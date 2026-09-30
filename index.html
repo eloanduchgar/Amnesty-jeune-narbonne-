@@ -79,7 +79,7 @@ header{display:flex;justify-content:space-between;align-items:center;gap:12px;fl
 <input id="lem" type="email" placeholder="E-mail" autocomplete="username" aria-label="E-mail"><input id="lpw" type="password" placeholder="Mot de passe" autocomplete="current-password" aria-label="Mot de passe">
 <div class="row" style="justify-content:center"><button class="pri" id="lin" type="button" style="background:#000;color:#ffff00">Se connecter</button><button id="lnew" type="button">Créer un compte</button></div>
 <button id="lgo" type="button">Continuer avec Google</button><button id="lrs" type="button">Mot de passe oublié</button>
-<button id="lloc" type="button">Continuer en mode local</button><small style="color:#000">Le mode local garde les données sur cet appareil uniquement.</small></div>
+</div>
 <header><div><h1>Atelier com' – Amnesty Jeunes Narbonne</h1><p>Ton espace de travail d'antenne.</p></div><div><span id="who"></span><button id="out" type="button">Se déconnecter</button></div></header>
 <nav id="nav"><button data-t="home" class="on">Accueil</button><span class="nl">Communication</span><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="lib">Modèles</button><button data-t="charte">Charte et réglages</button></nav>
 <main id="t-create" class="tab">
@@ -198,7 +198,7 @@ header{display:flex;justify-content:space-between;align-items:center;gap:12px;fl
 <fieldset id="adm" hidden><legend>Membres de l'antenne (admin)</legend>
 <div class="row"><div><label for="mE">E-mail du membre</label><input type="text" id="mE"></div><div><label for="mR">Rôle</label><select id="mR"><option value="editeur">Éditeur</option><option value="lecteur">Lecteur</option><option value="admin">Admin</option></select></div></div>
 <div class="acts"><button class="pri" id="mAdd" type="button">Ajouter le membre</button></div><div id="mlist"></div></fieldset>
-<small>Les réglages, le logo, le planning et les modèles sont partagés avec l'équipe (ou gardés sur cet appareil en mode local).</small></div>
+<small>Les réglages, le logo, le planning et les modèles sont partagés avec l'équipe.</small></div>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -610,10 +610,8 @@ $("lin").onclick=guard(()=>FB.login($("lem").value.trim(),$("lpw").value));
 $("lnew").onclick=guard(async()=>{await FB.signup($("lem").value.trim(),$("lpw").value);say("Compte créé. Clique sur le lien reçu par e-mail, puis connecte-toi.")});
 $("lgo").onclick=guard(()=>FB.google());
 $("lrs").onclick=guard(async()=>{await FB.reset($("lem").value.trim());say("E-mail de réinitialisation envoyé.")});
-$("lloc").onclick=()=>{DB=null;sessionStorage.setItem("aj-in","local");enter(null,"Mode local")};
-$("out").onclick=()=>{sessionStorage.removeItem("aj-in");(window.FB?FB.out():Promise.resolve()).finally(()=>location.reload())};
+$("out").onclick=()=>{(window.FB?FB.out():Promise.resolve()).finally(()=>location.reload())};
 document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
-if(sessionStorage.getItem("aj-in")==="local")$("lloc").click();
 
 applyTpl();
 Promise.all([document.fonts.load('700 40px "Roboto Condensed"'),document.fonts.load('500 30px Roboto'),document.fonts.load('700 30px Roboto')]).then(render).catch(()=>{});
