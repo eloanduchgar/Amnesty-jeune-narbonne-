@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-qrZjiMkIAMi+s/b6+HKz8CYQmYy4VqYAuK1dEvYvPvg=' 'sha256-W1KMOL8s+1P8y8w41FYH1tOJuaWsAzCaO3yD4f4dvZI=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-t2hrzz72GW5wlsCzOcqZDiHdu9lCwsAefnVQK3l1q1o=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Espace de travail d'Amnesty antenne jeune Narbonne">
@@ -96,6 +96,11 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 #t-login input{max-width:340px;border-color:var(--k)}
 #t-login .cartb{border:4px solid var(--k);padding:12px 20px;text-align:left}
 .hide{display:none!important}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mode button{border-radius:18px;text-align:left;padding:14px 18px;display:flex;flex-direction:column;gap:2px;font-size:17px}
+.mode button small{color:inherit;opacity:.7;font-weight:500}
+#t-pw{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:55}
+#t-pw .bx{background:#fff;border-radius:22px;padding:24px;max-width:400px;width:100%}
 #toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--k);color:var(--y);padding:11px 18px;border-radius:999px;display:none;z-index:60;font-weight:700}
 </style>
 </head>
@@ -108,10 +113,16 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 <p id="lmsg" style="max-width:440px;margin:0">Vérification de la session…</p>
 <input id="lem" type="email" placeholder="Adresse e-mail" autocomplete="username" aria-label="Adresse e-mail">
 <input id="lpw" type="password" placeholder="Mot de passe" autocomplete="current-password" aria-label="Mot de passe">
-<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button class="pri" id="lin" type="button">Se connecter</button><button id="lnew" type="button">Créer un compte</button></div>
+<button class="pri" id="lin" type="button">Se connecter</button>
+<button id="lml" type="button">Recevoir un lien de connexion par e-mail</button>
 <button id="lgo" type="button">Continuer avec Google</button>
-<button id="lrs" class="ghost" type="button">Mot de passe oublié</button>
+<button class="pri" id="lfin" type="button" hidden>Valider mon adresse</button>
+<small style="max-width:380px">Première visite ? Un·e admin de l'antenne doit d'abord t'inviter : tu recevras un lien par e-mail.</small>
 </div>
+
+<div id="t-pw" class="hide"><div class="bx"><h2>Bienvenue !</h2><p>Choisis un mot de passe pour te reconnecter facilement (facultatif : tu pourras toujours demander un lien par e-mail).</p>
+<label for="npw">Mot de passe (10 caractères minimum)</label><input type="password" id="npw" autocomplete="new-password">
+<div class="chips" style="margin-top:14px"><button class="pri" id="pwok" type="button">Enregistrer</button><button id="pwno" type="button">Plus tard</button></div></div></div>
 
 <header class="top"><div class="brand"><span class="cart">AMNESTY</span><b>Amnesty antenne jeune Narbonne</b></div><div class="usr"><span id="who"></span><button id="out" type="button">Se déconnecter</button></div></header>
 <nav id="nav" aria-label="Navigation"><button data-t="home" class="on">Accueil</button><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="lib">Modèles</button><button data-t="charte">Charte et réglages</button></nav>
@@ -127,15 +138,16 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 <section id="t-create" class="pg">
 <div class="cre">
 <div class="stage">
+<div class="mode" role="group" aria-label="Type de publication"><button id="mOne" type="button"><b>Une seule page</b><small>Un visuel simple</small></button><button id="mMul" type="button" class="on"><b>Carrousel</b><small>Plusieurs pages à faire glisser</small></button></div>
 <div class="starts"><span>Commencer avec :</span><span class="chips" id="starts"></span></div>
 <div class="cvw"><canvas id="cv" aria-label="Aperçu de la page"></canvas></div>
-<div class="pager"><button id="pv" class="ico" type="button" aria-label="Page précédente">‹</button><div id="dots" class="dots"></div><button id="nx" class="ico" type="button" aria-label="Page suivante">›</button></div>
+<div id="multi"><div class="pager"><button id="pv" class="ico" type="button" aria-label="Page précédente">‹</button><div id="dots" class="dots"></div><button id="nx" class="ico" type="button" aria-label="Page suivante">›</button></div>
 <p class="cnt" id="pgn"></p>
 <div class="thumbs" id="thumbs"></div>
-<div class="ops"><button id="opd" type="button">Dupliquer</button><button id="opl" type="button">◀ Déplacer</button><button id="opr" type="button">Déplacer ▶</button><button id="opx" class="dng" type="button">Supprimer la page</button></div>
+<div class="ops"><button id="opd" type="button">Dupliquer</button><button id="opl" type="button">◀ Déplacer</button><button id="opr" type="button">Déplacer ▶</button><button id="opx" class="dng" type="button">Supprimer la page</button></div></div>
 </div>
 <div class="panel">
-<div class="seg" id="seg"><button data-k="txt" class="on" type="button">Texte</button><button data-k="sty" type="button">Style</button><button data-k="per" type="button">Dessins</button><button data-k="out" type="button">Publier</button></div>
+<div class="seg" id="seg"><button data-k="txt" class="on" type="button">Texte</button><button data-k="sty" type="button">Style</button><button data-k="per" type="button">Stickers</button><button data-k="out" type="button">Publier</button></div>
 
 <div class="grp on" id="g-txt">
 <p class="hint">Type de cette page</p><div class="chips" id="types"></div>
@@ -156,9 +168,8 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 </div>
 
 <div class="grp" id="g-per">
-<label for="fCnt">Personnages sur cette page</label><select id="fCnt"><option>0</option><option>1</option><option>2</option><option>3</option></select>
-<label for="fSgn">Texte de la pancarte</label><input type="text" id="fSgn" maxlength="40">
-<div style="margin-top:14px"><button id="shuf" type="button">Changer les looks</button></div>
+<p class="hint">Stickers sur cette page (3 maximum)</p><div class="chips" id="stk"></div>
+<label for="fSgn">Texte de la pancarte ou de la bulle</label><input type="text" id="fSgn" maxlength="40">
 </div>
 
 <div class="grp" id="g-out">
@@ -230,7 +241,7 @@ let DB=null,CFG={},PL=[],LB=[],CC=[],sT;
 const rid=()=>"i"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const store={
 watch(col,cb){DB.collection(col).onSnapshot(q=>cb(q.docs.map(d=>({id:d.id,...d.data()}))),e=>note("Lecture refusée ("+e.code+")"))},
-async put(col,it){const id=it.id||rid(),o={...it};delete o.id;try{await DB.collection(col).doc(id).set(o)}catch(e){note("Action refusée : ton rôle ne permet pas de modifier.")}},
+async put(col,it){const id=it.id||rid(),o={...it};delete o.id;try{await DB.collection(col).doc(id).set(o);return true}catch(e){note("Action refusée : ton rôle ne permet pas de modifier.");return false}},
 async del(col,id){try{await DB.collection(col).doc(id).delete()}catch(e){note("Action refusée : ton rôle ne permet pas de supprimer.")}},
 cfgWatch(cb){DB.doc("config/antenne").onSnapshot(q=>cb(q.exists?q.data():{}),e=>note("Lecture refusée ("+e.code+")"))},
 async cfgSet(o){try{await DB.doc("config/antenne").set(o)}catch(e){note("Réglages non enregistrés (droits insuffisants ?)")}}};
@@ -239,36 +250,23 @@ const cfgObj=l=>{const t=ST();return{nom:t.nom.slice(0,100),cpt:t.cpt.slice(0,10
 const saveCfg=()=>{clearTimeout(sT);sT=setTimeout(()=>store.cfgSet(cfgObj(CFG.logo)),700)};
 ["sNom","sCpt","sTags","sSig"].forEach(i=>$(i).addEventListener("input",()=>{caption();saveCfg()}));
 
-/* ===== dessin (personnages, textes) ===== */
-const SKIN=["#ffffff","#999999","#333333"],HAIR=["#000000","#000000","#666666"],SHIRT=["#000000","#ffffff","#ffff00"];
-let seed=3;
-function rnd(i,n,k){return Math.abs(Math.sin((seed+1)*(i+1)*(k+7)*12.9898)*43758.5453)%1*n|0}
-function wrap(c,text,w){let out=[];for(const para of text.split("\n")){let cur="";for(const wd of para.split(/\s+/).filter(Boolean)){const t=cur?cur+" "+wd:wd;if(c.measureText(t).width>w&&cur){out.push(cur);cur=wd}else cur=t}out.push(cur)}return out}
-function rr(c,x,y,w,h,r){c.beginPath();c.roundRect?c.roundRect(x,y,w,h,r):c.rect(x,y,w,h);c.fill()}
-function person(c,x,y,s,type,p,sign){
-c.save();c.lineCap="round";c.lineJoin="round";
-const bw=110*s,bh=150*s,leg=90*s,top=y-leg-bh,hy=top-46*s,r=40*s;
-c.fillStyle="#1d1d1b";rr(c,x-42*s,y-leg,36*s,leg,8*s);rr(c,x+6*s,y-leg,36*s,leg,8*s);
-const arm=(x1,y1,x2,y2,col)=>{c.strokeStyle=p.shirt;c.lineWidth=26*s;c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.fillStyle=col;c.beginPath();c.arc(x2,y2,15*s,0,7);c.fill()};
-const L=[x-bw/2+10*s,top+26*s],R=[x+bw/2-10*s,top+26*s];
-arm(L[0],L[1],L[0]-8*s,top+bh*.8,p.skin);
-let hx,hy2;
-if(type==="sign"){hx=R[0]+26*s;hy2=top-60*s;
-c.strokeStyle="#000";c.lineWidth=8*s;c.beginPath();c.moveTo(hx,hy2-10*s);c.lineTo(hx,hy2+40*s);c.stroke();
-c.fillStyle="#fff";c.strokeStyle="#000";c.lineWidth=6*s;c.beginPath();c.rect(hx-105*s,hy2-160*s,210*s,140*s);c.fill();c.stroke();
-c.fillStyle="#000";c.font=`700 ${34*s}px "Roboto Condensed",sans-serif`;c.textAlign="center";c.textBaseline="middle";
-const ls=wrap(c,sign,190*s).slice(0,3);ls.forEach((l,i)=>c.fillText(l.toUpperCase(),hx,hy2-90*s+(i-(ls.length-1)/2)*38*s));
-arm(R[0],R[1],hx,hy2,p.skin)}
-else if(type==="fist"){hx=R[0]+22*s;hy2=top-56*s;arm(R[0],R[1],hx,hy2,p.skin);c.fillStyle=p.skin;c.beginPath();c.arc(hx,hy2,20*s,0,7);c.fill()}
-else{hx=R[0]+38*s;hy2=top+6*s;arm(R[0],R[1],hx,hy2,p.skin);
-c.fillStyle="#ffff00";c.strokeStyle="#000";c.lineWidth=5*s;c.beginPath();c.moveTo(hx,hy2-16*s);c.lineTo(hx+78*s,hy2-46*s);c.lineTo(hx+78*s,hy2+34*s);c.lineTo(hx,hy2+12*s);c.closePath();c.fill();c.stroke()}
-c.fillStyle=p.shirt;rr(c,x-bw/2,top,bw,bh+20*s,22*s);
-c.fillStyle=p.skin;c.beginPath();c.arc(x,hy,r,0,7);c.fill();c.strokeStyle="#000";c.lineWidth=4*s;c.stroke();
-c.fillStyle=p.hair;c.beginPath();c.arc(x,hy-2*s,r+3*s,Math.PI,0);c.fill();
-c.fillStyle="#111";c.beginPath();c.arc(x-14*s,hy+2*s,4*s,0,7);c.arc(x+14*s,hy+2*s,4*s,0,7);c.fill();
-c.strokeStyle="#111";c.lineWidth=4*s;c.beginPath();c.arc(x,hy+10*s,13*s,.15*Math.PI,.85*Math.PI);c.stroke();
-c.restore()}
-
+/* ===== dessin (stickers, textes) ===== */
+const STK_NAMES={fist:"Poing levé",mega:"Mégaphone",sign:"Pancarte",bubble:"Bulle",heart:"Cœur",burst:"Étoile",arrow:"Flèche",peace:"Paix"},STK_KEYS=Object.keys(STK_NAMES);
+function wrap(c,text,w){const out=[];for(const para of text.split("\n")){let cur="";for(const wd of para.split(/\s+/).filter(Boolean)){const t=cur?cur+" "+wd:wd;if(c.measureText(t).width>w&&cur){out.push(cur);cur=wd}else cur=t}out.push(cur)}return out}
+function rr(c,x,y,w,h,r){c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,r);else c.rect(x,y,w,h);c.fill()}
+const rp=(c,x,y,w,h,r)=>{c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,r);else c.rect(x,y,w,h)};
+const fs_=(c,f)=>{c.fillStyle=f;c.fill();c.lineWidth=7;c.strokeStyle="#000";c.lineJoin="round";c.lineCap="round";c.stroke()};
+function stkText(c,t,cx,cy,w,h,max){c.fillStyle="#000";c.textAlign="center";c.textBaseline="middle";let s=max,ls;for(;s>=16;s-=2){c.font=`700 ${s}px "Roboto Condensed",sans-serif`;ls=wrap(c,t.toUpperCase(),w);if(ls.length*s*1.05<=h)break}ls.forEach((l,i)=>c.fillText(l,cx,cy+(i-(ls.length-1)/2)*s*1.05));c.textAlign="left";c.textBaseline="alphabetic"}
+const STK={
+fist(c){rp(c,62,140,76,54,10);fs_(c,"#ffff00");[[48,42,24,60],[72,30,24,72],[96,30,24,72],[120,42,24,60]].forEach(([x,y,w,h])=>{rp(c,x,y,w,h,12);fs_(c,"#fff")});rp(c,42,70,110,84,26);fs_(c,"#fff");rp(c,22,92,52,28,14);fs_(c,"#fff")},
+mega(c){c.beginPath();c.moveTo(48,78);c.lineTo(150,30);c.lineTo(150,150);c.lineTo(48,128);c.closePath();fs_(c,"#fff");rp(c,14,78,42,50,8);fs_(c,"#ffff00");rp(c,140,22,20,136,8);fs_(c,"#ffff00");rp(c,60,126,26,56,8);fs_(c,"#000");[22,38].forEach(r=>{c.beginPath();c.arc(162,90,r,-.7,.7);c.lineWidth=13;c.strokeStyle="#000";c.stroke();c.lineWidth=6;c.strokeStyle="#ffff00";c.stroke()})},
+sign(c,S){rp(c,92,120,16,76,4);fs_(c,"#ffff00");rp(c,14,14,172,118,14);fs_(c,"#fff");stkText(c,S.sgn||"",100,73,144,92,44)},
+bubble(c,S){c.beginPath();c.moveTo(46,128);c.lineTo(36,190);c.lineTo(92,132);c.closePath();fs_(c,"#fff");rp(c,8,18,184,120,34);fs_(c,"#fff");c.fillStyle="#fff";c.fillRect(49,124,42,14);stkText(c,S.sgn||"",100,78,140,84,44)},
+heart(c){c.beginPath();c.moveTo(100,176);c.bezierCurveTo(18,120,8,60,54,38);c.bezierCurveTo(80,26,100,46,100,62);c.bezierCurveTo(100,46,120,26,146,38);c.bezierCurveTo(192,60,182,120,100,176);c.closePath();fs_(c,"#fff");c.beginPath();c.arc(104,100,52,3.5,4.4);c.lineWidth=8;c.strokeStyle="#ffff00";c.stroke()},
+burst(c){c.beginPath();for(let i=0;i<28;i++){const a=i*Math.PI/14-Math.PI/2,r=i%2?74:96;c.lineTo(100+Math.cos(a)*r,100+Math.sin(a)*r)}c.closePath();fs_(c,"#ffff00");c.fillStyle="#000";c.font='700 120px "Roboto Condensed",sans-serif';c.textAlign="center";c.textBaseline="middle";c.fillText("!",100,104);c.textAlign="left";c.textBaseline="alphabetic"},
+arrow(c){c.beginPath();c.moveTo(14,76);c.lineTo(108,76);c.lineTo(108,34);c.lineTo(188,100);c.lineTo(108,166);c.lineTo(108,124);c.lineTo(14,124);c.closePath();fs_(c,"#fff");c.beginPath();c.moveTo(28,100);c.lineTo(94,100);c.lineWidth=8;c.strokeStyle="#ffff00";c.stroke()},
+peace(c){c.beginPath();c.arc(100,100,80,0,7);fs_(c,"#fff");c.lineWidth=9;c.strokeStyle="#000";c.beginPath();c.moveTo(100,20);c.lineTo(100,180);c.moveTo(100,100);c.lineTo(44,156);c.moveTo(100,100);c.lineTo(156,156);c.stroke()}};
+function sticker(c,key,x,y,k,tilt,S){c.save();c.translate(x,y);c.rotate(tilt*Math.PI/180);c.scale(k,k);c.translate(-100,-100);STK[key](c,S);c.restore()}
 const IM={logo:null};
 function cover(c,im,W,H){const r=Math.max(W/im.width,H/im.height),w=im.width*r,h=im.height*r;c.drawImage(im,(W-w)/2,(H-h)/2,w,h)}
 function setLogo(u,save){$("lp").src=u;const im=new Image();im.onload=()=>{IM.logo=im;render()};im.src=u;if(save){CFG.logo=u;store.cfgSet(cfgObj(u))}}
@@ -280,20 +278,26 @@ function bands(c,text,x,y,maxW,maxH,start,min,ac,at){if(!text.trim())return y;co
 function para(c,text,x,y,maxW,maxH,size,min,col){if(!text.trim())return y;let s=size,ls;for(;s>=min;s-=2){c.font=`500 ${s}px Roboto,sans-serif`;ls=wrap(c,text,maxW);if(ls.length*s*1.32<=maxH)break}c.fillStyle=col;ls.forEach((l,i)=>c.fillText(l,x,y+s*1.05+i*s*1.32));return y+ls.length*s*1.32+10}
 
 /* ===== publication en plusieurs pages ===== */
-const SD={cover:{lab:"Amnesty Jeunes",ttl:"Titre accrocheur",txt:"Une phrase pour donner envie de lire la suite.",chars:2},content:{lab:"À savoir",ttl:"Une idée par page",txt:"Explique simplement un point. Phrases courtes, mots simples."},number:{lab:"Le chiffre",num:"1 sur 3",ttl:"Explique ce que ce chiffre veut dire"},cta:{lab:"Passe à l'action",ttl:"Rejoins-nous !",txt:"Signe, partage, invite tes ami·es.",chars:2}};
-const newSlide=(t,o)=>({type:t,lab:"",ttl:"",txt:"",num:"",dat:"",loc:"",chars:0,sgn:"Liberté !",seed:3,...SD[t],...o});
+const SD={cover:{lab:"Amnesty Jeunes",ttl:"Titre accrocheur",txt:"Une phrase pour donner envie de lire la suite.",stk:["fist"]},content:{lab:"À savoir",ttl:"Une idée par page",txt:"Explique simplement un point. Phrases courtes, mots simples."},number:{lab:"Le chiffre",num:"1 sur 3",ttl:"Explique ce que ce chiffre veut dire"},cta:{lab:"Passe à l'action",ttl:"Rejoins-nous !",txt:"Signe, partage, invite tes ami·es.",stk:["mega"]}};
+const newSlide=(t,o)=>{const s={type:t,lab:"",ttl:"",txt:"",num:"",dat:"",loc:"",stk:[],sgn:"Liberté !",...SD[t],...o};s.stk=[...s.stk];return s};
 const STARTS={
 topic:["Sujet expliqué",()=>[newSlide("cover",{lab:"On t'explique",ttl:"Le sujet en quelques pages",txt:"Fais glisser pour comprendre."}),newSlide("content",{lab:"Le contexte",ttl:"Que se passe-t-il ?"}),newSlide("content",{lab:"Les droits en jeu",ttl:"Pourquoi ça nous concerne"}),newSlide("number"),newSlide("cta",{ttl:"Et toi, tu agis comment ?"})]],
-event:["Événement",()=>[newSlide("cover",{lab:"Rendez-vous",ttl:"Rejoins-nous !",txt:"Viens découvrir Amnesty Jeunes Narbonne."}),newSlide("cta",{lab:"Infos pratiques",ttl:"On t'attend !",txt:"Amène tes ami·es.",dat:"Jeudi 18h30",loc:"Narbonne",chars:1})]],
+event:["Événement",()=>[newSlide("cover",{lab:"Rendez-vous",ttl:"Rejoins-nous !",txt:"Viens découvrir Amnesty Jeunes Narbonne."}),newSlide("cta",{lab:"Infos pratiques",ttl:"On t'attend !",txt:"Amène tes ami·es.",dat:"Jeudi 18h30",loc:"Narbonne",stk:["heart"]})]],
 action:["Action",()=>[newSlide("cover",{lab:"Passe à l'action",ttl:"Signe la pétition",txt:"Ça prend 2 minutes."}),newSlide("content",{lab:"Pourquoi",ttl:"Une signature peut changer une vie"}),newSlide("cta",{lab:"Comment faire",ttl:"Lien en bio",txt:"Signe, puis partage autour de toi.",loc:"Lien en bio"})]],
-quote:["Citation",()=>[newSlide("cover",{lab:"Parole de militant·e",ttl:"« Se taire, c'est laisser faire. »",txt:"Prénom, Amnesty Jeunes Narbonne",chars:1})]]};
+quote:["Citation",()=>[newSlide("cover",{lab:"Parole de militant·e",ttl:"« Se taire, c'est laisser faire. »",txt:"Prénom, Amnesty Jeunes Narbonne",stk:[]})]]};
 const TK={event:"event",action:"action",quote:"quote",info:"topic"},TY={cover:"Couverture",content:"Contenu",number:"Chiffre clé",cta:"Appel à l'action"};
-const SHOW={cover:["lab","ttl","txt"],content:["lab","ttl","txt"],number:["lab","num","ttl","txt"],cta:["lab","ttl","txt","dat","loc"]};
+const SHOW={cover:["lab","ttl","txt","dat","loc"],content:["lab","ttl","txt"],number:["lab","num","ttl","txt"],cta:["lab","ttl","txt","dat","loc"]};
+let BAK=[];
 let POST={fmt:"1350",pal:"alt",key:"alt",bg:"#ffff00",fg:"#000000",dots:true,tag:"#AmnestyJeunes",slides:[]},cur=0;
-function startPost(k,ttl,dat){POST.slides=STARTS[k][1]();if(ttl)POST.slides[0].ttl=ttl.slice(0,150);if(dat){const c=POST.slides.find(s=>s.type==="cta");if(c)c.dat=dat}cur=0;fill();render()}
+function startPost(k,ttl,dat,multi){const all=STARTS[k][1]();if(multi===undefined)multi=POST.slides.length>1;let sl=all;
+if(!multi){const f=all[0],c=all.find(x=>x.type==="cta");if(c&&c!==f){f.dat=c.dat;f.loc=c.loc}sl=[f]}
+POST.slides=sl;BAK=[];if(ttl)sl[0].ttl=ttl.slice(0,150);if(dat){const c=multi?sl.find(x=>x.type==="cta"):sl[0];if(c)c.dat=dat}cur=0;fill();render()}
+function setMode(multi){const a=POST.slides;
+if(multi&&a.length<2){if(BAK.length)a.push(...BAK);else{const f=a[0];a.push(newSlide("content",{lab:"Le contexte",ttl:"Que se passe-t-il ?"}),newSlide("content",{lab:"Les droits en jeu",ttl:"Pourquoi ça nous concerne"}),newSlide("cta",{dat:f.dat,loc:f.loc}));f.dat=f.loc=""}BAK=[];go(0)}
+else if(!multi&&a.length>1){BAK=a.slice(1);const c=BAK.find(x=>x.type==="cta");if(c&&!a[0].dat&&!a[0].loc){a[0].dat=c.dat;a[0].loc=c.loc}POST.slides=[a[0]];go(0)}}
 
 function renderTo(cv,i){
-const c=cv.getContext("2d"),W=1080,H=+POST.fmt,S=POST.slides[i],n=POST.slides.length,pad=64;cv.width=W;cv.height=H;seed=S.seed||3;
+const c=cv.getContext("2d"),W=1080,H=+POST.fmt,S=POST.slides[i],n=POST.slides.length,pad=64;cv.width=W;cv.height=H;
 const alt=POST.pal==="alt",ph=!!S.img,bg=alt?(i%2?"#000000":"#ffff00"):POST.bg,fg=alt?(i%2?"#ffff00":"#000000"):POST.fg;
 const tc=ph?"#ffffff":fg,ac=ph?"#ffff00":fg,at=ph?"#000000":bg;
 c.textBaseline="alphabetic";c.textAlign="left";c.fillStyle=ph?"#222":bg;c.fillRect(0,0,W,H);
@@ -302,8 +306,8 @@ const lh=84;c.fillStyle="#ffff00";
 if(IM.logo){const w=IM.logo.width*lh/IM.logo.height;c.fillRect(pad,48,w,lh);c.drawImage(IM.logo,pad,48,w,lh)}
 else{c.fillRect(pad,48,270,lh);c.strokeStyle="#000";c.lineWidth=3;c.strokeRect(pad,48,270,lh);c.fillStyle="#000";c.font='700 32px "Roboto Condensed",sans-serif';c.fillText("AMNESTY",pad+14,86);c.font='700 20px "Roboto Condensed",sans-serif';c.fillText("INTERNATIONAL",pad+14,108);c.font='500 17px Roboto,sans-serif';c.fillText("Jeunes Narbonne",pad+14,126)}
 if(n>1){c.font='700 30px Roboto,sans-serif';const t=(i+1)+"/"+n,w=c.measureText(t).width+36;c.fillStyle=ac;rr(c,W-pad-w,62,w,52,26);c.fillStyle=at;c.textAlign="center";c.fillText(t,W-pad-w/2,98);c.textAlign="left"}
-const isCta=S.type==="cta",boxH=isCta&&(S.dat||S.loc)?210:0,floor=H-100-boxH;
-const sc=(H<1200?.85:1.05)*(S.type==="content"?.65:1),base=floor-(boxH?14:30),figTop=S.chars?base-400*sc:base;
+const isCta=S.type==="cta",boxH=(isCta||S.type==="cover")&&(S.dat||S.loc)?210:0,floor=H-100-boxH;
+const kk=(H<1200?1.25:1.5)*(S.type==="content"?.72:1),spx=200*kk,base=floor-(boxH?14:30),stk=S.stk||[],figTop=stk.length?base-spx-8:base;
 let y=190;
 if(S.lab.trim()){c.font='700 32px Roboto,sans-serif';const w=c.measureText(S.lab).width+40;c.fillStyle=ac;rr(c,pad,y,w,52,26);c.fillStyle=at;c.fillText(S.lab,pad+20,y+37);y+=52+28}
 const avail=figTop-y-10,mw=W-2*pad;
@@ -311,8 +315,8 @@ if(S.type==="number"){let ns=420;for(;ns>120;ns-=10){c.font=`700 ${ns}px "Roboto
 y=bands(c,S.ttl,pad,y,mw,avail*.4,70,40,ac,at)+20;para(c,S.txt,pad,y,mw,figTop-y,42,28,tc)}
 else if(S.type==="content"){y=bands(c,S.ttl,pad,y,mw,avail*.32,100,48,ac,at)+26;para(c,S.txt,pad,y,mw,figTop-y,48,30,tc)}
 else{y=bands(c,S.ttl,pad,y,mw,avail*(isCta?.55:.7),isCta?120:150,48,ac,at)+22;para(c,S.txt,pad,y,mw,figTop-y,40,28,tc)}
-const xs={0:[],1:[.72],2:[.3,.72],3:[.2,.5,.8]}[S.chars||0],types=["sign","fist","mega"];
-xs.forEach((f,k)=>person(c,W*f,base,sc,types[k%3],{skin:SKIN[rnd(k,3,1)],hair:HAIR[rnd(k,3,2)],shirt:SHIRT.filter(z=>z!==bg.toLowerCase())[rnd(k,2,3)]},S.sgn||"Liberté !"));
+const xs={0:[],1:[.74],2:[.3,.72],3:[.2,.5,.8]}[stk.length]||[],tl=[-7,5,-4];
+xs.forEach((f,j)=>sticker(c,stk[j],W*f,base-spx/2,kk,tl[j],S));
 if(boxH){c.fillStyle=ac;c.fillRect(0,floor,W,boxH);c.fillStyle=at;let cy=floor+82;if(S.dat){c.font='700 76px "Roboto Condensed",sans-serif';c.fillText(S.dat,pad,cy);cy+=52}if(S.loc){c.font='500 38px Roboto,sans-serif';c.fillText(S.loc,pad,cy)}if(POST.tag){c.font='700 30px Roboto,sans-serif';c.textAlign="right";c.fillText(POST.tag,W-pad,floor+boxH-28);c.textAlign="left"}}
 if(n>1&&i===0){c.font='700 34px Roboto,sans-serif';c.fillStyle=ac;c.textAlign="right";c.fillText("Glisse  →",W-pad,H-42);c.textAlign="left"}
 if(n>1&&POST.dots){const tw=34+(n-1)*30;let x=(W-tw)/2;c.fillStyle=ac;for(let k=0;k<n;k++){if(k===i){rr(c,x,H-60,34,16,8);x+=48}else{c.globalAlpha=.4;c.beginPath();c.arc(x+8,H-52,8,0,7);c.fill();c.globalAlpha=1;x+=30}}}}
@@ -320,26 +324,26 @@ const OFF=document.createElement("canvas");let tT;
 function render(){renderTo($("cv"),cur);dotsUI();caption();clearTimeout(tT);tT=setTimeout(thumbs,160)}
 function thumbs(){const el=$("thumbs");el.innerHTML="";POST.slides.forEach((S,i)=>{renderTo(OFF,i);const b=document.createElement("button");b.type="button";b.className="th"+(i===cur?" on":"");const t=document.createElement("canvas");t.width=108;t.height=Math.round(108*OFF.height/1080);t.getContext("2d").drawImage(OFF,0,0,t.width,t.height);b.append(t);b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});
 if(POST.slides.length<10){const a=mk("+",addSlide);a.className="th add";a.setAttribute("aria-label","Ajouter une page");el.append(a)}}
-function dotsUI(){const el=$("dots"),n=POST.slides.length;el.innerHTML="";POST.slides.forEach((_,i)=>{const b=document.createElement("button");b.type="button";b.className=i===cur?"on":"";b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});$("pgn").textContent="Page "+(cur+1)+" sur "+n;$("pv").disabled=cur===0;$("nx").disabled=cur===n-1}
+function dotsUI(){const el=$("dots"),n=POST.slides.length;el.innerHTML="";$("multi").hidden=n<2;$("mOne").classList.toggle("on",n<2);$("mMul").classList.toggle("on",n>1);POST.slides.forEach((_,i)=>{const b=document.createElement("button");b.type="button";b.className=i===cur?"on":"";b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});$("pgn").textContent="Page "+(cur+1)+" sur "+n;$("pv").disabled=cur===0;$("nx").disabled=cur===n-1}
 function go(i){cur=Math.max(0,Math.min(POST.slides.length-1,i));fill();render()}
-function fill(){const S=POST.slides[cur];if(!S)return;$("fLab").value=S.lab;$("fNum").value=S.num;$("fTtl").value=S.ttl;$("fTxt").value=S.txt;$("fDat").value=S.dat;$("fLoc").value=S.loc;$("fCnt").value=S.chars;$("fSgn").value=S.sgn;$("fFmt").value=POST.fmt;$("fDots").checked=POST.dots;$("fTag").value=POST.tag;
+function fill(){const S=POST.slides[cur];if(!S)return;$("fLab").value=S.lab;$("fNum").value=S.num;$("fTtl").value=S.ttl;$("fTxt").value=S.txt;$("fDat").value=S.dat;$("fLoc").value=S.loc;$("fSgn").value=S.sgn;$("fFmt").value=POST.fmt;$("fDots").checked=POST.dots;$("fTag").value=POST.tag;
 document.querySelectorAll(".f[data-f]").forEach(e=>e.hidden=!SHOW[S.type].includes(e.dataset.f));
 document.querySelectorAll("#types button").forEach(b=>b.classList.toggle("on",b.dataset.k===S.type));
-document.querySelectorAll("#chips button").forEach(b=>b.classList.toggle("on",b.dataset.k===POST.key))}
+document.querySelectorAll("#chips button").forEach(b=>b.classList.toggle("on",b.dataset.k===POST.key));document.querySelectorAll("#stk button").forEach(b=>b.classList.toggle("on",S.stk.includes(b.dataset.k)))}
 const FM={fLab:"lab",fNum:"num",fTtl:"ttl",fTxt:"txt",fDat:"dat",fLoc:"loc",fSgn:"sgn"};
 Object.keys(FM).forEach(id=>$(id).addEventListener("input",()=>{POST.slides[cur][FM[id]]=$(id).value;render()}));
-$("fCnt").onchange=()=>{POST.slides[cur].chars=+$("fCnt").value;render()};
 $("fFmt").onchange=()=>{POST.fmt=$("fFmt").value;render()};
 $("fDots").onchange=()=>{POST.dots=$("fDots").checked;render()};
 $("fTag").addEventListener("input",()=>{POST.tag=$("fTag").value;render()});
-$("shuf").onclick=()=>{POST.slides[cur].seed=(POST.slides[cur].seed||3)+1;render()};
 $("fPh").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{POST.slides[cur].img=im;render()};im.src=URL.createObjectURL(f)};
 $("fPhx").onclick=()=>{delete POST.slides[cur].img;render()};
 Object.entries(TY).forEach(([k,v])=>{const b=mk(v,()=>{POST.slides[cur].type=k;fill();render()});b.dataset.k=k;$("types").append(b)});
+STK_KEYS.forEach(k=>{const b=mk(STK_NAMES[k],()=>{const a=POST.slides[cur].stk,i=a.indexOf(k);if(i>=0)a.splice(i,1);else if(a.length<3)a.push(k);else note("3 stickers maximum par page");fill();render()});b.dataset.k=k;$("stk").append(b)});
+$("mOne").onclick=()=>setMode(false);$("mMul").onclick=()=>setMode(true);
 Object.entries(STARTS).forEach(([k,v])=>$("starts").append(mk(v[0],()=>startPost(k))));
 document.querySelectorAll("#seg button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#seg button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".grp").forEach(g=>g.classList.toggle("on",g.id==="g-"+b.dataset.k))});
 function addSlide(){if(POST.slides.length>=10)return;POST.slides.splice(cur+1,0,newSlide("content"));go(cur+1)}
-$("opd").onclick=()=>{if(POST.slides.length>=10)return;POST.slides.splice(cur+1,0,{...POST.slides[cur]});go(cur+1)};
+$("opd").onclick=()=>{if(POST.slides.length>=10)return;POST.slides.splice(cur+1,0,{...POST.slides[cur],stk:[...POST.slides[cur].stk]});go(cur+1)};
 $("opx").onclick=()=>{if(POST.slides.length<2)return;POST.slides.splice(cur,1);go(Math.min(cur,POST.slides.length-1))};
 $("opl").onclick=()=>{if(cur<1)return;const a=POST.slides;[a[cur-1],a[cur]]=[a[cur],a[cur-1]];go(cur-1)};
 $("opr").onclick=()=>{const a=POST.slides;if(cur>=a.length-1)return;[a[cur+1],a[cur]]=[a[cur],a[cur+1]];go(cur+1)};
@@ -356,7 +360,7 @@ let t=`📣 ${S0.ttl}\n\n${S0.txt}`;if(pts.length)t+="\n\nDans ce carrousel :\n"
 if(st.sig)t+=`\n${st.sig}`;if(st.cpt)t+=`\n\nSuivez ${st.nom||"nous"} : ${st.cpt}`;t+=`\n\n${st.tags} ${POST.tag.startsWith("#")?POST.tag:""}`;$("cap").value=t.trim()}
 $("cp2").onclick=async()=>{try{await navigator.clipboard.writeText($("cap").value)}catch(e){$("cap").select();try{document.execCommand("copy")}catch(_){}}$("cp2").textContent="Copié !";setTimeout(()=>$("cp2").textContent="Copier la légende",1500)};
 function clean(p){const str=(v,n)=>String(v==null?"":v).slice(0,n),ok=["cover","content","number","cta"];
-const sl=(Array.isArray(p.slides)?p.slides:[]).slice(0,10).map(s=>({type:ok.includes(s.type)?s.type:"content",lab:str(s.lab,40),ttl:str(s.ttl,150),txt:str(s.txt,600),num:str(s.num,12),dat:str(s.dat,60),loc:str(s.loc,80),chars:Math.min(3,Math.max(0,+s.chars||0)),sgn:str(s.sgn,40),seed:+s.seed||3}));
+const sl=(Array.isArray(p.slides)?p.slides:[]).slice(0,10).map(s=>({type:ok.includes(s.type)?s.type:"content",lab:str(s.lab,40),ttl:str(s.ttl,150),txt:str(s.txt,600),num:str(s.num,12),dat:str(s.dat,60),loc:str(s.loc,80),stk:(Array.isArray(s.stk)?s.stk:[]).filter(k=>STK_KEYS.includes(k)).slice(0,3),sgn:str(s.sgn,40)}));
 return{fmt:["1350","1080","1920"].includes(p.fmt)?p.fmt:"1350",pal:p.pal==="alt"?"alt":"fix",key:str(p.key,30)||"alt",bg:hx(p.bg),fg:hx(p.fg),dots:p.dots!==false,tag:str(p.tag,60),slides:sl.length?sl:[newSlide("cover")]}}
 $("sv").onclick=()=>{const d=JSON.stringify(POST,(k,v)=>k==="img"?undefined:v);if(d.length>29000){note("Publication trop longue pour un modèle.");return}store.put("modeles",{name:(POST.slides[0].ttl||"Sans titre").slice(0,80),data:d});note("Enregistré dans Modèles")};
 function drawLB(){const el=$("llist");el.innerHTML=LB.length?"":"<p><small>Aucun modèle enregistré.</small></p>";LB.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<b>${esc(m.name)}</b>`;d.append(mk("Ouvrir",()=>{try{POST=clean(JSON.parse(m.data));cur=0;fill();render();show("create")}catch(e){note("Modèle illisible")}}),mk("Supprimer",()=>store.del("modeles",m.id)));el.append(d)})}
@@ -601,7 +605,7 @@ const TN={event:"Événement",action:"Action",quote:"Citation",info:"Sujet expli
 let cy=new Date().getFullYear(),cm=new Date().getMonth(),sel=iso(new Date());
 const plan=(date,theme,tpl)=>store.put("plan",{date,net:"Instagram",theme:theme.replace(" *","").slice(0,200),tpl,done:false});
 function postRow(p){const d=document.createElement("div");d.className="row"+(p.done?" done":"");d.innerHTML=`<b>${fmtD(p.date)}</b><span>${esc(p.theme)}<small>${TN[p.tpl]||""}</small></span>`;
-d.append(mk("Créer le visuel",()=>{startPost(TK[p.tpl]||"topic",p.theme,p.tpl==="event"?fmtD(p.date):"");show("create")}),mk(p.done?"Rouvrir":"Publié",()=>store.put("plan",{...p,done:!p.done})),mk("Supprimer",()=>store.del("plan",p.id)));return d}
+d.append(mk("Créer le visuel",()=>{startPost(TK[p.tpl]||"topic",p.theme,p.tpl==="event"?fmtD(p.date):"",p.tpl!=="quote");show("create")}),mk(p.done?"Rouvrir":"Publié",()=>store.put("plan",{...p,done:!p.done})),mk("Supprimer",()=>store.del("plan",p.id)));return d}
 function drawCal(){$("ct").textContent=new Date(cy,cm,1).toLocaleDateString("fr-FR",{month:"long",year:"numeric"});const g=$("cg");g.innerHTML="";
 ["lun","mar","mer","jeu","ven","sam","dim"].forEach(w=>{const h=document.createElement("div");h.className="cw";h.textContent=w;g.append(h)});
 const off=(new Date(cy,cm,1).getDay()+6)%7,n=new Date(cy,cm+1,0).getDate(),today=iso(new Date());
@@ -626,31 +630,36 @@ function drawJD(){const el=$("jd");const L=jlist();el.innerHTML=`<p><small>${L.l
 $("jx").onclick=()=>{$("jj").hidden=false;$("jj").value=JSON.stringify(jlist().map(j=>({date:j.x,journee:j.t,theme:j.c})),null,1)};
 const drawAll=()=>{drawPL();drawCal();drawDay();drawHome()};
 
-/* ===== membres (admin) ===== */
-function drawMem(a){const el=$("mlist");el.innerHTML="";a.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto";d.innerHTML=`<span>${esc(m.id)}<small>${esc(m.role)}</small></span>`;d.append(mk("Retirer",()=>store.del("membres",m.id)));el.append(d)})}
-$("mAdd").onclick=()=>{const e=$("mE").value.trim().toLowerCase();if(!/^[^\s\/@]+@[^\s\/@]+\.[^\s\/@]+$/.test(e))return;store.put("membres",{id:e,role:$("mR").value});$("mE").value=""};
-
 /* ===== connexion ===== */
 const say=m=>{$("lmsg").textContent=m};
-const errMsg=e=>({"auth/invalid-credential":"E-mail ou mot de passe incorrect.","auth/wrong-password":"E-mail ou mot de passe incorrect.","auth/user-not-found":"E-mail ou mot de passe incorrect.","auth/email-already-in-use":"Un compte existe déjà avec cet e-mail.","auth/weak-password":"Mot de passe trop court.","auth/invalid-email":"Adresse e-mail invalide.","auth/missing-password":"Saisis ton mot de passe.","auth/popup-closed-by-user":"Connexion Google annulée.","auth/popup-blocked":"Fenêtre bloquée : autorise les pop-up ou utilise e-mail et mot de passe.","auth/operation-not-allowed":"Cette méthode n'est pas activée dans Firebase (Authentication > Méthode de connexion).","auth/unauthorized-domain":"Domaine non autorisé : ajoute-le dans Firebase > Authentication > Paramètres > Domaines autorisés.","auth/too-many-requests":"Trop de tentatives : réessaie dans quelques minutes.","auth/network-request-failed":"Problème de réseau."}[e.code]||"Erreur : "+(e.code||e.message));
-let idle;const bump=()=>{clearTimeout(idle);idle=setTimeout(()=>FB.out().finally(()=>location.reload()),3600000)};
+const errMsg=e=>({"auth/invalid-credential":"E-mail ou mot de passe incorrect.","auth/wrong-password":"E-mail ou mot de passe incorrect.","auth/user-not-found":"E-mail ou mot de passe incorrect.","auth/invalid-email":"Adresse e-mail invalide.","auth/missing-password":"Saisis ton mot de passe.","auth/popup-closed-by-user":"Connexion Google annulée.","auth/popup-blocked":"Fenêtre bloquée : autorise les pop-up ou utilise le lien par e-mail.","auth/operation-not-allowed":"Méthode non activée dans Firebase (Authentication > Méthode de connexion : active E-mail/Mot de passe et « Lien envoyé par e-mail »).","auth/unauthorized-domain":"Domaine non autorisé : ajoute-le dans Firebase > Authentication > Paramètres > Domaines autorisés.","auth/unauthorized-continue-uri":"Domaine non autorisé : ajoute-le dans Firebase > Authentication > Paramètres > Domaines autorisés.","auth/too-many-requests":"Trop de tentatives : réessaie dans quelques minutes.","auth/quota-exceeded":"Quota d'e-mails atteint : réessaie demain.","auth/invalid-action-code":"Lien expiré ou déjà utilisé : demande un nouveau lien.","auth/expired-action-code":"Lien expiré : demande un nouveau lien.","auth/network-request-failed":"Problème de réseau.","auth/requires-recent-login":"Reconnecte-toi puis réessaie."}[e.code]||"Erreur : "+(e.code||e.message));
+let idle,linkLogin=false;const bump=()=>{clearTimeout(idle);idle=setTimeout(()=>FB.out().finally(()=>location.reload()),3600000)};
 ["click","keydown","pointermove","touchstart"].forEach(e=>addEventListener(e,()=>{if(DB)bump()},{passive:true}));
+const resetLogin=()=>{["lpw","lin","lml","lgo"].forEach(i=>$(i).hidden=false);$("lfin").hidden=true};
+async function inviteMail(e){try{await FB.invite(e);note("Lien de connexion envoyé à "+e)}catch(x){note("Invitation non envoyée : "+errMsg(x))}}
+function drawMem(a){const el=$("mlist");el.innerHTML="";a.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<span>${esc(m.id)}<small>${esc(m.role)}</small></span>`;d.append(mk("Renvoyer le lien",()=>inviteMail(m.id)),mk("Retirer",()=>store.del("membres",m.id)));el.append(d)})}
+$("mAdd").onclick=async()=>{const e=$("mE").value.trim().toLowerCase();if(!/^[^\s\/@]+@[^\s\/@]+\.[^\s\/@]+$/.test(e)){note("Adresse e-mail invalide.");return}if(await store.put("membres",{id:e,role:$("mR").value})){$("mE").value="";inviteMail(e)}};
 function enter(name,role){$("t-login").classList.add("hide");$("who").textContent=name+" · "+role;$("hw").textContent="Bonjour "+name.split(/[ @]/)[0];$("adm").hidden=role!=="admin";if(role==="admin")store.watch("membres",drawMem);bump();
 store.cfgWatch(c=>{CFG=c;const f=(i,k,d)=>{if(document.activeElement!==$(i))$(i).value=c[k]!=null?c[k]:d};f("sNom","nom","Amnesty Jeunes Narbonne");f("sCpt","cpt","");f("sTags","tags","#Amnesty #AmnestyJeunes #Narbonne #DroitsHumains");f("sSig","sig","");
 if(c.logo&&/^data:image\/(jpeg|png);base64,[A-Za-z0-9+\/=]+$/.test(c.logo)){if(!IM.logo||IM.logo.src!==c.logo)setLogo(c.logo,false)}else{IM.logo=null;$("lp").removeAttribute("src")}caption();render()});
-store.watch("plan",a=>{PL=a;drawAll()});store.watch("modeles",a=>{LB=a;drawLB()});store.watch("couleurs",a=>{CC=a;drawChips()});show("home")}
+store.watch("plan",a=>{PL=a;drawAll()});store.watch("modeles",a=>{LB=a;drawLB()});store.watch("couleurs",a=>{CC=a;drawChips()});show("home");
+if(linkLogin){linkLogin=false;$("t-pw").classList.remove("hide")}}
 window.onFbUser=async u=>{
+const fail=m=>{say(m);FB.out();resetLogin()};
 if(!u){if($("lmsg").textContent==="Vérification de la session…")say("Connecte-toi avec ton compte de l'antenne.");return}
-if(!u.emailVerified){say("Vérifie ta boîte mail (lien de confirmation), puis reconnecte-toi.");FB.out();return}
-let m=null;try{m=await FB.member(u)}catch(e){say("Lecture de ton profil refusée : les règles Firestore ne sont peut-être pas publiées.");FB.out();return}
-if(!m){say("Le compte "+u.email+" n'est pas encore validé : demande à un·e admin de l'antenne de t'ajouter aux membres.");FB.out();return}
+if(!u.emailVerified){fail("Adresse e-mail non vérifiée : utilise le lien reçu par e-mail ou Google.");return}
+let m=null;try{m=await FB.member(u)}catch(e){fail("Lecture de ton profil refusée : les règles Firestore ne sont peut-être pas publiées.");return}
+if(!m){fail("Le compte "+u.email+" n'est pas encore validé : demande à un·e admin de l'antenne de t'inviter.");return}
 DB=FB.db;enter(u.displayName||u.email,["admin","editeur","lecteur"].includes(m.role)?m.role:"lecteur")};
+window.onEmailLink=e=>{linkLogin=true;["lpw","lin","lml","lgo"].forEach(i=>$(i).hidden=true);$("lfin").hidden=false;if(e){$("lem").value=e;$("lfin").click()}else say("Confirme l'adresse e-mail où tu as reçu le lien, puis valide.")};
 const guard=f=>async()=>{if(!window.FB){say("Service de connexion indisponible : vérifie ta connexion internet.");return}try{await f()}catch(e){say(errMsg(e))}};
 $("lin").onclick=guard(()=>FB.login($("lem").value.trim(),$("lpw").value));
 $("lpw").addEventListener("keydown",e=>{if(e.key==="Enter")$("lin").click()});
-$("lnew").onclick=guard(async()=>{if($("lpw").value.length<10){say("Mot de passe : 10 caractères minimum.");return}await FB.signup($("lem").value.trim(),$("lpw").value);say("Compte créé. Clique sur le lien reçu par e-mail, puis connecte-toi.")});
+$("lml").onclick=guard(async()=>{const e=$("lem").value.trim();if(!e){say("Saisis d'abord ton adresse e-mail.");return}await FB.send(e);say("Lien envoyé à "+e+". Ouvre-le pour te connecter (vérifie aussi les spams).")});
 $("lgo").onclick=guard(()=>FB.google());
-$("lrs").onclick=guard(async()=>{await FB.reset($("lem").value.trim());say("E-mail de réinitialisation envoyé (vérifie aussi les spams).")});
+$("lfin").onclick=async()=>{if(!window.FB)return;try{await FB.completeLink($("lem").value.trim())}catch(e){say(errMsg(e));resetLogin()}};
+$("pwok").onclick=async()=>{const p=$("npw").value;if(p.length<10){note("10 caractères minimum.");return}try{await FB.setPassword(p);note("Mot de passe enregistré.");$("npw").value="";$("t-pw").classList.add("hide")}catch(e){note(errMsg(e))}};
+$("pwno").onclick=()=>$("t-pw").classList.add("hide");
 $("out").onclick=()=>{(window.FB?FB.out():Promise.resolve()).finally(()=>location.reload())};
 setTimeout(()=>{if(!window.FB)say("Service de connexion indisponible : vérifie ta connexion internet puis recharge la page.")},7000);
 
@@ -661,7 +670,7 @@ render();drawJD();
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, updatePassword, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { getFirestore, collection, doc, onSnapshot, setDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyAKp_oELkaMTaA4o84eD6_OLeUTLm5QnOY",
@@ -673,11 +682,16 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig), auth = getAuth(app), fs = getFirestore(app);
 const P = p => doc(fs, ...p.split("/"));
+const linkSettings = () => ({ url: location.origin + location.pathname, handleCodeInApp: true });
 window.FB = {
   login: (e, p) => signInWithEmailAndPassword(auth, e, p),
-  signup: async (e, p) => { const c = await createUserWithEmailAndPassword(auth, e, p); await sendEmailVerification(c.user); await signOut(auth); },
   google: () => signInWithPopup(auth, new GoogleAuthProvider()),
-  reset: e => sendPasswordResetEmail(auth, e),
+  // lien de connexion pour soi-même (mémorise l'adresse sur cet appareil)
+  send: async e => { await sendSignInLinkToEmail(auth, e, linkSettings()); localStorage.setItem("aj-mail", e); },
+  // invitation envoyée par un·e admin à un·e autre membre
+  invite: e => sendSignInLinkToEmail(auth, e, linkSettings()),
+  completeLink: async e => { await signInWithEmailLink(auth, e, location.href); localStorage.removeItem("aj-mail"); history.replaceState(null, "", location.pathname); },
+  setPassword: p => updatePassword(auth.currentUser, p),
   out: () => signOut(auth),
   member: async u => { const s = await getDoc(doc(fs, "membres", u.email.toLowerCase())); return s.exists() ? s.data() : null; },
   db: {
@@ -692,6 +706,7 @@ window.FB = {
   }
 };
 onAuthStateChanged(auth, u => window.onFbUser && window.onFbUser(u));
+if (isSignInWithEmailLink(auth, location.href) && window.onEmailLink) window.onEmailLink(localStorage.getItem("aj-mail"));
 </script>
 </body>
 </html>
