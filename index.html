@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Espace de travail communication – Amnesty Jeunes Narbonne">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+<title>Atelier com' – Amnesty Jeunes Narbonne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#111;--mut:#5a5a5a;--line:#d9d9d9;--panel:#f3f3f0;--y:#ffff00;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e0e;--fg:#f4f4f4;--mut:#a5a5a5;--line:#333;--panel:#1a1a1a}}
+:root[data-theme="dark"]{--bg:#0e0e0e;--fg:#f4f4f4;--mut:#a5a5a5;--line:#333;--panel:#1a1a1a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 Roboto,system-ui,sans-serif}
+header{background:var(--y);color:#000;padding:20px 24px;border-bottom:6px solid #000}
+header h1{margin:0;font:700 34px/1.05 "Roboto Condensed",Impact,sans-serif}
+header p{margin:6px 0 0;font-weight:600}
+main{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:28px;max-width:1200px;margin:0 auto;padding:24px}
+@media(max-width:820px){main{grid-template-columns:1fr;padding:16px}}
+fieldset{border:0;border-top:2px solid var(--fg);margin:0 0 18px;padding:12px 0 0}
+legend{font:700 20px "Roboto Condensed",sans-serif;padding-right:10px}
+label{display:block;font-weight:600;font-size:14px;margin:10px 0 4px}
+input[type=text],textarea,select{width:100%;padding:10px;border:1.5px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit}
+textarea{resize:vertical}
+input:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid #f0a800;outline-offset:1px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+.row>*{flex:1 1 120px}
+input[type=color]{width:100%;height:42px;border:1.5px solid var(--line);border-radius:6px;background:var(--bg);padding:2px}
+button{font:600 15px Roboto,sans-serif;padding:10px 14px;border-radius:6px;border:2px solid var(--fg);background:var(--bg);color:var(--fg);cursor:pointer}
+button.pri{background:var(--y);color:#000;border-color:#000;font-weight:700}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.chips button{padding:6px 10px;font-size:13px}
+.prev{position:sticky;top:12px;align-self:start}
+canvas{width:100%;height:auto;max-height:82vh;object-fit:contain;border:2px solid var(--fg);display:block;background:#888}
+.acts{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+#res{display:none;margin-top:14px;padding:12px;background:var(--panel);border-radius:8px}
+#res img{max-width:260px;width:100%;display:block;margin-top:8px}
+small{color:var(--mut)}
+nav{display:flex;gap:6px;padding:10px 24px;background:var(--fg);flex-wrap:wrap;position:sticky;top:0;z-index:5}
+nav button{background:transparent;color:var(--bg);border-color:transparent}
+nav button.on{background:var(--y);color:#000}
+.tab{display:none}.tab.on{display:grid}.page.tab.on{display:block}
+.page{max-width:900px;margin:0 auto;padding:24px}
+.pi{display:grid;grid-template-columns:120px 1fr auto auto auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+@media(max-width:640px){.pi{grid-template-columns:1fr 1fr}}
+.done{opacity:.5}
+.sw{display:flex;gap:8px;flex-wrap:wrap}.sw div{width:104px;height:70px;border:2px solid var(--fg);padding:6px;font-size:12px;font-weight:700;color:#000}
+.g{display:flex;gap:10px;flex-wrap:wrap}.g img{width:190px}
+#lp{max-width:260px;background:#ffff00;display:block;margin:8px 0}
+ul.r{margin:6px 0 0;padding-left:20px}ul.r li{margin:4px 0}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#who{font-weight:700;margin-right:8px}
+.nl{color:var(--y);font-weight:700;align-self:center;margin:0 4px 0 12px}
+.ch{display:flex;align-items:center;gap:8px;margin-bottom:10px}.ch h3{flex:1;margin:0;text-transform:capitalize;font:700 28px "Roboto Condensed",sans-serif}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cw{font-size:12px;font-weight:700;color:var(--mut);text-align:center}
+.cd{aspect-ratio:1/.85;border-radius:12px;border:1.5px solid var(--line);display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:6px 8px;font-weight:700;background:var(--bg);color:var(--fg);font-size:15px}
+.cd.today{background:var(--y);color:#000;border-color:#000}.cd.sel{outline:3px solid var(--fg)}
+.cd i{font-style:normal;font-size:11px;border-radius:999px;padding:0 7px;border:1px solid var(--fg)}.dy{background:var(--y);color:#000}.dk{background:var(--fg);color:var(--bg)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0 24px}
+.tile{padding:18px;border:2px solid var(--fg);border-radius:14px;text-align:left;background:var(--y);color:#000;display:flex;flex-direction:column;gap:6px;min-height:120px;font-weight:400}
+.tile b{font:700 28px "Roboto Condensed",sans-serif}.tile.off{background:var(--panel);color:var(--mut);border-style:dashed}
+#t-login{position:fixed;inset:0;background:#ffff00;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center;z-index:50;overflow:auto}
+#t-login button{border-color:#000;color:#000;background:#fff}
+.hide{display:none!important}
+#t-login input{width:100%;max-width:320px;padding:10px;border:2px solid #000;border-radius:6px;background:#fff;color:#000;font:inherit}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;display:none;z-index:60}
+</style>
+</head>
+<body>
+<div id="toast" role="status"></div>
+<div id="t-login"><div style="border:4px solid #000;padding:14px 22px;text-align:left"><div style="font:700 46px/1 'Roboto Condensed',sans-serif">AMNESTY</div><div style="font:700 28px/1.1 'Roboto Condensed',sans-serif">INTERNATIONAL</div><div style="font-weight:500">Jeunes Narbonne</div></div>
+<h1 style="font:700 42px/1 'Roboto Condensed',sans-serif;margin:6px 0">Espace militant·es</h1>
+<p style="max-width:460px;margin:0" id="lmsg">Connecte-toi avec ton compte de l'antenne.</p>
+<input id="lem" type="email" placeholder="E-mail" autocomplete="username" aria-label="E-mail"><input id="lpw" type="password" placeholder="Mot de passe" autocomplete="current-password" aria-label="Mot de passe">
+<div class="row" style="justify-content:center"><button class="pri" id="lin" type="button" style="background:#000;color:#ffff00">Se connecter</button><button id="lnew" type="button">Créer un compte</button></div>
+<button id="lgo" type="button">Continuer avec Google</button><button id="lrs" type="button">Mot de passe oublié</button>
+<button id="lloc" type="button">Continuer en mode local</button><small style="color:#000">Le mode local garde les données sur cet appareil uniquement.</small></div>
+<header><div><h1>Atelier com' – Amnesty Jeunes Narbonne</h1><p>Ton espace de travail d'antenne.</p></div><div><span id="who"></span><button id="out" type="button">Se déconnecter</button></div></header>
+<nav id="nav"><button data-t="home" class="on">Accueil</button><span class="nl">Communication</span><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="lib">Modèles</button><button data-t="charte">Charte et réglages</button></nav>
+<main id="t-create" class="tab">
+<section>
+<fieldset><legend>1. Type de publication</legend>
+<select id="tpl">
+<option value="event">Événement (rdv, réunion, stand)</option>
+<option value="action">Action / pétition</option>
+<option value="quote">Citation / témoignage</option>
+<option value="info">Info / sensibilisation</option>
+</select>
+<label for="lay">Mise en page (style Amnesty)</label>
+<select id="lay"><option value="hl">Surligné : titre sur bandes</option><option value="flat">Aplat : titre sur fond uni</option><option value="photo">Photo : titre surligné sur image</option></select>
+<label for="fmt">Format</label>
+<select id="fmt">
+<option value="1350">Post Instagram (1080×1350)</option>
+<option value="1080">Carré (1080×1080)</option>
+<option value="1920">Story / Réel (1080×1920)</option>
+</select>
+</fieldset>
+
+<fieldset><legend>2. Textes</legend>
+<label for="lab">Petit bandeau</label><input type="text" id="lab">
+<label for="ttl">Titre</label><textarea id="ttl" rows="2"></textarea>
+<label for="sub">Sous-titre</label><textarea id="sub" rows="2"></textarea>
+<div class="row">
+<div><label for="dat">Date / heure</label><input type="text" id="dat"></div>
+<div><label for="loc">Lieu</label><input type="text" id="loc"></div>
+</div>
+<label for="tag">Hashtag ou compte affiché</label><input type="text" id="tag" value="#AmnestyJeunes">
+</fieldset>
+
+<fieldset><legend>3. Personnages</legend>
+<div class="row">
+<div><label for="cnt">Nombre</label>
+<select id="cnt"><option>0</option><option>1</option><option selected>2</option><option>3</option></select></div>
+<div><label>&nbsp;</label><button id="shuf" type="button">Changer les looks</button></div>
+</div>
+<label for="sgn">Texte sur la pancarte</label><input type="text" id="sgn" value="Liberté !">
+<small>Les personnages tiennent une pancarte, un mégaphone ou lèvent le poing.</small>
+</fieldset>
+
+<fieldset><legend>4. Images</legend>
+<label for="fph">Photo de fond (mise en page Photo)</label><input type="file" id="fph" accept="image/*">
+<label for="flg">Logo officiel (PNG, fond jaune)</label><input type="file" id="flg" accept="image/*">
+<small>Importe le logo une seule fois : il est mémorisé sur cet appareil. Sans fichier, un cartouche provisoire s'affiche.</small>
+</fieldset>
+<fieldset><legend>5. Couleurs (charte : jaune, noir, blanc)</legend>
+<input type="hidden" id="cbg" value="#ffff00"><input type="hidden" id="cfg" value="#000000">
+<div class="chips" id="chips"></div><small>Tes propres couleurs se créent dans l'onglet Charte et réglages.</small></fieldset>
+<details><summary><strong>Rappel de la charte Amnesty International France</strong></summary>
+<small>Uniquement jaune, noir et blanc (et nuances de noir). Le logo garde toujours son cartouche jaune : ne pas le redessiner ni le recolorer. Titres en Trade Gothic Bold Condensed (ici Roboto Condensed, alternative libre). Surlignage raisonnable par rapport au texte. Ton positif et dynamique, personnes actrices de leur combat.</small></details>
+</section>
+
+<section class="prev">
+<canvas id="cv" width="1080" height="1350" aria-label="Aperçu du visuel"></canvas>
+<div class="acts">
+<button class="pri" id="dl" type="button">Télécharger l'image</button>
+<button id="dl3" type="button">Exporter les 3 formats</button>
+<button id="sv" type="button">Enregistrer comme modèle</button>
+</div>
+<div id="res"><strong>Ton image est prête.</strong><br><small>Clic droit → « Enregistrer l'image » (ou appui long sur mobile).</small><img id="out" alt="Visuel prêt à enregistrer"><div class="g" id="all"></div></div>
+<fieldset style="margin-top:22px"><legend>Légende à copier</legend>
+<textarea id="cap" rows="9"></textarea>
+<div class="acts"><button id="cp" type="button">Copier la légende</button></div>
+</fieldset>
+</section>
+</main>
+
+<div id="t-home" class="page tab on"><h2 id="hw">Bienvenue</h2>
+<p>Espace de travail d'Amnesty Jeunes Narbonne.</p>
+<div class="tiles"><button class="tile" type="button" data-go="create"><b>Communication</b><span>Créer les visuels, planifier les publications, retrouver la charte.</span></button>
+<div class="tile off"><b>Événements</b><span>Bientôt</span></div><div class="tile off"><b>Membres</b><span>Bientôt</span></div><div class="tile off"><b>Actions et pétitions</b><span>Bientôt</span></div></div>
+<h3>Prochaines dates</h3><div id="hnext"></div></div>
+
+<div id="t-plan" class="page tab"><h2>Calendrier</h2>
+<div class="ch"><button id="cp" type="button" aria-label="Mois précédent">◀</button><h3 id="ct"></h3><button id="cto" type="button">Aujourd'hui</button><button id="cn" type="button" aria-label="Mois suivant">▶</button></div>
+<div class="cg" id="cg"></div><div id="cday" style="margin:16px 0"></div>
+<fieldset><legend>Ajouter une publication</legend>
+<div class="row"><div><label for="pD">Date</label><input type="text" id="pD" placeholder="AAAA-MM-JJ"></div>
+<div><label for="pN">Réseau</label><select id="pN"><option>Instagram</option><option>Story Instagram</option><option>Facebook</option><option>LinkedIn</option></select></div>
+<div><label for="pT">Type</label><select id="pT"><option value="event">Événement</option><option value="action">Action</option><option value="quote">Citation</option><option value="info">Info</option></select></div></div>
+<label for="pH">Thème</label><input type="text" id="pH"><div class="acts"><button class="pri" id="pA" type="button">Ajouter</button><button id="pW" type="button">Générer 4 semaines de rythme</button></div></fieldset>
+<div id="plist"></div>
+<fieldset style="margin-top:20px"><legend>Journées mondiales (ONU et droits humains)</legend>
+<div class="row"><div><label for="jq">Rechercher</label><input type="text" id="jq"></div><div><label for="jm">Mois</label><select id="jm"></select></div><div><label for="jc">Thème</label><select id="jc"></select></div></div>
+<div id="jd"></div><div class="acts"><button id="jx" type="button">Exporter la liste en JSON</button></div><textarea id="jj" rows="4" hidden></textarea>
+<small>* hors calendrier officiel de l'ONU mais très suivies par les militants. Vérifie les dates sur le site de l'ONU avant de publier.</small></fieldset></div>
+
+<div id="t-lib" class="page tab"><h2>Modèles enregistrés</h2>
+<div class="row"><div><label for="mN">Nom du modèle</label><input type="text" id="mN"></div><div><button class="pri" id="mA" type="button">Enregistrer le visuel actuel</button></div></div>
+<div id="llist"></div></div>
+
+<div id="t-charte" class="page tab"><h2>Charte graphique complète</h2>
+<small>Synthèse inspirée de la charte d'Amnesty International France et des guides d'autres sections. Réfère-toi toujours à la version officielle de ton référent.</small>
+<fieldset><legend>Identité</legend><p>Amnesty International est une ONG indépendante qui défend la liberté d'expression et lutte contre les discriminations. Notre antenne jeunes fait vivre ce combat à Narbonne : enquêtes relayées, pétitions, actions et rendez-vous locaux.</p></fieldset>
+<fieldset><legend>Couleurs</legend><div class="sw"><div style="background:#ffff00">Jaune #FFFF00</div><div style="background:#000;color:#ffff00">Noir #000000</div><div style="background:#fff">Blanc #FFFFFF</div><div style="background:#333;color:#fff">Noir 80 %</div><div style="background:#666;color:#fff">Noir 60 %</div><div style="background:#999">Noir 40 %</div><div style="background:#ccc">Noir 20 %</div></div>
+<ul class="r"><li>Le jaune est la couleur institutionnelle : il identifie Amnesty au premier regard.</li><li>Le contraste avec le noir donne l'impact ; le blanc laisse respirer.</li><li>Les nuances de noir (20 à 80 %) servent aux textes secondaires.</li></ul></fieldset>
+<fieldset><legend>Mes couleurs (combinaisons fond / texte)</legend>
+<div class="row"><div><label for="ccN">Nom</label><input type="text" id="ccN"></div><div><label for="ccB">Fond</label><input type="color" id="ccB" value="#ffff00"></div><div><label for="ccF">Texte</label><input type="color" id="ccF" value="#000000"></div></div>
+<div class="acts"><button class="pri" id="ccA" type="button">Ajouter la combinaison</button></div><div id="ccl"></div>
+<small>La charte d'Amnesty France impose jaune, noir et blanc : réserve les autres couleurs aux cas particuliers.</small></fieldset>
+<fieldset><legend>Logo</legend><img id="lp" alt="Logo enregistré"><button id="lx" type="button">Retirer le logo enregistré</button>
+<ul class="r"><li>Il se compose du nom, de la bougie et du cartouche jaune : toujours avec son cartouche.</li><li>Versions : couleur (noir sur jaune), négatif, noir et blanc.</li><li>Préférer un fond jaune ; sinon un fond blanc ou noir.</li><li>Sur une photo en couleurs, favoriser le logo jaune.</li><li>Ne pas le redessiner, ne pas utiliser deux couleurs pour le texte et la bougie.</li><li>Laisser un espace libre autour du logo.</li></ul></fieldset>
+<fieldset><legend>Typographie</legend><p style="font:700 44px/1 'Roboto Condensed',sans-serif;margin:6px 0">Titre : gras condensé</p><p style="font:700 20px Roboto,sans-serif;margin:6px 0">Sous-titre : gras</p><p style="margin:6px 0">Texte courant : romain ou light. Police officielle : Trade Gothic ; alternative libre : Roboto / Roboto Condensed.</p></fieldset>
+<fieldset><legend>Mise en page</legend><ul class="r"><li>Logo en haut à gauche, marges régulières.</li><li>Titre sur bandes surlignées jaunes ou noires, en proportion du texte.</li><li>Bloc d'information (date, lieu, compte) en bas, sur aplat.</li><li>Un seul message et un seul appel à l'action par visuel.</li></ul></fieldset>
+<fieldset><legend>Photos et illustrations</legend><ul class="r"><li>Photos authentiques de l'antenne et du terrain, avec l'accord des personnes.</li><li>Rester cohérent avec les couleurs de l'image (bichromie possible).</li><li>Montrer des personnes actrices de leur combat, jamais dégradées ni passives.</li><li>Illustrations et personnages en jaune, noir et blanc.</li></ul></fieldset>
+<fieldset><legend>Ton et écriture</legend><ul class="r"><li>Passionné, fort, positif et porteur d'espoir.</li><li>Verbes d'action : signe, partage, rejoins-nous.</li><li>Écriture inclusive (point médian) et phrases courtes.</li><li>« Amnesty International France » pour le formel, « Amnesty » à l'oral.</li></ul></fieldset>
+<fieldset><legend>Formats réseaux</legend><ul class="r"><li>Post : 1080 × 1350 (4:5) ou carré 1080 × 1080.</li><li>Story et Réel : 1080 × 1920 ; garder le texte à l'écart des bords haut et bas.</li><li>Légende : accroche dans la première ligne, hashtags fixes en fin.</li></ul></fieldset>
+<fieldset><legend>Avant de publier</legend><label><input type="checkbox"> Logo présent avec son cartouche jaune</label><label><input type="checkbox"> Uniquement jaune, noir et blanc</label><label><input type="checkbox"> Un message, une action</label><label><input type="checkbox"> Texte lisible sur mobile</label><label><input type="checkbox"> Dates, lieux et faits vérifiés</label><label><input type="checkbox"> Accord des personnes visibles</label></fieldset>
+<h2>Réglages de l'antenne</h2>
+<label for="sNom">Nom de l'antenne</label><input type="text" id="sNom" value="Amnesty Jeunes Narbonne">
+<label for="sCpt">Compte Instagram</label><input type="text" id="sCpt" placeholder="@...">
+<label for="sTags">Hashtags fixes</label><input type="text" id="sTags" value="#Amnesty #AmnestyJeunes #Narbonne #DroitsHumains">
+<label for="sSig">Phrase de fin de légende (facultatif)</label><input type="text" id="sSig">
+<fieldset id="adm" hidden><legend>Membres de l'antenne (admin)</legend>
+<div class="row"><div><label for="mE">E-mail du membre</label><input type="text" id="mE"></div><div><label for="mR">Rôle</label><select id="mR"><option value="editeur">Éditeur</option><option value="lecteur">Lecteur</option><option value="admin">Admin</option></select></div></div>
+<div class="acts"><button class="pri" id="mAdd" type="button">Ajouter le membre</button></div><div id="mlist"></div></fieldset>
+<small>Les réglages, le logo, le planning et les modèles sont partagés avec l'équipe (ou gardés sur cet appareil en mode local).</small></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const PRE={
+event:{lab:"Rendez-vous",ttl:"Rejoins-nous : ensemble, on défend les droits humains",sub:"Viens découvrir Amnesty Jeunes Narbonne et choisir tes combats.",dat:"Jeudi 18h30",loc:"Narbonne – salle à préciser",end:"Venez nombreux·ses et amenez vos ami·es !"},
+action:{lab:"Passe à l'action",ttl:"Signe la pétition. Ça prend 2 minutes.",sub:"Une signature peut changer une vie.",dat:"",loc:"Lien en bio",end:"Signe, partage, et invite tes ami·es à faire pareil."},
+quote:{lab:"Parole de militant·e",ttl:"« Se taire, c'est laisser faire. »",sub:"Prénom, membre d'Amnesty Jeunes Narbonne",dat:"",loc:"",end:"Et toi, qu'est-ce qui te fait agir ?"},
+info:{lab:"À savoir",ttl:"Les droits humains, ça nous concerne toutes et tous",sub:"Ce qu'il faut retenir en 30 secondes.",dat:"",loc:"",end:"Partage pour informer autour de toi."}};
+const SKIN=["#ffffff","#999999","#333333"],HAIR=["#000000","#000000","#666666"],SHIRT=["#000000","#ffffff","#ffff00"];
+let seed=3;
+function rnd(i,n,k){return Math.abs(Math.sin((seed+1)*(i+1)*(k+7)*12.9898)*43758.5453)%1*n|0}
+function wrap(c,text,w){let out=[];for(const para of text.split("\n")){let cur="";for(const wd of para.split(/\s+/).filter(Boolean)){const t=cur?cur+" "+wd:wd;if(c.measureText(t).width>w&&cur){out.push(cur);cur=wd}else cur=t}out.push(cur)}return out}
+function rr(c,x,y,w,h,r){c.beginPath();c.roundRect?c.roundRect(x,y,w,h,r):c.rect(x,y,w,h);c.fill()}
+function person(c,x,y,s,type,p,sign){
+c.save();c.lineCap="round";c.lineJoin="round";
+const bw=110*s,bh=150*s,leg=90*s,top=y-leg-bh,hy=top-46*s,r=40*s;
+c.fillStyle="#1d1d1b";rr(c,x-42*s,y-leg,36*s,leg,8*s);rr(c,x+6*s,y-leg,36*s,leg,8*s);
+const arm=(x1,y1,x2,y2,col)=>{c.strokeStyle=p.shirt;c.lineWidth=26*s;c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.fillStyle=col;c.beginPath();c.arc(x2,y2,15*s,0,7);c.fill()};
+const L=[x-bw/2+10*s,top+26*s],R=[x+bw/2-10*s,top+26*s];
+arm(L[0],L[1],L[0]-8*s,top+bh*.8,p.skin);
+let hx,hy2;
+if(type==="sign"){hx=R[0]+26*s;hy2=top-60*s;
+c.strokeStyle="#000";c.lineWidth=8*s;c.beginPath();c.moveTo(hx,hy2-10*s);c.lineTo(hx,hy2+40*s);c.stroke();
+c.fillStyle="#fff";c.strokeStyle="#000";c.lineWidth=6*s;c.beginPath();c.rect(hx-105*s,hy2-160*s,210*s,140*s);c.fill();c.stroke();
+c.fillStyle="#000";c.font=`700 ${34*s}px "Roboto Condensed",sans-serif`;c.textAlign="center";c.textBaseline="middle";
+const ls=wrap(c,sign,190*s).slice(0,3);ls.forEach((l,i)=>c.fillText(l.toUpperCase(),hx,hy2-90*s+(i-(ls.length-1)/2)*38*s));
+arm(R[0],R[1],hx,hy2,p.skin)}
+else if(type==="fist"){hx=R[0]+22*s;hy2=top-56*s;arm(R[0],R[1],hx,hy2,p.skin);c.fillStyle=p.skin;c.beginPath();c.arc(hx,hy2,20*s,0,7);c.fill()}
+else{hx=R[0]+38*s;hy2=top+6*s;arm(R[0],R[1],hx,hy2,p.skin);
+c.fillStyle="#ffff00";c.strokeStyle="#000";c.lineWidth=5*s;c.beginPath();c.moveTo(hx,hy2-16*s);c.lineTo(hx+78*s,hy2-46*s);c.lineTo(hx+78*s,hy2+34*s);c.lineTo(hx,hy2+12*s);c.closePath();c.fill();c.stroke()}
+c.fillStyle=p.shirt;rr(c,x-bw/2,top,bw,bh+20*s,22*s);
+c.fillStyle=p.skin;c.beginPath();c.arc(x,hy,r,0,7);c.fill();c.strokeStyle="#000";c.lineWidth=4*s;c.stroke();
+c.fillStyle=p.hair;c.beginPath();c.arc(x,hy-2*s,r+3*s,Math.PI,0);c.fill();
+c.fillStyle="#111";c.beginPath();c.arc(x-14*s,hy+2*s,4*s,0,7);c.arc(x+14*s,hy+2*s,4*s,0,7);c.fill();
+c.strokeStyle="#111";c.lineWidth=4*s;c.beginPath();c.arc(x,hy+10*s,13*s,.15*Math.PI,.85*Math.PI);c.stroke();
+c.restore()}
+const IM={photo:null,logo:null};
+function loadImg(id,k){$(id).onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{IM[k]=im;render()};im.src=URL.createObjectURL(f)}}
+loadImg("fph","photo");function setLogo(u,save){$("lp").src=u;const im=new Image();im.onload=()=>{IM.logo=im;render()};im.src=u;if(save)saveLogo(u)}
+$("flg").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>shrink(r.result);r.readAsDataURL(f)};
+
+function cover(c,im,W,H){const r=Math.max(W/im.width,H/im.height),w=im.width*r,h=im.height*r;c.drawImage(im,(W-w)/2,(H-h)/2,w,h)}
+function render(){
+const cv=$("cv"),c=cv.getContext("2d"),W=1080,H=+$("fmt").value,L=$("lay").value,ph=L==="photo";cv.height=H;
+const bg=$("cbg").value,fg=$("cfg").value,pad=64;
+const tc=ph?"#fff":fg,ac=ph?"#ffff00":fg,at=ph?"#000":bg;
+c.fillStyle=ph?"#333":bg;c.fillRect(0,0,W,H);
+if(ph){if(IM.photo)cover(c,IM.photo,W,H);c.fillStyle="rgba(0,0,0,.4)";c.fillRect(0,0,W,H)}
+else{c.fillStyle=fg;c.globalAlpha=.07;c.beginPath();c.arc(W-40,H*.3,340,0,7);c.fill();c.globalAlpha=1}
+c.textBaseline="alphabetic";c.textAlign="left";
+if(IM.logo){const h=110,w=IM.logo.width*h/IM.logo.height;c.fillStyle="#ffff00";c.fillRect(pad,50,w,h);c.drawImage(IM.logo,pad,50,w,h)}
+else{c.fillStyle="#ffff00";c.fillRect(pad,50,330,110);c.strokeStyle="#000";c.lineWidth=4;c.strokeRect(pad,50,330,110);c.fillStyle="#000";
+c.font='700 40px "Roboto Condensed",sans-serif';c.fillText("AMNESTY",pad+18,96);c.font='700 26px "Roboto Condensed",sans-serif';c.fillText("INTERNATIONAL",pad+18,124);c.font='500 22px Roboto,sans-serif';c.fillText("Jeunes Narbonne",pad+18,150)}
+const hasBox=$("dat").value||$("loc").value||$("tag").value,boxH=hasBox?230:0,n=+$("cnt").value;
+const PAL=SHIRT.filter(k=>k!==bg.toLowerCase()),s=H<1200?.95:1.2,base=H-boxH-(hasBox?14:40),figTop=n?base-400*s:base;
+let y=200;
+const lab=$("lab").value.trim();
+if(lab){c.font='700 32px Roboto,sans-serif';const w=c.measureText(lab).width+40;c.fillStyle=ac;rr(c,pad,y,w,52,26);c.fillStyle=at;c.fillText(lab,pad+20,y+37);y+=52+28}
+const avail=figTop-y-10,tt=$("ttl").value.trim();
+let size=150,lines;
+for(;size>=44;size-=4){c.font=`700 ${size}px "Roboto Condensed",sans-serif`;lines=wrap(c,tt,W-2*pad-28);if(lines.length*size*1.12<=avail*.78)break}
+let ty=y;
+lines.forEach(l=>{const w=c.measureText(l).width;
+if(L==="flat"){c.fillStyle=tc;c.fillText(l,pad,ty+size*.9)}else{c.fillStyle=ac;c.fillRect(pad-14,ty,w+28,size*1.08);c.fillStyle=at;c.fillText(l,pad,ty+size*.9)}
+ty+=size*1.12});
+const sub=$("sub").value.trim();
+if(sub){c.font='500 40px Roboto,sans-serif';c.fillStyle=tc;wrap(c,sub,W-2*pad).slice(0,3).forEach((l,i)=>c.fillText(l,pad,ty+40+i*52))}
+const xs={0:[],1:[.72],2:[.3,.72],3:[.2,.5,.8]}[n],types=["sign","fist","mega"];
+xs.forEach((f,i)=>person(c,W*f,base,s,types[i%3],{skin:SKIN[rnd(i,3,1)],hair:HAIR[rnd(i,3,2)],shirt:PAL[rnd(i,PAL.length,3)]},$("sgn").value||"Liberté !"));
+if(hasBox){const by=H-boxH;c.fillStyle=ac;c.fillRect(0,by,W,boxH);c.fillStyle=at;let cy=by+82;
+if($("dat").value){c.font='700 76px "Roboto Condensed",sans-serif';c.fillText($("dat").value,pad,cy);cy+=52}
+if($("loc").value){c.font='500 38px Roboto,sans-serif';c.fillText($("loc").value,pad,cy)}
+if($("tag").value){c.font='700 30px Roboto,sans-serif';c.textAlign="right";c.fillText($("tag").value,W-pad,by+boxH-30);c.textAlign="left"}}
+caption()}
+const ST=()=>({nom:$("sNom").value,cpt:$("sCpt").value,tags:$("sTags").value,sig:$("sSig").value});
+function caption(){const t=PRE[$("tpl").value],d=$("dat").value,l=$("loc").value,st=ST();
+let s=`📣 ${$("ttl").value}\n\n${$("sub").value}\n`;if(d)s+=`\n📅 ${d}`;if(l)s+=`\n📍 ${l}`;
+s+=`\n\n${t.end}`;if(st.sig)s+=`\n${st.sig}`;if(st.cpt)s+=`\n\nSuivez ${st.nom||"nous"} : ${st.cpt}`;
+s+=`\n\n${st.tags} ${$("tag").value.startsWith("#")?$("tag").value:""}`;$("cap").value=s.trim()}
+function applyTpl(){const t=PRE[$("tpl").value];$("lab").value=t.lab;$("ttl").value=t.ttl;$("sub").value=t.sub;$("dat").value=t.dat;$("loc").value=t.loc;render()}
+$("tpl").onchange=applyTpl;
+["lay","fmt","lab","ttl","sub","dat","loc","tag","cnt","sgn","cbg","cfg"].forEach(i=>$(i).addEventListener("input",render));
+$("shuf").onclick=()=>{seed+=1;render()};
+$("dl").onclick=()=>{$("cv").toBlob(b=>{const u=URL.createObjectURL(b);$("out").src=u;$("res").style.display="block";
+try{const a=document.createElement("a");a.href=u;a.download="amnesty-jeunes-narbonne.png";a.click()}catch(e){}
+$("res").scrollIntoView({behavior:"smooth",block:"nearest"})},"image/png")};
+$("cp").onclick=async()=>{try{await navigator.clipboard.writeText($("cap").value)}catch(e){$("cap").select();try{document.execCommand("copy")}catch(_){}}$("cp").textContent="Copié !";setTimeout(()=>$("cp").textContent="Copier la légende",1500)};
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const mk=(t,fn)=>{const b=document.createElement("button");b.type="button";b.textContent=t;b.onclick=fn;return b};
+function show(t){document.querySelectorAll(".tab").forEach(e=>e.classList.toggle("on",e.id==="t-"+t));document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));window.scrollTo(0,0)}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.t));
+// ===== stockage (base de données partagée ou local) =====
+let DB=null,CFG={},PL=[],LB=[],CC=[],sT;const W={};
+const rid=()=>"i"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const note=m=>{const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(note.t);note.t=setTimeout(()=>t.style.display="none",3500)};
+const store={
+watch(col,cb){W[col]=cb;if(DB)DB.collection(col).onSnapshot(q=>cb(q.docs.map(d=>({id:d.id,...d.data()}))),e=>note("Lecture impossible ("+e.code+")"));else cb(LS.get("aj-"+col,[]))},
+async put(col,it){const id=it.id||rid(),o={...it};delete o.id;try{if(DB)await DB.collection(col).doc(id).set(o);else{const a=LS.get("aj-"+col,[]),k=a.findIndex(x=>x.id===id);if(k<0)a.push({...o,id});else a[k]={...o,id};LS.set("aj-"+col,a);W[col]&&W[col](a)}}catch(e){note("Enregistrement refusé (lecture seule ?)")}},
+async del(col,id){try{if(DB)await DB.collection(col).doc(id).delete();else{const a=LS.get("aj-"+col,[]).filter(x=>x.id!==id);LS.set("aj-"+col,a);W[col]&&W[col](a)}}catch(e){note("Suppression refusée")}},
+cfgWatch(cb){if(DB)DB.doc("config/antenne").onSnapshot(q=>cb(q.exists?q.data():{}),()=>{});else cb(LS.get("aj-cfg",{}))},
+async cfgSet(o){try{if(DB)await DB.doc("config/antenne").set(o);else LS.set("aj-cfg",o)}catch(e){note("Réglages non enregistrés")}}};
+const saveCfg=()=>{clearTimeout(sT);sT=setTimeout(()=>store.cfgSet({...ST(),logo:CFG.logo||""}),700)};
+["sNom","sCpt","sTags","sSig"].forEach(i=>$(i).addEventListener("input",()=>{caption();saveCfg()}));
+function saveLogo(u){CFG.logo=u;store.cfgSet({...ST(),logo:u})}
+function shrink(u){const im=new Image();im.onload=()=>{const h=Math.min(300,im.height),w=im.width*h/im.height,c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");x.fillStyle="#ffff00";x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);setLogo(c.toDataURL("image/jpeg",.88),true)};im.src=u}
+$("lx").onclick=()=>{CFG.logo="";store.cfgSet({...ST(),logo:""});IM.logo=null;$("lp").removeAttribute("src");render()};
+// ===== dates : liste officielle ONU (fixes) =====
+const RAW=`0104 m du braille
+0124 i de l'éducation
+0126 i des énergies propres
+0127 i dédiée à la mémoire des victimes de l'Holocauste
+0128 i de la coexistence pacifique
+0201 x Semaine mondiale de l'harmonie interconfessionnelle
+0202 m des zones humides
+0204 i de la fraternité humaine
+0206 i de tolérance zéro à l'égard des mutilations génitales féminines
+0210 i des légumineuses
+0211 i des femmes et des filles de science
+0212 i pour la prévention de l'extrémisme violent
+0213 m de la radio
+0220 m de la justice sociale
+0221 i de la langue maternelle
+0301 m des herbiers marins
+0301 x Journée Zéro discrimination
+0303 m de la vie sauvage
+0305 i de sensibilisation au désarmement et à la non-prolifération
+0308 i des droits des femmes
+0310 i des femmes juges
+0315 i de lutte contre l'islamophobie
+0320 i du bonheur
+0320 x Journée de la langue française
+0321 i des forêts
+0321 m des glaciers
+0321 i du Novruz
+0321 i pour l'élimination de la discrimination raciale
+0321 m de la poésie
+0321 m de la trisomie 21
+0322 m de l'eau
+0323 x Journée météorologique mondiale
+0324 i pour le droit à la vérité sur les violations flagrantes des droits de l'homme
+0324 m de la lutte contre la tuberculose
+0325 x Journée de solidarité avec les fonctionnaires détenus ou portés disparus
+0325 i de commémoration des victimes de l'esclavage et de la traite transatlantique
+0330 i du zéro déchet
+0331 x Journée internationale de la visibilité transgenre *
+0402 m de sensibilisation à l'autisme
+0404 i pour la sensibilisation aux mines
+0405 i de la conscience
+0406 i du sport au service du développement et de la paix
+0407 i de réflexion sur le génocide des Tutsis au Rwanda
+0407 m de la santé
+0412 i du vol spatial habité
+0414 m de la maladie de Chagas
+0415 i du mieux-être
+0421 m de la créativité et de l'innovation
+0422 i de la Terre nourricière
+0423 m du livre et du droit d'auteur
+0424 i du multilatéralisme et de la diplomatie au service de la paix
+0425 m contre le paludisme
+0425 i des délégués
+0426 i du souvenir de la catastrophe de Tchernobyl
+0426 m de la propriété intellectuelle
+0428 m pour la sécurité et la santé au travail
+0429 i dédiée à la mémoire des victimes des tremblements de terre
+0430 i du jazz
+0501 x Journée du Vesak
+0502 m du thon
+0503 m de la liberté de la presse
+0505 m de la langue portugaise
+0508 x Journées du souvenir et de la réconciliation (morts de la Seconde Guerre mondiale)
+0512 i de la santé des végétaux
+0515 i des familles
+0516 i de la lumière
+0516 i du vivre-ensemble en paix
+0517 m des télécommunications et de la société de l'information
+0517 x Journée contre l'homophobie, la transphobie et la biphobie *
+0519 m du fair-play
+0520 m des abeilles
+0521 i du thé
+0521 m de la diversité culturelle pour le dialogue et le développement
+0522 i de la diversité biologique
+0523 i pour l'élimination de la fistule obstétricale
+0524 i du markhor
+0525 m du football
+0529 i des Casques bleus des Nations Unies
+0531 m sans tabac
+0601 m des parents
+0603 m de la bicyclette
+0604 i des enfants victimes innocentes de l'agression
+0605 i de la lutte contre la pêche illicite
+0605 m de l'environnement
+0607 i de la sécurité sanitaire des aliments
+0608 m de l'océan
+0610 i pour le dialogue entre les civilisations
+0611 i du jeu
+0612 m contre le travail des enfants
+0613 i de sensibilisation à l'albinisme
+0614 m du donneur de sang
+0615 m de sensibilisation à la maltraitance des personnes âgées
+0616 i des envois de fonds familiaux
+0617 m de la lutte contre la désertification et la sécheresse
+0618 i de la lutte contre les discours de haine
+0618 x Journée de la gastronomie durable
+0619 i pour l'élimination de la violence sexuelle en temps de conflit
+0620 m des réfugié·es
+0621 i de la célébration du solstice
+0621 i du yoga
+0623 x Journée des Nations Unies pour la fonction publique
+0623 i des veuves
+0624 i des femmes dans la diplomatie
+0625 x Journée des gens de mer
+0626 i contre l'abus et le trafic de drogues
+0626 i pour le soutien aux victimes de la torture
+0627 i des personnes sourdaveugles
+0627 x Journée des micro-, petites et moyennes entreprises
+0629 i des tropiques
+0630 i des astéroïdes
+0630 i du parlementarisme
+0706 i des coopératives
+0706 m du développement rural
+0707 m de la langue kiswahili
+0711 i de réflexion et de commémoration du génocide de Srebrenica
+0711 m du cheval
+0711 m de la population
+0712 i de l'espoir
+0712 i de la lutte contre les tempêtes de sable et de poussière
+0715 m des compétences des jeunes
+0718 i Nelson Mandela
+0720 i de la Lune
+0720 m du jeu d'échecs
+0725 i des femmes et des filles d'ascendance africaine
+0725 i pour le bien-être des juges
+0725 m de prévention de la noyade
+0728 m contre l'hépatite
+0730 i de l'amitié
+0730 m de la lutte contre la traite d'êtres humains
+0801 x Semaine mondiale de l'allaitement maternel
+0806 i des pays en développement sans littoral
+0809 i des peuples autochtones
+0811 m du steel pan
+0812 i de la jeunesse
+0819 m de l'aide humanitaire
+0821 i du souvenir en hommage aux victimes du terrorisme
+0822 i de commémoration des personnes victimes de violences en raison de leur religion ou de leurs convictions
+0823 i du souvenir de la traite négrière et de son abolition
+0827 m des lacs
+0829 i contre les essais nucléaires
+0830 i des victimes de disparition forcée
+0831 i des personnes d'ascendance africaine
+0905 i des femmes et des filles autochtones
+0905 i de la charité
+0907 i de la coopération policière
+0907 i de l'air pur pour des ciels bleus
+0908 i de l'alphabétisation
+0909 i pour la protection de l'éducation contre les attaques
+0912 x Journée des Nations Unies pour la coopération Sud-Sud
+0915 i de la démocratie
+0916 i pour la science, la technologie et l'innovation dans le Sud
+0916 i de la protection de la couche d'ozone
+0917 m de la sécurité des patients
+0918 i de l'égalité de rémunération
+0921 i de la paix
+0923 i des langues des signes
+0926 m de la mer
+0926 i pour l'élimination totale des armes nucléaires
+0927 m du tourisme
+0928 i de l'accès universel à l'information
+0929 i de sensibilisation aux pertes et gaspillages de nourriture
+0930 i de la traduction
+1001 i du café
+1001 i pour les personnes âgées
+1002 i de la non-violence
+1004 x Semaine mondiale de l'espace
+1005 m des enseignants
+1007 m du coton
+1009 m de la poste
+1010 m de la santé mentale
+1010 x Journée mondiale contre la peine de mort *
+1011 i de la fille
+1013 i pour la réduction des risques de catastrophes
+1015 i des femmes rurales
+1016 m de l'alimentation
+1017 i pour l'élimination de la pauvreté
+1020 m de la statistique
+1023 i de la panthère des neiges
+1024 x Journée des Nations Unies
+1024 x Semaine du désarmement
+1024 x Semaine mondiale de l'éducation aux médias et à l'information
+1027 m du patrimoine audiovisuel
+1029 i des soins et de l'assistance
+1031 m des villes
+1102 i de la fin de l'impunité pour les crimes commis contre des journalistes
+1105 m de sensibilisation aux tsunamis
+1106 i pour la prévention de l'exploitation de l'environnement en temps de guerre et de conflit armé
+1110 x Semaine mondiale de la science au service de la paix et du développement
+1114 m du diabète
+1115 i de la prévention de la criminalité transnationale organisée
+1116 m de la tolérance
+1116 i du régime méditerranéen
+1118 m pour la prévention et la guérison de l'exploitation et des violences sexuelles visant les enfants
+1119 m des toilettes
+1120 m de l'enfance
+1120 x Journée de l'industrialisation de l'Afrique
+1120 x Journée du souvenir trans *
+1121 m de la télévision
+1121 m de la philosophie
+1124 m des jumeaux siamois
+1125 i pour l'élimination de la violence à l'égard des femmes
+1126 m des transports durables
+1127 i pour l'élimination du mariage des enfants, du mariage précoce et du mariage forcé
+1129 i de solidarité avec le peuple palestinien
+1130 x Journée du souvenir dédiée à toutes les victimes de la guerre chimique
+1201 m de lutte contre le sida
+1202 i pour l'abolition de l'esclavage
+1203 i des personnes handicapées
+1204 i des banques
+1205 i des volontaires
+1205 m des sols
+1207 x Journée de l'aviation civile internationale
+1209 i contre la corruption
+1209 i de commémoration des victimes du crime de génocide et de prévention de ce crime
+1210 x Journée des droits de l'homme
+1211 i de la montagne
+1212 i de la couverture sanitaire universelle
+1212 i de la neutralité
+1214 i contre le colonialisme sous toutes ses formes
+1215 m de la famille des langues turciques
+1218 i des migrants
+1218 x Journée de la langue arabe
+1219 i d'hommage aux femmes engagées dans la recherche de personnes disparues
+1220 i de la solidarité humaine
+1221 m du basket-ball
+1221 m de la méditation
+1224 i de la lutte contre la cybercriminalité
+1227 i de la préparation aux épidémies`;
+const CR=[["Migrations",/réfugi|migrant/],["Femmes",/femme|filles|veuve|sexuelle|mutilations|fistule|mariage/],["Jeunesse",/enfant|jeunesse|éducation|alphabét|enseignant|jeunes|parents/],["Libertés",/presse|journalistes|démocratie|accès universel|haine|transgenre|homophobie|trans\b/],["Droits",/droits|discrimination|racial|torture|esclav|traite|autochtone|disparition|vérité|justice|peine de mort|handicap|corruption|colonialisme|ascendance|religion|humaine/],["Paix",/paix|nucléaire|désarmement|terroris|non-violence|guerre|tolérance|conflit|humanitaire|coexistence|Casques|solidarité|extrémisme|mines|neutralité|dialogue/],["Mémoire",/Holocauste|génocide|souvenir|commémoration|victimes|Tchernobyl/],["Environnement",/environnement|forêt|océan|\beau\b|Terre|glaciers|lacs|zones humides|vie sauvage|abeilles|sols|montagne|déchet|désertification|air pur|ozone|\bmer\b|pêche|herbiers|tropiques|oiseaux|panthère|markhor|thon|végétaux|Lune|astéroïdes|diversité biologique/],["Santé",/santé|sida|hépatite|diabète|paludisme|tuberculose|tabac|autisme|trisomie|sang|noyade|albinisme|Chagas|maltraitance/]];
+const cat=t=>{for(const[c,r]of CR)if(r.test(t))return c;return"Société"};
+const JD=RAW.split("\n").map(l=>{const k=l[5],r=l.slice(7),t=k==="i"?"Journée internationale "+r:k==="m"?"Journée mondiale "+r:r;return{m:+l.slice(0,2),d:+l.slice(2,4),t,c:cat(t)}});
+const JDM={};JD.forEach(j=>(JDM[pad2(j.m)+pad2(j.d)]=JDM[pad2(j.m)+pad2(j.d)]||[]).push(j));
+const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],CATS=["Droits","Femmes","Jeunesse","Migrations","Libertés","Paix","Mémoire","Environnement","Santé","Société"],ACT=["Femmes","Migrations","Libertés","Droits"];
+const TN={event:"Événement",action:"Action",quote:"Citation",info:"Info"};
+function pad2(n){return String(n).padStart(2,"0")}
+const iso=d=>d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate());
+const fmtD=v=>new Date(v+"T12:00").toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
+const nextD=(m,d)=>{const n=new Date(),y=new Date(n.getFullYear(),m-1,d,23)<n?n.getFullYear()+1:n.getFullYear();return y+"-"+pad2(m)+"-"+pad2(d)};
+// ===== calendrier =====
+let cy=new Date().getFullYear(),cm=new Date().getMonth(),sel=iso(new Date());
+function postRow(p){const d=document.createElement("div");d.className="pi"+(p.done?" done":"");d.innerHTML=`<b>${fmtD(p.date)}</b><span>${esc(p.theme)}<br><small>${esc(p.net)} · ${TN[p.tpl]||""}</small></span>`;
+d.append(mk("Créer le visuel",()=>{$("tpl").value=p.tpl;applyTpl();$("ttl").value=p.theme;if(p.tpl==="event")$("dat").value=fmtD(p.date);render();show("create")}),mk(p.done?"Rouvrir":"Publié",()=>store.put("plan",{...p,done:!p.done})),mk("Supprimer",()=>store.del("plan",p.id)));return d}
+function drawCal(){$("ct").textContent=new Date(cy,cm,1).toLocaleDateString("fr-FR",{month:"long",year:"numeric"});const g=$("cg");g.innerHTML="";
+["lun","mar","mer","jeu","ven","sam","dim"].forEach(w=>{const h=document.createElement("div");h.className="cw";h.textContent=w;g.append(h)});
+const off=(new Date(cy,cm,1).getDay()+6)%7,n=new Date(cy,cm+1,0).getDate(),today=iso(new Date());
+for(let i=0;i<off;i++)g.append(document.createElement("div"));
+for(let d=1;d<=n;d++){const k=cy+"-"+pad2(cm+1)+"-"+pad2(d),ev=(JDM[pad2(cm+1)+pad2(d)]||[]).length,po=PL.filter(p=>p.date===k).length,b=document.createElement("button");b.type="button";b.className="cd"+(k===today?" today":"")+(k===sel?" sel":"");
+b.innerHTML=`<span>${d}</span><span>${ev?`<i class="dy" title="Journées">${ev}</i> `:""}${po?`<i class="dk" title="Publications">${po}</i>`:""}</span>`;b.onclick=()=>{sel=k;drawCal();drawDay()};g.append(b)}}
+function drawDay(){const el=$("cday");el.innerHTML="";const h=document.createElement("h3");h.textContent=new Date(sel+"T12:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});el.append(h);
+const ps=PL.filter(p=>p.date===sel),js=JDM[sel.slice(5,7)+sel.slice(8,10)]||[];ps.forEach(p=>el.append(postRow(p)));
+if(!ps.length&&!js.length)el.insertAdjacentHTML("beforeend","<p><small>Rien de prévu ce jour.</small></p>");
+js.forEach(j=>{const r=document.createElement("div");r.className="pi";r.style.gridTemplateColumns="1fr auto";r.innerHTML=`<span>${esc(j.t)}<br><small>${j.c}</small></span>`;r.append(mk("Ajouter au planning",()=>store.put("plan",{date:sel,net:"Instagram",theme:j.t.replace(" *",""),tpl:ACT.includes(j.c)?"action":"info",done:false})));el.append(r)});$("pD").value=sel}
+function jump(k){sel=k;cy=+k.slice(0,4);cm=+k.slice(5,7)-1;drawCal();drawDay();window.scrollTo(0,0)}
+$("cp").onclick=()=>{cm--;if(cm<0){cm=11;cy--}drawCal()};$("cn").onclick=()=>{cm++;if(cm>11){cm=0;cy++}drawCal()};$("cto").onclick=()=>jump(iso(new Date()));
+function drawPL(){const el=$("plist");el.innerHTML="";const L=[...PL].sort((a,b)=>a.date.localeCompare(b.date));if(!L.length)el.innerHTML="<p><small>Aucune publication prévue.</small></p>";L.forEach(p=>el.append(postRow(p)))}
+$("pA").onclick=()=>{if(!/^\d{4}-\d\d-\d\d$/.test($("pD").value)||!$("pH").value.trim())return;store.put("plan",{date:$("pD").value,net:$("pN").value,theme:$("pH").value.trim(),tpl:$("pT").value,done:false});$("pH").value=""};
+$("pW").onclick=()=>{const t=new Date();t.setDate(t.getDate()+((8-t.getDay())%7||7));for(let w=0;w<4;w++)for(const[o,tpl,th]of[[0,"info","Info de la semaine"],[2,"action","Action de la semaine"],[4,"event","Rendez-vous de la semaine"]]){const d=new Date(t);d.setDate(t.getDate()+w*7+o);store.put("plan",{date:iso(d),net:"Instagram",theme:th,tpl,done:false})}};
+function drawHome(){const t=iso(new Date()),el=$("hnext");el.innerHTML="";
+[...PL.filter(p=>p.date>=t&&!p.done).map(p=>({d:p.date,t:"À publier : "+p.theme})),...JD.filter(j=>!["Environnement","Santé","Société"].includes(j.c)).map(j=>({d:nextD(j.m,j.d),t:j.t}))].sort((a,b)=>a.d.localeCompare(b.d)).slice(0,8).forEach(e=>{const r=document.createElement("div");r.className="pi";r.style.gridTemplateColumns="120px 1fr";r.innerHTML=`<b>${fmtD(e.d)}</b><span>${esc(e.t)}</span>`;el.append(r)})}
+const drawAll=()=>{drawPL();drawCal();drawDay();drawHome();drawJD()};
+// ===== recherche des journées =====
+$("jm").innerHTML='<option value="">Tous</option>'+MOIS.map((m,i)=>`<option value="${i+1}">${m}</option>`).join("");
+$("jc").innerHTML='<option value="">Tous</option>'+CATS.map(c=>`<option>${c}</option>`).join("");
+const jlist=()=>{const q=$("jq").value.toLowerCase(),m=$("jm").value,c=$("jc").value;return JD.filter(j=>(!q||j.t.toLowerCase().includes(q))&&(!m||j.m==m)&&(!c||j.c===c)).map(j=>({...j,x:nextD(j.m,j.d)})).sort((a,b)=>a.x.localeCompare(b.x))};
+function drawJD(){const el=$("jd");el.innerHTML="";const L=jlist();el.innerHTML=`<p><small>${L.length} journée(s)</small></p>`;
+L.forEach(j=>{const r=document.createElement("div");r.className="pi";r.style.gridTemplateColumns="120px 1fr auto auto";r.innerHTML=`<b>${fmtD(j.x)}</b><span>${esc(j.t)}<br><small>${j.c}</small></span>`;r.append(mk("Voir",()=>jump(j.x)),mk("Ajouter",()=>store.put("plan",{date:j.x,net:"Instagram",theme:j.t.replace(" *",""),tpl:ACT.includes(j.c)?"action":"info",done:false})));el.append(r)})}
+["jq","jm","jc"].forEach(i=>$(i).addEventListener("input",drawJD));
+$("jx").onclick=()=>{$("jj").hidden=false;$("jj").value=JSON.stringify(jlist().map(j=>({date:j.x,journee:j.t,theme:j.c})),null,1)};
+// ===== modèles =====
+const FIELDS=["tpl","lay","fmt","lab","ttl","sub","dat","loc","tag","cnt","sgn","cbg","cfg"];
+function drawLB(){const el=$("llist");el.innerHTML=LB.length?"":"<p><small>Aucun modèle enregistré.</small></p>";
+LB.forEach(m=>{const d=document.createElement("div");d.className="pi";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<b>${esc(m.name)}</b>`;d.append(mk("Ouvrir",()=>{FIELDS.forEach(k=>$(k).value=m.v[k]);render();show("create")}),mk("Supprimer",()=>store.del("modeles",m.id)));el.append(d)})}
+function saveModel(name){const v={};FIELDS.forEach(k=>v[k]=$(k).value);store.put("modeles",{name:name||"Sans titre",v})}
+$("mA").onclick=()=>{saveModel($("mN").value.trim()||$("ttl").value.slice(0,40));$("mN").value=""};
+$("sv").onclick=()=>{saveModel($("ttl").value.slice(0,40));$("sv").textContent="Enregistré dans Modèles";setTimeout(()=>$("sv").textContent="Enregistrer comme modèle",1800)};
+$("dl3").onclick=()=>{const cur=$("fmt").value;$("all").innerHTML="";["1350","1080","1920"].forEach(h=>{$("fmt").value=h;render();const im=new Image();im.src=$("cv").toDataURL("image/png");im.alt="Format "+h;$("all").append(im)});$("fmt").value=cur;render();$("res").style.display="block"};
+// ===== couleurs perso =====
+const BASE=[["Jaune et noir","#ffff00","#000000"],["Noir et jaune","#000000","#ffff00"],["Blanc et noir","#ffffff","#000000"],["Noir et blanc","#000000","#ffffff"]];
+function drawChips(){const el=$("chips");el.innerHTML="";[...BASE,...CC.map(c=>[c.n,c.bg,c.fg])].forEach(c=>el.append(mk(c[0],()=>{$("cbg").value=c[1];$("cfg").value=c[2];render()})));
+const l=$("ccl");l.innerHTML="";CC.forEach(c=>{const d=document.createElement("div");d.className="pi";d.style.gridTemplateColumns="1fr auto";d.innerHTML=`<span><b style="background:${esc(c.bg)};color:${esc(c.fg)};padding:2px 8px;border:1px solid #000">Aa</b> ${esc(c.n)} <small>${esc(c.bg)} / ${esc(c.fg)}</small></span>`;d.append(mk("Supprimer",()=>store.del("couleurs",c.id)));l.append(d)})}
+$("ccA").onclick=()=>{store.put("couleurs",{n:$("ccN").value.trim()||"Ma couleur",bg:$("ccB").value,fg:$("ccF").value});$("ccN").value=""};
+// ===== connexion et démarrage =====
+let started=false;
+function start(){if(started)return;started=true;
+store.cfgWatch(c=>{CFG=c;const f=(i,k,d)=>{if(document.activeElement!==$(i))$(i).value=c[k]??d};f("sNom","nom","Amnesty Jeunes Narbonne");f("sCpt","cpt","");f("sTags","tags","#Amnesty #AmnestyJeunes #Narbonne #DroitsHumains");f("sSig","sig","");
+if(c.logo){if(!IM.logo||IM.logo.src!==c.logo)setLogo(c.logo,false)}else{IM.logo=null;$("lp").removeAttribute("src")}caption();render()});
+store.watch("plan",a=>{PL=a;drawAll()});store.watch("modeles",a=>{LB=a;drawLB()});store.watch("couleurs",a=>{CC=a;drawChips()})}
+function enter(me,role){$("t-login").classList.add("hide");$("who").textContent=(me||"Local")+" · "+role;$("hw").textContent=me?"Bonjour "+me.split(/[ @]/)[0]:"Bienvenue";
+$("adm").hidden=role!=="admin";if(role==="admin")store.watch("membres",drawMem);start();show("home")}
+function drawMem(a){const el=$("mlist");el.innerHTML="";a.forEach(m=>{const d=document.createElement("div");d.className="pi";d.style.gridTemplateColumns="1fr auto";d.innerHTML=`<span>${esc(m.id)}<br><small>${esc(m.role)}</small></span>`;d.append(mk("Retirer",()=>store.del("membres",m.id)));el.append(d)})}
+$("mAdd").onclick=()=>{const e=$("mE").value.trim().toLowerCase();if(!e.includes("@"))return;store.put("membres",{id:e,role:$("mR").value});$("mE").value=""};
+const say=m=>$("lmsg").textContent=m;
+const errMsg=e=>({"auth/invalid-credential":"E-mail ou mot de passe incorrect.","auth/email-already-in-use":"Un compte existe déjà avec cet e-mail.","auth/weak-password":"Mot de passe trop court (6 caractères minimum).","auth/invalid-email":"Adresse e-mail invalide.","auth/popup-closed-by-user":"Connexion Google annulée."}[e.code]||"Erreur : "+(e.code||e.message));
+window.onFbUser=async u=>{if(!u)return;
+if(!u.emailVerified){say("Vérifie ta boîte mail (lien de confirmation), puis reconnecte-toi.");FB.out();return}
+let m=null;try{m=await FB.member(u)}catch(e){}
+if(!m){say("Compte "+u.email+" non validé : demande à un·e admin de l'antenne de t'ajouter aux membres.");FB.out();return}
+DB=FB.db;enter(u.displayName||u.email,m.role||"lecteur")};
+const guard=f=>async()=>{if(!window.FB){say("Firebase indisponible : vérifie ta connexion internet.");return}try{await f()}catch(e){say(errMsg(e))}};
+$("lin").onclick=guard(()=>FB.login($("lem").value.trim(),$("lpw").value));
+$("lnew").onclick=guard(async()=>{await FB.signup($("lem").value.trim(),$("lpw").value);say("Compte créé. Clique sur le lien reçu par e-mail, puis connecte-toi.")});
+$("lgo").onclick=guard(()=>FB.google());
+$("lrs").onclick=guard(async()=>{await FB.reset($("lem").value.trim());say("E-mail de réinitialisation envoyé.")});
+$("lloc").onclick=()=>{DB=null;sessionStorage.setItem("aj-in","local");enter(null,"Mode local")};
+$("out").onclick=()=>{sessionStorage.removeItem("aj-in");(window.FB?FB.out():Promise.resolve()).finally(()=>location.reload())};
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
+if(sessionStorage.getItem("aj-in")==="local")$("lloc").click();
+
+applyTpl();
+Promise.all([document.fonts.load('700 40px "Roboto Condensed"'),document.fonts.load('500 30px Roboto'),document.fonts.load('700 30px Roboto')]).then(render).catch(()=>{});
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore, collection, doc, onSnapshot, setDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyAKp_oELkaMTaA4o84eD6_OLeUTLm5QnOY",
+  authDomain: "amnesty-antenne-jeune-nrb.firebaseapp.com",
+  projectId: "amnesty-antenne-jeune-nrb",
+  storageBucket: "amnesty-antenne-jeune-nrb.firebasestorage.app",
+  messagingSenderId: "65812645675",
+  appId: "1:65812645675:web:af3285a83a9efe16fae76e"
+};
+const app = initializeApp(firebaseConfig), auth = getAuth(app), fs = getFirestore(app);
+const P = p => doc(fs, ...p.split("/"));
+window.FB = {
+  login: (e, p) => signInWithEmailAndPassword(auth, e, p),
+  signup: async (e, p) => { const c = await createUserWithEmailAndPassword(auth, e, p); await sendEmailVerification(c.user); await signOut(auth); },
+  google: () => signInWithPopup(auth, new GoogleAuthProvider()),
+  reset: e => sendPasswordResetEmail(auth, e),
+  out: () => signOut(auth),
+  member: async u => { const s = await getDoc(doc(fs, "membres", u.email.toLowerCase())); return s.exists() ? s.data() : null; },
+  // adaptateur : même interface que le reste de l'application
+  db: {
+    collection: n => ({
+      onSnapshot: (cb, er) => onSnapshot(collection(fs, n), q => cb({ docs: q.docs.map(d => ({ id: d.id, data: () => d.data() })) }), er),
+      doc: id => ({ set: o => setDoc(doc(fs, n, id), o), delete: () => deleteDoc(doc(fs, n, id)) })
+    }),
+    doc: p => ({
+      onSnapshot: (cb, er) => onSnapshot(P(p), q => cb({ exists: q.exists(), data: () => q.data() }), er),
+      set: o => setDoc(P(p), o)
+    })
+  }
+};
+onAuthStateChanged(auth, u => window.onFbUser && window.onFbUser(u));
+</script>
+</body>
+</html>
