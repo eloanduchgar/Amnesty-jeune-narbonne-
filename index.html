@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-t2hrzz72GW5wlsCzOcqZDiHdu9lCwsAefnVQK3l1q1o=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-B0uufqqY0jpPs0QKYdYKUAbftZ4H3TVtsjg2S+wvaj8=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Espace de travail d'Amnesty antenne jeune Narbonne">
@@ -89,8 +89,8 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 /* charte */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:14px}
 .card{background:var(--g);border-radius:20px;padding:20px}.card ul{margin:8px 0 0;padding-left:20px}.card li{margin:4px 0}
-.sw{display:flex;gap:8px;flex-wrap:wrap}.sw div{width:96px;height:64px;border:2px solid var(--k);border-radius:12px;padding:6px;font-size:12px;font-weight:700;color:#000}
-#lp{max-width:240px;background:var(--y);display:block;margin:8px 0}
+.sw{display:flex;gap:8px;flex-wrap:wrap}.sw div{width:158px;min-height:84px;border:2px solid var(--k);border-radius:12px;padding:8px;font-size:12px;line-height:1.4;font-weight:500;color:#000}.tg{font-family:"Trade Gothic",Arial,sans-serif}.logos img{max-width:100%;max-height:90px;background:#eee;display:block;margin:8px 0}.logos img:not([src]){display:none}ul{padding-left:20px}li{margin:4px 0}
+
 /* connexion */
 #t-login{position:fixed;inset:0;background:var(--y);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;z-index:50;overflow:auto}
 #t-login input{max-width:340px;border-color:var(--k)}
@@ -161,10 +161,14 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 
 <div class="grp" id="g-sty">
 <p class="hint">Couleurs</p><div class="chips" id="chips"></div>
+<p class="hint">Couleurs secondaires (un usage précis chacune)</p><div class="chips" id="chips2"></div>
+<p class="hint">Fond</p><div class="chips" id="bgs"></div>
 <label for="fFmt">Format</label><select id="fFmt"><option value="1350">Post 4:5 (1080×1350)</option><option value="1080">Carré (1080×1080)</option><option value="1920">Story (1080×1920)</option></select>
 <label class="chk"><input type="checkbox" id="fDots"> Points de progression façon Instagram</label>
 <label for="fTag">Hashtag ou compte affiché (page d'appel)</label><input type="text" id="fTag" maxlength="60">
 <p class="hint">Photo de fond pour cette page</p><input type="file" id="fPh" accept="image/*"><div style="margin-top:8px"><button id="fPhx" type="button">Retirer la photo</button></div>
+<label for="fPm">Traitement de la photo</label><select id="fPm"><option value="color">Couleurs (logo jaune)</option><option value="duo">Bichromie jaune et noir</option><option value="bw">Noir et blanc</option></select>
+<p class="hint">Logo partenaire (même taille que le nôtre)</p><input type="file" id="fPt" accept="image/*"><div style="margin-top:8px"><button id="fPtx" type="button">Retirer</button></div>
 </div>
 
 <div class="grp" id="g-per">
@@ -197,28 +201,88 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 
 <section id="t-lib" class="pg"><h2>Modèles enregistrés</h2><p><small>Pour enregistrer : Créer, onglet Publier, « Enregistrer comme modèle ».</small></p><div id="llist" class="list"></div></section>
 
-<section id="t-charte" class="pg"><h2>Charte graphique</h2>
-<p><small>Synthèse inspirée de la charte d'Amnesty International France. Réfère-toi toujours à la version officielle.</small></p>
-<div class="cards">
-<div class="card"><h3 style="margin-top:0">Couleurs</h3><div class="sw"><div style="background:#ffff00">Jaune</div><div style="background:#000;color:#ffff00">Noir</div><div style="background:#fff">Blanc</div><div style="background:#666;color:#fff">Noir 60 %</div></div><ul><li>Le jaune identifie Amnesty.</li><li>Uniquement jaune, noir et blanc.</li></ul></div>
-<div class="card"><h3 style="margin-top:0">Logo</h3><img id="lp" alt="Logo enregistré"><ul><li>Toujours avec son cartouche jaune.</li><li>Ne jamais le redessiner ni le recolorer.</li><li>Préférer un fond jaune, sinon blanc ou noir.</li></ul>
-<label for="flg">Importer le logo officiel</label><input type="file" id="flg" accept="image/*"><div style="margin-top:8px"><button id="lx" type="button">Retirer le logo</button></div></div>
-<div class="card"><h3 style="margin-top:0">Typographie</h3><p class="cond" style="font-size:40px;margin:4px 0">Titres en gras condensé</p><p style="margin:4px 0">Texte en Roboto. Police officielle : Trade Gothic.</p></div>
-<div class="card"><h3 style="margin-top:0">Ton</h3><ul><li>Positif, dynamique, porteur d'espoir.</li><li>Des personnes actrices, jamais victimes.</li><li>Une idée par page, un appel à l'action.</li><li>Écriture inclusive, phrases courtes.</li></ul></div>
-<div class="card"><h3 style="margin-top:0">Carrousel</h3><ul><li>Page 1 : une accroche forte.</li><li>Pages suivantes : une idée chacune.</li><li>Dernière page : quoi faire, quand, où.</li><li>5 à 7 pages, c'est l'idéal.</li></ul></div>
-<div class="card"><h3 style="margin-top:0">Avant de publier</h3><label class="chk"><input type="checkbox"> Logo avec son cartouche</label><label class="chk"><input type="checkbox"> Jaune, noir, blanc seulement</label><label class="chk"><input type="checkbox"> Texte lisible sur mobile</label><label class="chk"><input type="checkbox"> Dates et faits vérifiés</label><label class="chk"><input type="checkbox"> Accord des personnes visibles</label></div>
-</div>
+<section id="t-charte" class="pg"><h2>Charte graphique d'Amnesty International</h2>
+<p><small>D'après le « Guide graphique : logo / typo / couleurs » d'Amnesty International France (mars 2018). Tout ce qui suit est appliqué par le site.</small></p>
+
+<div class="card" style="margin-bottom:14px"><h3 style="margin-top:0">Mon logo officiel</h3>
+<p><small>Importe les fichiers logo fournis par Amnesty, sans les modifier. Le site choisit la bonne version selon le fond. Sans logo importé, les images ne peuvent pas être préparées.</small></p>
+<div class="g3 logos">
+<div><b>Couleur</b><br><small>Cartouche jaune : version par défaut</small><img id="lp" alt="Logo couleur"><input type="file" id="flg" accept="image/*"><div style="margin-top:6px"><button id="lx" type="button">Retirer</button></div></div>
+<div><b>Négatif</b><br><small>Cartouche noir : sur fond jaune</small><img id="lpN" alt="Logo négatif"><input type="file" id="flgN" accept="image/*"><div style="margin-top:6px"><button id="lxN" type="button">Retirer</button></div></div>
+<div><b>Noir et blanc</b><br><small>Cartouche blanc : sur photo noir et blanc</small><img id="lpB" alt="Logo noir et blanc"><input type="file" id="flgB" accept="image/*"><div style="margin-top:6px"><button id="lxB" type="button">Retirer</button></div></div>
+</div></div>
+
+<details class="more"><summary>Notre organisation</summary>
+<p>Amnesty International est un mouvement mondial de plus de 7 millions de personnes qui se battent pour faire respecter l'ensemble des droits inscrits dans la Déclaration universelle des droits de l'homme de 1948.</p>
+<p>Nous sommes impartiaux et indépendants de toute tendance politique, de tout intérêt économique et de toute croyance religieuse.</p></details>
+
+<details class="more"><summary>Le logo</summary>
+<h3>Construction</h3><ul><li>Le logo est constitué du nom de la marque, de la bougie (son symbole) et d'un cartouche jaune. <b>Le bloc marque ne peut pas être dissocié.</b></li><li>Taille minimale : 25 mm.</li><li>Une zone de confort (espace vide) doit toujours être respectée autour du logo.</li></ul>
+<h3>Couleurs du logo</h3><ul><li>Seulement noir 100 % et jaune 100 %.</li><li><b>Couleur</b> : noir sur cartouche jaune. <b>Négatif</b> : jaune sur cartouche noir, uniquement lorsque le fond derrière le logo est jaune. <b>Noir et blanc</b> : cartouche blanc ou noir.</li><li>L'impact du logo est renforcé sur fond jaune. Sinon, un fond blanc ou noir est possible.</li></ul>
+<h3>Logo et photos</h3><ul><li>Sur des images en couleurs : toujours favoriser le logo en jaune.</li><li>En bichromie ou en noir et blanc : rester cohérent avec les couleurs de l'image.</li><li>Toujours avoir un cartouche derrière le logo.</li></ul>
+<h3>Usage numérique et partenariats</h3><ul><li>Dans des circonstances exceptionnelles, un identifiant pays (« FRANCE », bande noire verticale) peut être ajouté, surtout pour le site et les réseaux sociaux.</li><li>À côté d'un partenaire : zone de dégagement respectée, logos de même taille, le nôtre sur fond jaune si possible.</li></ul>
+<h3>Groupes locaux</h3><ul><li>Le nom de la ville est placé sous le logo, centré, en Trade Light (approche 100).</li><li>Si la ville compte plus de 10 lettres, la mention « Ville de » disparaît.</li><li>Pour nous : <b>Ville de Narbonne</b>.</li></ul>
+<h3>Interdits</h3><ul>
+<li>Ne pas utiliser le logo sans la bougie, sans cartouche ou dissocié de la bougie.</li>
+<li>Ne pas utiliser une autre forme de cartouche. La forme ronde est réservée à la bougie seule.</li>
+<li>Ne pas déformer le logo ni modifier la taille du cartouche.</li>
+<li>Ne pas utiliser une couleur de fond autre que jaune, noir ou blanc.</li>
+<li>Ne pas utiliser une autre couleur que noir ou blanc pour le logo, ni deux couleurs différentes pour le texte et la bougie.</li>
+<li>Ne pas adapter les couleurs à l'intérieur des logos fournis.</li></ul></details>
+
+<details class="more"><summary>La bougie</summary><ul>
+<li>Elle peut être utilisée seule, mais ne doit jamais être coupée.</li>
+<li>Elle ne peut être seule que si le logo entier est déjà présent ailleurs sur le document.</li>
+<li>Seule forme autorisée : le cercle (jaune, noir ou blanc). Taille minimale : 8 mm, zone de confort respectée.</li>
+<li>Mêmes couleurs que le logo.</li>
+<li>Ne pas l'utiliser en puce ou en point de titre.</li>
+<li>Pas d'accumulation de bougies sur une même page (bougie + logo).</li></ul></details>
+
+<details class="more"><summary>Couleurs</summary>
+<h3>Couleurs primaires</h3><p><small>Noir, jaune et blanc, utilisables à parts égales.</small></p>
+<div class="sw"><div style="background:#000;color:#ffff00">Noir<br>Pantone Process Black<br>C0 M0 J0 N100<br>R0 V0 B0<br>#000000</div><div style="background:#ffff00">Jaune<br>Pantone Process Yellow<br>C0 M0 J100 N0<br>R255 V255 B0<br>#FFFF00</div><div style="background:#fff">Blanc</div><div style="background:#333;color:#fff">Noir à 80 %</div><div style="background:#666;color:#fff">Noir à 60 %</div><div style="background:#999">Noir à 40 %</div><div style="background:#ccc">Noir à 20 %</div></div>
+<h3>Couleurs secondaires</h3><p><small>Usage restreint : chaque couleur correspond à une utilisation précise, sur une proportion limitée.</small></p>
+<div class="sw"><div style="background:#006460;color:#fff">Vert-bleu<br><b>Fondation</b><br>C90 M14 J50 N40<br>R1 V100 B96<br>#006460</div><div style="background:#005d8b;color:#fff">Bleu<br><b>Legs</b><br>C100 M60 J28 N0<br>R0 V93 B139<br>#005d8b</div><div style="background:#d2026d;color:#fff">Rose<br><b>Chronique / Alerte web</b><br>C11 M100 J20 N2<br>R210 V2 B109<br>#d2026d</div><div style="background:#ed8122">Orange<br><b>Site / Formation</b><br>C1,5 M58 J91 N0<br>R237 V129 B34<br>#ed8122</div><div style="background:#df3725;color:#fff">Rouge<br><b>Collecte / Urgence</b><br>C5 M89 J90 N0<br>R223 V55 B37<br>#df3725</div></div></details>
+
+<details class="more"><summary>Typographie</summary>
+<p>La police principale est <b>Amnesty Trade Gothic</b>. À défaut, la police de remplacement est <b>Arial</b>. Le site utilise Trade Gothic si elle est installée sur l'appareil, sinon Arial.</p>
+<ul><li><b>Condensed n°20</b> : gros titres, exergues et citations (en majuscules).</li><li><b>Bold n°2</b> : chapeaux, mise en valeur de certains mots dans le texte courant.</li><li><b>Médium</b> : texte courant. Pas de condensé dans le texte courant.</li></ul>
+<p class="tg" style="font-weight:700;font-size:30px;text-transform:uppercase;margin:6px 0">Gros titres</p><p class="tg" style="font-weight:700;margin:4px 0">Chapeau en gras</p><p class="tg" style="margin:4px 0">Texte courant en médium.</p></details>
+
+<details class="more"><summary>Surlignage</summary><ul>
+<li>Respecter les couleurs de la charte : noir, jaune, blanc.</li>
+<li>Sur des supports standards, ne pas utiliser le jaune et le blanc ensemble (lisibilité).</li>
+<li>Attention à la proportion du surlignage par rapport au texte.</li></ul></details>
+
+<details class="more"><summary>Papier et impression</summary><p>Amnesty International s'engage à utiliser des papiers labellisés (type PEFC ou FSC) ou recyclés, pour des impressions « responsables ».</p></details>
+
+<details class="more"><summary>Avant de publier</summary>
+<label class="chk"><input type="checkbox"> Logo officiel avec son cartouche, bonne version selon le fond</label>
+<label class="chk"><input type="checkbox"> « Ville de Narbonne » sous le logo</label>
+<label class="chk"><input type="checkbox"> Uniquement jaune, noir, blanc (secondaires pour leur usage précis)</label>
+<label class="chk"><input type="checkbox"> Jaune et blanc jamais associés pour le texte</label>
+<label class="chk"><input type="checkbox"> Titres en majuscules condensées, texte courant sans condensé</label>
+<label class="chk"><input type="checkbox"> Surlignage proportionné au texte</label>
+<label class="chk"><input type="checkbox"> Logo jaune sur photo en couleurs</label>
+<label class="chk"><input type="checkbox"> Pas de bougie en plus du logo</label>
+<label class="chk"><input type="checkbox"> Dates, lieux et faits vérifiés, accord des personnes visibles</label></details>
+
+<h2 style="margin-top:28px">Réglages</h2>
 <details class="more"><summary>Réglages de l'antenne</summary>
 <label for="sNom">Nom de l'antenne</label><input type="text" id="sNom" maxlength="100">
+<label for="sVille">Ville du groupe local (affichée sous le logo)</label><input type="text" id="sVille" maxlength="40">
 <label for="sCpt">Compte Instagram</label><input type="text" id="sCpt" maxlength="100" placeholder="@...">
 <label for="sTags">Hashtags fixes</label><input type="text" id="sTags" maxlength="300">
-<label for="sSig">Phrase de fin de légende</label><input type="text" id="sSig" maxlength="300"><br></details>
-<details class="more"><summary>Mes couleurs</summary>
+<label for="sSig">Phrase de fin de légende</label><input type="text" id="sSig" maxlength="300">
+<label for="sPol">Police des publications</label><select id="sPol"><option value="officielle">Officielle : Trade Gothic si installée, sinon Arial</option><option value="condensee">Alternative condensée (Roboto, non officielle)</option></select>
+<label class="chk"><input type="checkbox" id="sId"> Ajouter l'identifiant pays « FRANCE » (usage numérique exceptionnel)</label><br></details>
+<details class="more"><summary>Mes couleurs (hors charte)</summary>
+<p><small>La charte impose jaune, noir et blanc. À réserver aux cas particuliers.</small></p>
 <div class="g3"><div><label for="ccN">Nom</label><input type="text" id="ccN" maxlength="40"></div><div><label for="ccB">Fond</label><input type="color" id="ccB" value="#ffff00"></div><div><label for="ccF">Texte</label><input type="color" id="ccF" value="#000000"></div></div>
-<div style="margin:10px 0"><button class="pri" id="ccA" type="button">Ajouter</button></div><div id="ccl" class="list"></div><small>La charte impose jaune, noir et blanc : à réserver aux cas particuliers.</small></details>
+<div style="margin:10px 0"><button class="pri" id="ccA" type="button">Ajouter</button></div><div id="ccl" class="list"></div></details>
 <details class="more" id="adm" hidden><summary>Membres de l'antenne (admin)</summary>
 <div class="g3"><div><label for="mE">E-mail</label><input type="text" id="mE"></div><div><label for="mR">Rôle</label><select id="mR"><option value="editeur">Éditeur</option><option value="lecteur">Lecteur</option><option value="admin">Admin</option></select></div></div>
-<div style="margin:10px 0"><button class="pri" id="mAdd" type="button">Ajouter le membre</button></div><div id="mlist" class="list"></div></details>
+<div style="margin:10px 0"><button class="pri" id="mAdd" type="button">Ajouter le membre et envoyer le lien</button></div><div id="mlist" class="list"></div></details>
 </section>
 </main>
 
@@ -234,6 +298,10 @@ const nextD=(m,d)=>{const n=new Date(),y=new Date(n.getFullYear(),m-1,d,23)<n?n.
 function show(t){document.querySelectorAll(".pg").forEach(e=>e.classList.toggle("on",e.id==="t-"+t));document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));window.scrollTo(0,0)}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.t));
 document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
+const FONTS={officielle:{t:'"Trade Gothic Bold Condensed No. 20","TradeGothic LT BoldCondensed No. 20","Trade Gothic LT Std",Arial,sans-serif',b:'"Trade Gothic","Trade Gothic LT Std",Arial,sans-serif'},condensee:{t:'"Roboto Condensed",Arial,sans-serif',b:'Roboto,Arial,sans-serif'}};
+let TFONT=FONTS.officielle.t,BFONT=FONTS.officielle.b;
+function applyFont(){const F=FONTS[$("sPol").value]||FONTS.officielle;TFONT=F.t;BFONT=F.b}
+const cityLabel=v=>{v=(v||"").trim();if(!v)return"";return v.replace(/[^A-Za-zÀ-ÿ]/g,"").length>10?v:"Ville de "+v};
 const note=m=>{const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(note.t);note.t=setTimeout(()=>t.style.display="none",3800)};
 
 /* ===== base de données (Firestore, via l'adaptateur FB.db) ===== */
@@ -245,10 +313,11 @@ async put(col,it){const id=it.id||rid(),o={...it};delete o.id;try{await DB.colle
 async del(col,id){try{await DB.collection(col).doc(id).delete()}catch(e){note("Action refusée : ton rôle ne permet pas de supprimer.")}},
 cfgWatch(cb){DB.doc("config/antenne").onSnapshot(q=>cb(q.exists?q.data():{}),e=>note("Lecture refusée ("+e.code+")"))},
 async cfgSet(o){try{await DB.doc("config/antenne").set(o)}catch(e){note("Réglages non enregistrés (droits insuffisants ?)")}}};
-const ST=()=>({nom:$("sNom").value,cpt:$("sCpt").value,tags:$("sTags").value,sig:$("sSig").value});
-const cfgObj=l=>{const t=ST();return{nom:t.nom.slice(0,100),cpt:t.cpt.slice(0,100),tags:t.tags.slice(0,300),sig:t.sig.slice(0,300),logo:l||""}};
-const saveCfg=()=>{clearTimeout(sT);sT=setTimeout(()=>store.cfgSet(cfgObj(CFG.logo)),700)};
+const ST=()=>({nom:$("sNom").value,cpt:$("sCpt").value,tags:$("sTags").value,sig:$("sSig").value,ville:$("sVille").value,police:$("sPol").value,idpays:$("sId").checked});
+const cfgObj=()=>{const t=ST();return{nom:t.nom.slice(0,100),cpt:t.cpt.slice(0,100),tags:t.tags.slice(0,300),sig:t.sig.slice(0,300),ville:t.ville.slice(0,40),police:t.police,idpays:!!t.idpays,logo:CFG.logo||"",logoN:CFG.logoN||"",logoB:CFG.logoB||""}};
+const saveCfg=()=>{clearTimeout(sT);sT=setTimeout(()=>store.cfgSet(cfgObj()),700)};
 ["sNom","sCpt","sTags","sSig"].forEach(i=>$(i).addEventListener("input",()=>{caption();saveCfg()}));
+["sVille","sPol","sId"].forEach(i=>$(i).addEventListener("input",()=>{applyFont();render();saveCfg()}));
 
 /* ===== dessin (stickers, textes) ===== */
 const STK_NAMES={fist:"Poing levé",mega:"Mégaphone",sign:"Pancarte",bubble:"Bulle",heart:"Cœur",burst:"Étoile",arrow:"Flèche",peace:"Paix"},STK_KEYS=Object.keys(STK_NAMES);
@@ -256,26 +325,40 @@ function wrap(c,text,w){const out=[];for(const para of text.split("\n")){let cur
 function rr(c,x,y,w,h,r){c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,r);else c.rect(x,y,w,h);c.fill()}
 const rp=(c,x,y,w,h,r)=>{c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,r);else c.rect(x,y,w,h)};
 const fs_=(c,f)=>{c.fillStyle=f;c.fill();c.lineWidth=7;c.strokeStyle="#000";c.lineJoin="round";c.lineCap="round";c.stroke()};
-function stkText(c,t,cx,cy,w,h,max){c.fillStyle="#000";c.textAlign="center";c.textBaseline="middle";let s=max,ls;for(;s>=16;s-=2){c.font=`700 ${s}px "Roboto Condensed",sans-serif`;ls=wrap(c,t.toUpperCase(),w);if(ls.length*s*1.05<=h)break}ls.forEach((l,i)=>c.fillText(l,cx,cy+(i-(ls.length-1)/2)*s*1.05));c.textAlign="left";c.textBaseline="alphabetic"}
+function stkText(c,t,cx,cy,w,h,max){c.fillStyle="#000";c.textAlign="center";c.textBaseline="middle";let s=max,ls;for(;s>=16;s-=2){c.font=`700 ${s}px ${TFONT}`;ls=wrap(c,t.toUpperCase(),w);if(ls.length*s*1.05<=h)break}ls.forEach((l,i)=>c.fillText(l,cx,cy+(i-(ls.length-1)/2)*s*1.05));c.textAlign="left";c.textBaseline="alphabetic"}
 const STK={
 fist(c){rp(c,62,140,76,54,10);fs_(c,"#ffff00");[[48,42,24,60],[72,30,24,72],[96,30,24,72],[120,42,24,60]].forEach(([x,y,w,h])=>{rp(c,x,y,w,h,12);fs_(c,"#fff")});rp(c,42,70,110,84,26);fs_(c,"#fff");rp(c,22,92,52,28,14);fs_(c,"#fff")},
 mega(c){c.beginPath();c.moveTo(48,78);c.lineTo(150,30);c.lineTo(150,150);c.lineTo(48,128);c.closePath();fs_(c,"#fff");rp(c,14,78,42,50,8);fs_(c,"#ffff00");rp(c,140,22,20,136,8);fs_(c,"#ffff00");rp(c,60,126,26,56,8);fs_(c,"#000");[22,38].forEach(r=>{c.beginPath();c.arc(162,90,r,-.7,.7);c.lineWidth=13;c.strokeStyle="#000";c.stroke();c.lineWidth=6;c.strokeStyle="#ffff00";c.stroke()})},
 sign(c,S){rp(c,92,120,16,76,4);fs_(c,"#ffff00");rp(c,14,14,172,118,14);fs_(c,"#fff");stkText(c,S.sgn||"",100,73,144,92,44)},
 bubble(c,S){c.beginPath();c.moveTo(46,128);c.lineTo(36,190);c.lineTo(92,132);c.closePath();fs_(c,"#fff");rp(c,8,18,184,120,34);fs_(c,"#fff");c.fillStyle="#fff";c.fillRect(49,124,42,14);stkText(c,S.sgn||"",100,78,140,84,44)},
 heart(c){c.beginPath();c.moveTo(100,176);c.bezierCurveTo(18,120,8,60,54,38);c.bezierCurveTo(80,26,100,46,100,62);c.bezierCurveTo(100,46,120,26,146,38);c.bezierCurveTo(192,60,182,120,100,176);c.closePath();fs_(c,"#fff");c.beginPath();c.arc(104,100,52,3.5,4.4);c.lineWidth=8;c.strokeStyle="#ffff00";c.stroke()},
-burst(c){c.beginPath();for(let i=0;i<28;i++){const a=i*Math.PI/14-Math.PI/2,r=i%2?74:96;c.lineTo(100+Math.cos(a)*r,100+Math.sin(a)*r)}c.closePath();fs_(c,"#ffff00");c.fillStyle="#000";c.font='700 120px "Roboto Condensed",sans-serif';c.textAlign="center";c.textBaseline="middle";c.fillText("!",100,104);c.textAlign="left";c.textBaseline="alphabetic"},
+burst(c){c.beginPath();for(let i=0;i<28;i++){const a=i*Math.PI/14-Math.PI/2,r=i%2?74:96;c.lineTo(100+Math.cos(a)*r,100+Math.sin(a)*r)}c.closePath();fs_(c,"#ffff00");c.fillStyle="#000";c.font=`700 120px ${TFONT}`;c.textAlign="center";c.textBaseline="middle";c.fillText("!",100,104);c.textAlign="left";c.textBaseline="alphabetic"},
 arrow(c){c.beginPath();c.moveTo(14,76);c.lineTo(108,76);c.lineTo(108,34);c.lineTo(188,100);c.lineTo(108,166);c.lineTo(108,124);c.lineTo(14,124);c.closePath();fs_(c,"#fff");c.beginPath();c.moveTo(28,100);c.lineTo(94,100);c.lineWidth=8;c.strokeStyle="#ffff00";c.stroke()},
 peace(c){c.beginPath();c.arc(100,100,80,0,7);fs_(c,"#fff");c.lineWidth=9;c.strokeStyle="#000";c.beginPath();c.moveTo(100,20);c.lineTo(100,180);c.moveTo(100,100);c.lineTo(44,156);c.moveTo(100,100);c.lineTo(156,156);c.stroke()}};
+const BGS={none:"Uni",circle:"Cercle",stripes:"Rayures",dots:"Pois",grid:"Grille",waves:"Vagues",rays:"Rayons",blocks:"Formes",corner:"Coins",mix:"Varié"},BG_KEYS=Object.keys(BGS),MIXL=["circle","stripes","dots","rays","waves","blocks","corner","grid"];
+function bgPattern(c,st,W,H,col){c.save();c.fillStyle=col;c.strokeStyle=col;
+switch(st){
+case"circle":c.globalAlpha=.06;c.beginPath();c.arc(W-30,H*.32,330,0,7);c.fill();break;
+case"stripes":c.globalAlpha=.07;c.lineWidth=34;for(let x=-H;x<W+H;x+=84){c.beginPath();c.moveTo(x,H);c.lineTo(x+H,0);c.stroke()}break;
+case"dots":c.globalAlpha=.11;for(let y=30;y<H;y+=46)for(let x=(Math.round(y/46)%2)*23+10;x<W;x+=46){const r=2+14*Math.pow(y/H,1.6);c.beginPath();c.arc(x,y,r,0,7);c.fill()}break;
+case"grid":c.globalAlpha=.09;c.lineWidth=3;for(let x=0;x<=W;x+=90){c.beginPath();c.moveTo(x,0);c.lineTo(x,H);c.stroke()}for(let y=0;y<=H;y+=90){c.beginPath();c.moveTo(0,y);c.lineTo(W,y);c.stroke()}break;
+case"waves":c.globalAlpha=.09;c.lineWidth=16;for(let y=260;y<H+60;y+=90){c.beginPath();for(let x=0;x<=W;x+=20)c.lineTo(x,y+Math.sin(x/90+y/70)*26);c.stroke()}break;
+case"rays":{c.globalAlpha=.07;const n=18,R=H*1.6;for(let i=0;i<n;i+=2){const a0=Math.PI/2+i*(Math.PI/2)/n,a1=a0+(Math.PI/2)/n;c.beginPath();c.moveTo(W,0);c.lineTo(W+Math.cos(a0)*R,Math.sin(a0)*R);c.lineTo(W+Math.cos(a1)*R,Math.sin(a1)*R);c.closePath();c.fill()}break}
+case"blocks":c.globalAlpha=.08;c.beginPath();c.arc(W*.85,H*.3,190,0,7);c.fill();c.save();c.translate(W*.12,H*.62);c.rotate(-.35);c.fillRect(-150,-150,300,300);c.restore();c.beginPath();c.moveTo(W*.7,H*.95);c.lineTo(W*.95,H*.6);c.lineTo(W*1.1,H*.95);c.closePath();c.fill();break;
+case"corner":c.globalAlpha=.08;c.lineWidth=40;for(let r=120;r<=560;r+=110){c.beginPath();c.arc(W,H,r,Math.PI,1.5*Math.PI);c.stroke();c.beginPath();c.arc(0,0,r*.8,0,.5*Math.PI);c.stroke()}break}
+c.restore()}
 function sticker(c,key,x,y,k,tilt,S){c.save();c.translate(x,y);c.rotate(tilt*Math.PI/180);c.scale(k,k);c.translate(-100,-100);STK[key](c,S);c.restore()}
-const IM={logo:null};
+const IM={c:null,n:null,b:null};
 function cover(c,im,W,H){const r=Math.max(W/im.width,H/im.height),w=im.width*r,h=im.height*r;c.drawImage(im,(W-w)/2,(H-h)/2,w,h)}
-function setLogo(u,save){$("lp").src=u;const im=new Image();im.onload=()=>{IM.logo=im;render()};im.src=u;if(save){CFG.logo=u;store.cfgSet(cfgObj(u))}}
-function shrink(u){const im=new Image();im.onload=()=>{const h=Math.min(300,im.height),w=im.width*h/im.height,c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");x.fillStyle="#ffff00";x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);setLogo(c.toDataURL("image/jpeg",.88),true)};im.src=u}
-$("flg").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>shrink(r.result);r.readAsDataURL(f)};
-$("lx").onclick=()=>{CFG.logo="";store.cfgSet(cfgObj(""));IM.logo=null;$("lp").removeAttribute("src");render()};
-function fit(c,text,maxW,maxH,start,min,lh){let size=start,lines;for(;size>=min;size-=4){c.font=`700 ${size}px "Roboto Condensed",sans-serif`;lines=wrap(c,text,maxW);if(lines.length*size*lh<=maxH)break}return{size,lines}}
-function bands(c,text,x,y,maxW,maxH,start,min,ac,at){if(!text.trim())return y;const f=fit(c,text,maxW-28,maxH,start,min,1.12);c.font=`700 ${f.size}px "Roboto Condensed",sans-serif`;let ty=y;f.lines.forEach(l=>{const w=c.measureText(l).width;c.fillStyle=ac;c.fillRect(x-14,ty,w+28,f.size*1.08);c.fillStyle=at;c.fillText(l,x,ty+f.size*.9);ty+=f.size*1.12});return ty}
-function para(c,text,x,y,maxW,maxH,size,min,col){if(!text.trim())return y;let s=size,ls;for(;s>=min;s-=2){c.font=`500 ${s}px Roboto,sans-serif`;ls=wrap(c,text,maxW);if(ls.length*s*1.32<=maxH)break}c.fillStyle=col;ls.forEach((l,i)=>c.fillText(l,x,y+s*1.05+i*s*1.32));return y+ls.length*s*1.32+10}
+const SLOTS={c:{k:"logo",p:"lp",f:"flg",x:"lx",bg:"#ffff00"},n:{k:"logoN",p:"lpN",f:"flgN",x:"lxN",bg:"#000000"},b:{k:"logoB",p:"lpB",f:"flgB",x:"lxB",bg:"#ffffff"}};
+const LOGO_RE=/^data:image\/(jpeg|png);base64,[A-Za-z0-9+\/=]+$/;
+function setLogo(slot,u,save){const S=SLOTS[slot];$(S.p).src=u;const im=new Image();im.onload=()=>{IM[slot]=im;render()};im.src=u;if(save){CFG[S.k]=u;store.cfgSet(cfgObj())}}
+function shrink(slot,u){const im=new Image();im.onload=()=>{const h=Math.min(300,im.height),w=im.width*h/im.height,c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");x.fillStyle=SLOTS[slot].bg;x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);setLogo(slot,c.toDataURL("image/jpeg",.9),true)};im.src=u}
+Object.entries(SLOTS).forEach(([slot,S])=>{$(S.f).onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>shrink(slot,r.result);r.readAsDataURL(f)};$(S.x).onclick=()=>{CFG[S.k]="";store.cfgSet(cfgObj());IM[slot]=null;$(S.p).removeAttribute("src");render()}});
+function tint(c,W,H,m){const d=c.getImageData(0,0,W,H),a=d.data;for(let i=0;i<a.length;i+=4){const l=a[i]*.299+a[i+1]*.587+a[i+2]*.114;if(m==="bw"){a[i]=a[i+1]=a[i+2]=l}else{a[i]=a[i+1]=l;a[i+2]=0}}c.putImageData(d,0,0)}
+function fit(c,text,maxW,maxH,start,min,lh){let size=start,lines;for(;size>=min;size-=4){c.font=`700 ${size}px ${TFONT}`;lines=wrap(c,text,maxW);if(lines.length*size*lh<=maxH)break}return{size,lines}}
+function bands(c,text,x,y,maxW,maxH,start,min,ac,at){if(!text.trim())return y;text=text.toUpperCase();const f=fit(c,text,maxW-28,maxH,start,min,1.12);c.font=`700 ${f.size}px ${TFONT}`;let ty=y;f.lines.forEach(l=>{const w=c.measureText(l).width;c.fillStyle=ac;c.fillRect(x-14,ty,w+28,f.size*1.08);c.fillStyle=at;c.fillText(l,x,ty+f.size*.9);ty+=f.size*1.12});return ty}
+function para(c,text,x,y,maxW,maxH,size,min,col){if(!text.trim())return y;let s=size,ls;for(;s>=min;s-=2){c.font=`500 ${s}px ${BFONT}`;ls=wrap(c,text,maxW);if(ls.length*s*1.32<=maxH)break}c.fillStyle=col;ls.forEach((l,i)=>c.fillText(l,x,y+s*1.05+i*s*1.32));return y+ls.length*s*1.32+10}
 
 /* ===== publication en plusieurs pages ===== */
 const SD={cover:{lab:"Amnesty Jeunes",ttl:"Titre accrocheur",txt:"Une phrase pour donner envie de lire la suite.",stk:["fist"]},content:{lab:"À savoir",ttl:"Une idée par page",txt:"Explique simplement un point. Phrases courtes, mots simples."},number:{lab:"Le chiffre",num:"1 sur 3",ttl:"Explique ce que ce chiffre veut dire"},cta:{lab:"Passe à l'action",ttl:"Rejoins-nous !",txt:"Signe, partage, invite tes ami·es.",stk:["mega"]}};
@@ -288,10 +371,10 @@ quote:["Citation",()=>[newSlide("cover",{lab:"Parole de militant·e",ttl:"« Se 
 const TK={event:"event",action:"action",quote:"quote",info:"topic"},TY={cover:"Couverture",content:"Contenu",number:"Chiffre clé",cta:"Appel à l'action"};
 const SHOW={cover:["lab","ttl","txt","dat","loc"],content:["lab","ttl","txt"],number:["lab","num","ttl","txt"],cta:["lab","ttl","txt","dat","loc"]};
 let BAK=[];
-let POST={fmt:"1350",pal:"alt",key:"alt",bg:"#ffff00",fg:"#000000",dots:true,tag:"#AmnestyJeunes",slides:[]},cur=0;
+let POST={fmt:"1350",pal:"alt",key:"alt",bg:"#ffff00",fg:"#000000",dots:true,bgs:"mix",pm:"color",tag:"#AmnestyJeunes",slides:[]},cur=0;
 function startPost(k,ttl,dat,multi){const all=STARTS[k][1]();if(multi===undefined)multi=POST.slides.length>1;let sl=all;
 if(!multi){const f=all[0],c=all.find(x=>x.type==="cta");if(c&&c!==f){f.dat=c.dat;f.loc=c.loc}sl=[f]}
-POST.slides=sl;BAK=[];if(ttl)sl[0].ttl=ttl.slice(0,150);if(dat){const c=multi?sl.find(x=>x.type==="cta"):sl[0];if(c)c.dat=dat}cur=0;fill();render()}
+POST.slides=sl;POST.bgs=multi?"mix":MIXL[Math.random()*MIXL.length|0];BAK=[];if(ttl)sl[0].ttl=ttl.slice(0,150);if(dat){const c=multi?sl.find(x=>x.type==="cta"):sl[0];if(c)c.dat=dat}cur=0;fill();render()}
 function setMode(multi){const a=POST.slides;
 if(multi&&a.length<2){if(BAK.length)a.push(...BAK);else{const f=a[0];a.push(newSlide("content",{lab:"Le contexte",ttl:"Que se passe-t-il ?"}),newSlide("content",{lab:"Les droits en jeu",ttl:"Pourquoi ça nous concerne"}),newSlide("cta",{dat:f.dat,loc:f.loc}));f.dat=f.loc=""}BAK=[];go(0)}
 else if(!multi&&a.length>1){BAK=a.slice(1);const c=BAK.find(x=>x.type==="cta");if(c&&!a[0].dat&&!a[0].loc){a[0].dat=c.dat;a[0].loc=c.loc}POST.slides=[a[0]];go(0)}}
@@ -299,26 +382,31 @@ else if(!multi&&a.length>1){BAK=a.slice(1);const c=BAK.find(x=>x.type==="cta");i
 function renderTo(cv,i){
 const c=cv.getContext("2d"),W=1080,H=+POST.fmt,S=POST.slides[i],n=POST.slides.length,pad=64;cv.width=W;cv.height=H;
 const alt=POST.pal==="alt",ph=!!S.img,bg=alt?(i%2?"#000000":"#ffff00"):POST.bg,fg=alt?(i%2?"#ffff00":"#000000"):POST.fg;
-const tc=ph?"#ffffff":fg,ac=ph?"#ffff00":fg,at=ph?"#000000":bg;
+const tc=ph?(POST.pm==="duo"?"#ffff00":"#ffffff"):fg,ac=ph?"#ffff00":fg,at=ph?"#000000":bg;
 c.textBaseline="alphabetic";c.textAlign="left";c.fillStyle=ph?"#222":bg;c.fillRect(0,0,W,H);
-if(ph){cover(c,S.img,W,H);c.fillStyle="rgba(0,0,0,.45)";c.fillRect(0,0,W,H)}else{c.fillStyle=fg;c.globalAlpha=.06;c.beginPath();c.arc(W-30,H*.32,330,0,7);c.fill();c.globalAlpha=1}
-const lh=84;c.fillStyle="#ffff00";
-if(IM.logo){const w=IM.logo.width*lh/IM.logo.height;c.fillRect(pad,48,w,lh);c.drawImage(IM.logo,pad,48,w,lh)}
-else{c.fillRect(pad,48,270,lh);c.strokeStyle="#000";c.lineWidth=3;c.strokeRect(pad,48,270,lh);c.fillStyle="#000";c.font='700 32px "Roboto Condensed",sans-serif';c.fillText("AMNESTY",pad+14,86);c.font='700 20px "Roboto Condensed",sans-serif';c.fillText("INTERNATIONAL",pad+14,108);c.font='500 17px Roboto,sans-serif';c.fillText("Jeunes Narbonne",pad+14,126)}
-if(n>1){c.font='700 30px Roboto,sans-serif';const t=(i+1)+"/"+n,w=c.measureText(t).width+36;c.fillStyle=ac;rr(c,W-pad-w,62,w,52,26);c.fillStyle=at;c.textAlign="center";c.fillText(t,W-pad-w/2,98);c.textAlign="left"}
+if(ph){cover(c,S.img,W,H);if(POST.pm!=="color")tint(c,W,H,POST.pm);c.fillStyle="rgba(0,0,0,.45)";c.fillRect(0,0,W,H)}else bgPattern(c,POST.bgs==="mix"?MIXL[i%MIXL.length]:POST.bgs,W,H,fg)
+const lh=84,idp=$("sId").checked,lx=pad+(idp?34:0);let lw=230;
+const LG=ph?(POST.pm==="bw"&&IM.b?IM.b:IM.c):(bg==="#ffff00"&&IM.n?IM.n:IM.c);
+if(LG){lw=LG.width*lh/LG.height;c.drawImage(LG,lx,48,lw,lh)}
+else{c.save();c.setLineDash([10,8]);c.strokeStyle=tc;c.lineWidth=3;c.strokeRect(lx,48,lw,lh);c.setLineDash([]);c.fillStyle=tc;c.font=`700 20px ${BFONT}`;c.textAlign="center";c.fillText("LOGO OFFICIEL",lx+lw/2,84);c.fillText("À IMPORTER",lx+lw/2,110);c.restore()}
+if(idp){c.fillStyle="#000";c.fillRect(pad,48,34,lh);c.save();c.translate(pad+23,48+lh/2);c.rotate(-Math.PI/2);c.fillStyle="#fff";c.font=`700 16px ${BFONT}`;c.textAlign="center";if("letterSpacing"in c)c.letterSpacing="3px";c.fillText("FRANCE",0,0);c.restore()}
+const cl=cityLabel($("sVille").value);if(cl){c.save();c.fillStyle=tc;c.font=`300 24px ${BFONT}`;if("letterSpacing"in c)c.letterSpacing="2.4px";c.textAlign="center";c.fillText(cl,lx+lw/2,48+lh+34);c.restore()}
+if(POST.partner){const Q=POST.partner,pw=Math.min(300,Q.width*lh/Q.height);c.drawImage(Q,lx+lw+Math.round(lh*.7),48,pw,lh)}
+c.textAlign="left";
+if(n>1){c.font=`700 30px ${BFONT}`;const t=(i+1)+"/"+n,w=c.measureText(t).width+36;c.fillStyle=ac;rr(c,W-pad-w,62,w,52,26);c.fillStyle=at;c.textAlign="center";c.fillText(t,W-pad-w/2,98);c.textAlign="left"}
 const isCta=S.type==="cta",boxH=(isCta||S.type==="cover")&&(S.dat||S.loc)?210:0,floor=H-100-boxH;
 const kk=(H<1200?1.25:1.5)*(S.type==="content"?.72:1),spx=200*kk,base=floor-(boxH?14:30),stk=S.stk||[],figTop=stk.length?base-spx-8:base;
-let y=190;
-if(S.lab.trim()){c.font='700 32px Roboto,sans-serif';const w=c.measureText(S.lab).width+40;c.fillStyle=ac;rr(c,pad,y,w,52,26);c.fillStyle=at;c.fillText(S.lab,pad+20,y+37);y+=52+28}
+let y=225;
+if(S.lab.trim()){c.font=`700 32px ${BFONT}`;const w=c.measureText(S.lab).width+40;c.fillStyle=ac;rr(c,pad,y,w,52,26);c.fillStyle=at;c.fillText(S.lab,pad+20,y+37);y+=52+28}
 const avail=figTop-y-10,mw=W-2*pad;
-if(S.type==="number"){let ns=420;for(;ns>120;ns-=10){c.font=`700 ${ns}px "Roboto Condensed",sans-serif`;if(c.measureText(S.num).width<=mw)break}c.fillStyle=ac;c.fillText(S.num,pad,y+ns*.85);y+=ns*.95+14;
+if(S.type==="number"){let ns=420;for(;ns>120;ns-=10){c.font=`700 ${ns}px ${TFONT}`;if(c.measureText(S.num).width<=mw)break}c.fillStyle=ac;c.fillText(S.num,pad,y+ns*.85);y+=ns*.95+14;
 y=bands(c,S.ttl,pad,y,mw,avail*.4,70,40,ac,at)+20;para(c,S.txt,pad,y,mw,figTop-y,42,28,tc)}
 else if(S.type==="content"){y=bands(c,S.ttl,pad,y,mw,avail*.32,100,48,ac,at)+26;para(c,S.txt,pad,y,mw,figTop-y,48,30,tc)}
 else{y=bands(c,S.ttl,pad,y,mw,avail*(isCta?.55:.7),isCta?120:150,48,ac,at)+22;para(c,S.txt,pad,y,mw,figTop-y,40,28,tc)}
 const xs={0:[],1:[.74],2:[.3,.72],3:[.2,.5,.8]}[stk.length]||[],tl=[-7,5,-4];
 xs.forEach((f,j)=>sticker(c,stk[j],W*f,base-spx/2,kk,tl[j],S));
-if(boxH){c.fillStyle=ac;c.fillRect(0,floor,W,boxH);c.fillStyle=at;let cy=floor+82;if(S.dat){c.font='700 76px "Roboto Condensed",sans-serif';c.fillText(S.dat,pad,cy);cy+=52}if(S.loc){c.font='500 38px Roboto,sans-serif';c.fillText(S.loc,pad,cy)}if(POST.tag){c.font='700 30px Roboto,sans-serif';c.textAlign="right";c.fillText(POST.tag,W-pad,floor+boxH-28);c.textAlign="left"}}
-if(n>1&&i===0){c.font='700 34px Roboto,sans-serif';c.fillStyle=ac;c.textAlign="right";c.fillText("Glisse  →",W-pad,H-42);c.textAlign="left"}
+if(boxH){c.fillStyle=ac;c.fillRect(0,floor,W,boxH);c.fillStyle=at;let cy=floor+82;if(S.dat){c.font=`700 76px ${TFONT}`;c.fillText(S.dat,pad,cy);cy+=52}if(S.loc){c.font=`500 38px ${BFONT}`;c.fillText(S.loc,pad,cy)}if(POST.tag){c.font=`700 30px ${BFONT}`;c.textAlign="right";c.fillText(POST.tag,W-pad,floor+boxH-28);c.textAlign="left"}}
+if(n>1&&i===0){c.font=`700 34px ${BFONT}`;c.fillStyle=ac;c.textAlign="right";c.fillText("Glisse  →",W-pad,H-42);c.textAlign="left"}
 if(n>1&&POST.dots){const tw=34+(n-1)*30;let x=(W-tw)/2;c.fillStyle=ac;for(let k=0;k<n;k++){if(k===i){rr(c,x,H-60,34,16,8);x+=48}else{c.globalAlpha=.4;c.beginPath();c.arc(x+8,H-52,8,0,7);c.fill();c.globalAlpha=1;x+=30}}}}
 const OFF=document.createElement("canvas");let tT;
 function render(){renderTo($("cv"),cur);dotsUI();caption();clearTimeout(tT);tT=setTimeout(thumbs,160)}
@@ -326,19 +414,24 @@ function thumbs(){const el=$("thumbs");el.innerHTML="";POST.slides.forEach((S,i)
 if(POST.slides.length<10){const a=mk("+",addSlide);a.className="th add";a.setAttribute("aria-label","Ajouter une page");el.append(a)}}
 function dotsUI(){const el=$("dots"),n=POST.slides.length;el.innerHTML="";$("multi").hidden=n<2;$("mOne").classList.toggle("on",n<2);$("mMul").classList.toggle("on",n>1);POST.slides.forEach((_,i)=>{const b=document.createElement("button");b.type="button";b.className=i===cur?"on":"";b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});$("pgn").textContent="Page "+(cur+1)+" sur "+n;$("pv").disabled=cur===0;$("nx").disabled=cur===n-1}
 function go(i){cur=Math.max(0,Math.min(POST.slides.length-1,i));fill();render()}
-function fill(){const S=POST.slides[cur];if(!S)return;$("fLab").value=S.lab;$("fNum").value=S.num;$("fTtl").value=S.ttl;$("fTxt").value=S.txt;$("fDat").value=S.dat;$("fLoc").value=S.loc;$("fSgn").value=S.sgn;$("fFmt").value=POST.fmt;$("fDots").checked=POST.dots;$("fTag").value=POST.tag;
+function fill(){const S=POST.slides[cur];if(!S)return;$("fLab").value=S.lab;$("fNum").value=S.num;$("fTtl").value=S.ttl;$("fTxt").value=S.txt;$("fDat").value=S.dat;$("fLoc").value=S.loc;$("fSgn").value=S.sgn;$("fFmt").value=POST.fmt;$("fPm").value=POST.pm;$("fDots").checked=POST.dots;$("fTag").value=POST.tag;
 document.querySelectorAll(".f[data-f]").forEach(e=>e.hidden=!SHOW[S.type].includes(e.dataset.f));
 document.querySelectorAll("#types button").forEach(b=>b.classList.toggle("on",b.dataset.k===S.type));
-document.querySelectorAll("#chips button").forEach(b=>b.classList.toggle("on",b.dataset.k===POST.key));document.querySelectorAll("#stk button").forEach(b=>b.classList.toggle("on",S.stk.includes(b.dataset.k)))}
+document.querySelectorAll("#chips button,#chips2 button").forEach(b=>b.classList.toggle("on",b.dataset.k===POST.key));document.querySelectorAll("#stk button").forEach(b=>b.classList.toggle("on",S.stk.includes(b.dataset.k)));document.querySelectorAll("#bgs button").forEach(b=>b.classList.toggle("on",b.dataset.k===POST.bgs))}
 const FM={fLab:"lab",fNum:"num",fTtl:"ttl",fTxt:"txt",fDat:"dat",fLoc:"loc",fSgn:"sgn"};
 Object.keys(FM).forEach(id=>$(id).addEventListener("input",()=>{POST.slides[cur][FM[id]]=$(id).value;render()}));
 $("fFmt").onchange=()=>{POST.fmt=$("fFmt").value;render()};
+$("fPm").onchange=()=>{POST.pm=$("fPm").value;render()};
+$("fPt").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{POST.partner=im;render()};im.src=URL.createObjectURL(f)};
+$("fPtx").onclick=()=>{delete POST.partner;render()};
 $("fDots").onchange=()=>{POST.dots=$("fDots").checked;render()};
 $("fTag").addEventListener("input",()=>{POST.tag=$("fTag").value;render()});
 $("fPh").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{POST.slides[cur].img=im;render()};im.src=URL.createObjectURL(f)};
 $("fPhx").onclick=()=>{delete POST.slides[cur].img;render()};
 Object.entries(TY).forEach(([k,v])=>{const b=mk(v,()=>{POST.slides[cur].type=k;fill();render()});b.dataset.k=k;$("types").append(b)});
 STK_KEYS.forEach(k=>{const b=mk(STK_NAMES[k],()=>{const a=POST.slides[cur].stk,i=a.indexOf(k);if(i>=0)a.splice(i,1);else if(a.length<3)a.push(k);else note("3 stickers maximum par page");fill();render()});b.dataset.k=k;$("stk").append(b)});
+BG_KEYS.forEach(k=>{const b=mk(BGS[k],()=>{POST.bgs=k;fill();render()});b.dataset.k=k;$("bgs").append(b)});
+$("bgs").append(mk("Au hasard",()=>{const o=MIXL.filter(x=>x!==POST.bgs);POST.bgs=o[Math.random()*o.length|0];fill();render()}));
 $("mOne").onclick=()=>setMode(false);$("mMul").onclick=()=>setMode(true);
 Object.entries(STARTS).forEach(([k,v])=>$("starts").append(mk(v[0],()=>startPost(k))));
 document.querySelectorAll("#seg button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#seg button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".grp").forEach(g=>g.classList.toggle("on",g.id==="g-"+b.dataset.k))});
@@ -350,8 +443,9 @@ $("opr").onclick=()=>{const a=POST.slides;if(cur>=a.length-1)return;[a[cur+1],a[
 $("pv").onclick=()=>go(cur-1);$("nx").onclick=()=>go(cur+1);
 addEventListener("keydown",e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||!$("t-create").classList.contains("on"))return;if(e.key==="ArrowLeft")go(cur-1);if(e.key==="ArrowRight")go(cur+1)});
 /* couleurs */
+const SEC=[["s1","Fondation","#006460"],["s2","Legs","#005d8b"],["s3","Chronique / Alerte web","#d2026d"],["s4","Site / Formation","#ed8122"],["s5","Collecte / Urgence","#df3725"]];
 const BASE=[["alt","Alterné jaune / noir","#ffff00","#000000"],["y","Jaune","#ffff00","#000000"],["k","Noir","#000000","#ffff00"],["w","Blanc","#ffffff","#000000"]];
-function drawChips(){const el=$("chips");el.innerHTML="";[...BASE,...CC.map(c=>["c"+c.id,c.n,c.bg,c.fg])].forEach(([k,n,bg,fg])=>{const b=mk(n,()=>{POST.key=k;POST.pal=k==="alt"?"alt":"fix";POST.bg=hx(bg);POST.fg=hx(fg);fill();render()});b.dataset.k=k;el.append(b)});fill();
+function drawChips(){const el=$("chips");el.innerHTML="";[...BASE,...CC.map(c=>["c"+c.id,c.n,c.bg,c.fg])].forEach(([k,n,bg,fg])=>{const b=mk(n,()=>{POST.key=k;POST.pal=k==="alt"?"alt":"fix";POST.bg=hx(bg);POST.fg=hx(fg);fill();render()});b.dataset.k=k;el.append(b)});const e2=$("chips2");e2.innerHTML="";SEC.forEach(([k,n,bg])=>{const b=mk(n,()=>{POST.key=k;POST.pal="fix";POST.bg=bg;POST.fg="#ffffff";fill();render()});b.dataset.k=k;e2.append(b)});fill();
 const l=$("ccl");l.innerHTML="";CC.forEach(c=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto";d.innerHTML=`<span><b style="background:${hx(c.bg)};color:${hx(c.fg)};padding:2px 10px;border:1px solid #000;border-radius:8px">Aa</b> ${esc(c.n)} <small style="display:inline">${hx(c.bg)} / ${hx(c.fg)}</small></span>`;d.append(mk("Supprimer",()=>store.del("couleurs",c.id)));l.append(d)})}
 $("ccA").onclick=()=>{store.put("couleurs",{n:($("ccN").value.trim()||"Ma couleur").slice(0,40),bg:hx($("ccB").value),fg:hx($("ccF").value)});$("ccN").value=""};
 /* légende, modèles, export */
@@ -361,10 +455,10 @@ if(st.sig)t+=`\n${st.sig}`;if(st.cpt)t+=`\n\nSuivez ${st.nom||"nous"} : ${st.cpt
 $("cp2").onclick=async()=>{try{await navigator.clipboard.writeText($("cap").value)}catch(e){$("cap").select();try{document.execCommand("copy")}catch(_){}}$("cp2").textContent="Copié !";setTimeout(()=>$("cp2").textContent="Copier la légende",1500)};
 function clean(p){const str=(v,n)=>String(v==null?"":v).slice(0,n),ok=["cover","content","number","cta"];
 const sl=(Array.isArray(p.slides)?p.slides:[]).slice(0,10).map(s=>({type:ok.includes(s.type)?s.type:"content",lab:str(s.lab,40),ttl:str(s.ttl,150),txt:str(s.txt,600),num:str(s.num,12),dat:str(s.dat,60),loc:str(s.loc,80),stk:(Array.isArray(s.stk)?s.stk:[]).filter(k=>STK_KEYS.includes(k)).slice(0,3),sgn:str(s.sgn,40)}));
-return{fmt:["1350","1080","1920"].includes(p.fmt)?p.fmt:"1350",pal:p.pal==="alt"?"alt":"fix",key:str(p.key,30)||"alt",bg:hx(p.bg),fg:hx(p.fg),dots:p.dots!==false,tag:str(p.tag,60),slides:sl.length?sl:[newSlide("cover")]}}
-$("sv").onclick=()=>{const d=JSON.stringify(POST,(k,v)=>k==="img"?undefined:v);if(d.length>29000){note("Publication trop longue pour un modèle.");return}store.put("modeles",{name:(POST.slides[0].ttl||"Sans titre").slice(0,80),data:d});note("Enregistré dans Modèles")};
+return{fmt:["1350","1080","1920"].includes(p.fmt)?p.fmt:"1350",pm:["color","duo","bw"].includes(p.pm)?p.pm:"color",bgs:BG_KEYS.includes(p.bgs)?p.bgs:"circle",pal:p.pal==="alt"?"alt":"fix",key:str(p.key,30)||"alt",bg:hx(p.bg),fg:hx(p.fg),dots:p.dots!==false,tag:str(p.tag,60),slides:sl.length?sl:[newSlide("cover")]}}
+$("sv").onclick=()=>{const d=JSON.stringify(POST,(k,v)=>k==="img"||k==="partner"?undefined:v);if(d.length>29000){note("Publication trop longue pour un modèle.");return}store.put("modeles",{name:(POST.slides[0].ttl||"Sans titre").slice(0,80),data:d});note("Enregistré dans Modèles")};
 function drawLB(){const el=$("llist");el.innerHTML=LB.length?"":"<p><small>Aucun modèle enregistré.</small></p>";LB.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<b>${esc(m.name)}</b>`;d.append(mk("Ouvrir",()=>{try{POST=clean(JSON.parse(m.data));cur=0;fill();render();show("create")}catch(e){note("Modèle illisible")}}),mk("Supprimer",()=>store.del("modeles",m.id)));el.append(d)})}
-$("dlx").onclick=async()=>{const el=$("exp");el.innerHTML="";const links=[];for(let i=0;i<POST.slides.length;i++){const cv=document.createElement("canvas");renderTo(cv,i);const b=await new Promise(r=>cv.toBlob(r,"image/png")),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="amnesty-narbonne-page-"+(i+1)+".png";a.innerHTML=`<img src="${u}" alt="Page ${i+1}"><span>Page ${i+1}</span>`;el.append(a);links.push(a)}
+$("dlx").onclick=async()=>{if(!IM.c){note("Importe d'abord le logo officiel (Charte et réglages) : la charte interdit de publier sans.");return}const el=$("exp");el.innerHTML="";const links=[];for(let i=0;i<POST.slides.length;i++){const cv=document.createElement("canvas");renderTo(cv,i);const b=await new Promise(r=>cv.toBlob(r,"image/png")),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="amnesty-narbonne-page-"+(i+1)+".png";a.innerHTML=`<img src="${u}" alt="Page ${i+1}"><span>Page ${i+1}</span>`;el.append(a);links.push(a)}
 $("dlall").hidden=false;$("dlall").onclick=()=>links.forEach((a,k)=>setTimeout(()=>a.click(),k*400))};
 
 /* ===== calendrier et journées mondiales (liste ONU, dates fixes) ===== */
@@ -640,8 +734,9 @@ async function inviteMail(e){try{await FB.invite(e);note("Lien de connexion envo
 function drawMem(a){const el=$("mlist");el.innerHTML="";a.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<span>${esc(m.id)}<small>${esc(m.role)}</small></span>`;d.append(mk("Renvoyer le lien",()=>inviteMail(m.id)),mk("Retirer",()=>store.del("membres",m.id)));el.append(d)})}
 $("mAdd").onclick=async()=>{const e=$("mE").value.trim().toLowerCase();if(!/^[^\s\/@]+@[^\s\/@]+\.[^\s\/@]+$/.test(e)){note("Adresse e-mail invalide.");return}if(await store.put("membres",{id:e,role:$("mR").value})){$("mE").value="";inviteMail(e)}};
 function enter(name,role){$("t-login").classList.add("hide");$("who").textContent=name+" · "+role;$("hw").textContent="Bonjour "+name.split(/[ @]/)[0];$("adm").hidden=role!=="admin";if(role==="admin")store.watch("membres",drawMem);bump();
-store.cfgWatch(c=>{CFG=c;const f=(i,k,d)=>{if(document.activeElement!==$(i))$(i).value=c[k]!=null?c[k]:d};f("sNom","nom","Amnesty Jeunes Narbonne");f("sCpt","cpt","");f("sTags","tags","#Amnesty #AmnestyJeunes #Narbonne #DroitsHumains");f("sSig","sig","");
-if(c.logo&&/^data:image\/(jpeg|png);base64,[A-Za-z0-9+\/=]+$/.test(c.logo)){if(!IM.logo||IM.logo.src!==c.logo)setLogo(c.logo,false)}else{IM.logo=null;$("lp").removeAttribute("src")}caption();render()});
+store.cfgWatch(c=>{CFG=c;const f=(i,k,d)=>{if(document.activeElement!==$(i))$(i).value=c[k]!=null?c[k]:d};f("sNom","nom","Amnesty Jeunes Narbonne");f("sCpt","cpt","");f("sTags","tags","#Amnesty #AmnestyJeunes #Narbonne #DroitsHumains");f("sSig","sig","");f("sVille","ville","Narbonne");$("sPol").value=c.police==="condensee"?"condensee":"officielle";$("sId").checked=!!c.idpays;applyFont();
+Object.entries(SLOTS).forEach(([slot,S])=>{const u=c[S.k];if(u&&LOGO_RE.test(u)){if(!IM[slot]||IM[slot].src!==u)setLogo(slot,u,false)}else{IM[slot]=null;$(S.p).removeAttribute("src")}});
+caption();render()});
 store.watch("plan",a=>{PL=a;drawAll()});store.watch("modeles",a=>{LB=a;drawLB()});store.watch("couleurs",a=>{CC=a;drawChips()});show("home");
 if(linkLogin){linkLogin=false;$("t-pw").classList.remove("hide")}}
 window.onFbUser=async u=>{
