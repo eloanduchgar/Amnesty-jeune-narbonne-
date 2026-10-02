@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-B0uufqqY0jpPs0QKYdYKUAbftZ4H3TVtsjg2S+wvaj8=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-x4qXQjoUfWYSMqOMYwvK9XL8AeGs0qZdIr6Je9JWIx8=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Espace de travail d'Amnesty antenne jeune Narbonne">
@@ -96,6 +96,8 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 #t-login input{max-width:340px;border-color:var(--k)}
 #t-login .cartb{border:4px solid var(--k);padding:12px 20px;text-align:left}
 .hide{display:none!important}
+h2.band{display:inline-block;background:var(--k);color:#fff;padding:6px 14px 4px;font-size:26px;margin-bottom:10px}
+a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;border-radius:999px;border:2px solid var(--k);background:#fff;color:var(--k);text-decoration:none}a.btn.pri{background:var(--k);color:var(--y)}
 .mode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .mode button{border-radius:18px;text-align:left;padding:14px 18px;display:flex;flex-direction:column;gap:2px;font-size:17px}
 .mode button small{color:inherit;opacity:.7;font-weight:500}
@@ -125,7 +127,7 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 <div class="chips" style="margin-top:14px"><button class="pri" id="pwok" type="button">Enregistrer</button><button id="pwno" type="button">Plus tard</button></div></div></div>
 
 <header class="top"><div class="brand"><span class="cart">AMNESTY</span><b>Amnesty antenne jeune Narbonne</b></div><div class="usr"><span id="who"></span><button id="out" type="button">Se déconnecter</button></div></header>
-<nav id="nav" aria-label="Navigation"><button data-t="home" class="on">Accueil</button><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="lib">Modèles</button><button data-t="charte">Charte et réglages</button></nav>
+<nav id="nav" aria-label="Navigation"><button data-t="home" class="on">Accueil</button><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="lib">Modèles</button><button data-t="charte">Charte graphique</button><button data-t="admin" id="tabAdmin" hidden>Admin</button></nav>
 
 <main>
 <section id="t-home" class="pg on">
@@ -168,6 +170,7 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 <label for="fTag">Hashtag ou compte affiché (page d'appel)</label><input type="text" id="fTag" maxlength="60">
 <p class="hint">Photo de fond pour cette page</p><input type="file" id="fPh" accept="image/*"><div style="margin-top:8px"><button id="fPhx" type="button">Retirer la photo</button></div>
 <label for="fPm">Traitement de la photo</label><select id="fPm"><option value="color">Couleurs (logo jaune)</option><option value="duo">Bichromie jaune et noir</option><option value="bw">Noir et blanc</option></select>
+<label for="fMk">Marque affichée sur cette page</label><select id="fMk"><option value="logo">Logo complet</option><option value="candle">Bougie seule (ronde)</option></select><small>La bougie seule n'est autorisée que si le logo complet figure sur une autre page.</small>
 <p class="hint">Logo partenaire (même taille que le nôtre)</p><input type="file" id="fPt" accept="image/*"><div style="margin-top:8px"><button id="fPtx" type="button">Retirer</button></div>
 </div>
 
@@ -201,16 +204,13 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 
 <section id="t-lib" class="pg"><h2>Modèles enregistrés</h2><p><small>Pour enregistrer : Créer, onglet Publier, « Enregistrer comme modèle ».</small></p><div id="llist" class="list"></div></section>
 
-<section id="t-charte" class="pg"><h2>Charte graphique d'Amnesty International</h2>
+<section id="t-charte" class="pg"><h2 class="band">// CHARTE GRAPHIQUE</h2>
 <p><small>D'après le « Guide graphique : logo / typo / couleurs » d'Amnesty International France (mars 2018). Tout ce qui suit est appliqué par le site.</small></p>
 
-<div class="card" style="margin-bottom:14px"><h3 style="margin-top:0">Mon logo officiel</h3>
-<p><small>Importe les fichiers logo fournis par Amnesty, sans les modifier. Le site choisit la bonne version selon le fond. Sans logo importé, les images ne peuvent pas être préparées.</small></p>
-<div class="g3 logos">
-<div><b>Couleur</b><br><small>Cartouche jaune : version par défaut</small><img id="lp" alt="Logo couleur"><input type="file" id="flg" accept="image/*"><div style="margin-top:6px"><button id="lx" type="button">Retirer</button></div></div>
-<div><b>Négatif</b><br><small>Cartouche noir : sur fond jaune</small><img id="lpN" alt="Logo négatif"><input type="file" id="flgN" accept="image/*"><div style="margin-top:6px"><button id="lxN" type="button">Retirer</button></div></div>
-<div><b>Noir et blanc</b><br><small>Cartouche blanc : sur photo noir et blanc</small><img id="lpB" alt="Logo noir et blanc"><input type="file" id="flgB" accept="image/*"><div style="margin-top:6px"><button id="lxB" type="button">Retirer</button></div></div>
-</div></div>
+<div class="card" style="margin-bottom:14px"><h3 style="margin-top:0">Guide graphique officiel (PDF)</h3>
+<p><small>Amnesty International France, mars 2018 : logo, typo, couleurs. Le fichier doit se trouver à côté de index.html.</small></p>
+<div class="chips"><a class="btn pri" href="guide-graphique-amnesty-2018.pdf" target="_blank" rel="noopener">Ouvrir le guide</a><a class="btn" href="guide-graphique-amnesty-2018.pdf" download>Télécharger</a></div>
+<details class="more" id="pdfd" style="margin-top:12px"><summary>Lire le guide ici</summary><iframe id="pdff" title="Guide graphique d'Amnesty International" style="width:100%;height:78vh;border:2px solid var(--line);border-radius:12px"></iframe></details></div>
 
 <details class="more"><summary>Notre organisation</summary>
 <p>Amnesty International est un mouvement mondial de plus de 7 millions de personnes qui se battent pour faire respecter l'ensemble des droits inscrits dans la Déclaration universelle des droits de l'homme de 1948.</p>
@@ -267,7 +267,23 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 <label class="chk"><input type="checkbox"> Pas de bougie en plus du logo</label>
 <label class="chk"><input type="checkbox"> Dates, lieux et faits vérifiés, accord des personnes visibles</label></details>
 
-<h2 style="margin-top:28px">Réglages</h2>
+</section>
+<section id="t-admin" class="pg"><h2 class="band">// ADMIN</h2>
+<p><small>Réservé aux admins : membres, logos officiels, réglages de l'antenne.</small></p>
+<details class="more" open><summary>Membres de l'antenne</summary>
+<div class="g3"><div><label for="mE">E-mail</label><input type="text" id="mE"></div><div><label for="mR">Rôle</label><select id="mR"><option value="editeur">Éditeur</option><option value="lecteur">Lecteur</option><option value="admin">Admin</option></select></div></div>
+<div style="margin:10px 0"><button class="pri" id="mAdd" type="button">Ajouter le membre et envoyer le lien</button></div><div id="mlist" class="list"></div>
+<small>Admin : tout gérer. Éditeur : créer et planifier. Lecteur : consulter.</small></details>
+<details class="more"><summary>Logos et bougie officiels</summary>
+<p><small>Importe les fichiers fournis par Amnesty, sans les modifier. Le site choisit la bonne version selon le fond.</small></p>
+<div class="g3 logos">
+<div><b>Logo couleur</b><br><small>Cartouche jaune (par défaut)</small><img id="lp" alt="Logo couleur"><input type="file" id="flg" accept="image/*"><div style="margin-top:6px"><button id="lx" type="button">Retirer</button></div></div>
+<div><b>Logo négatif</b><br><small>Cartouche noir, sur fond jaune</small><img id="lpN" alt="Logo négatif"><input type="file" id="flgN" accept="image/*"><div style="margin-top:6px"><button id="lxN" type="button">Retirer</button></div></div>
+<div><b>Logo noir et blanc</b><br><small>Cartouche blanc, sur photo N&amp;B</small><img id="lpB" alt="Logo noir et blanc"><input type="file" id="flgB" accept="image/*"><div style="margin-top:6px"><button id="lxB" type="button">Retirer</button></div></div>
+<div><b>Bougie ronde jaune</b><br><small>Cercle jaune, bougie noire : fond noir ou photo</small><img id="lpR" alt="Bougie ronde jaune"><input type="file" id="flgR" accept="image/*"><div style="margin-top:6px"><button id="lxR" type="button">Retirer</button></div></div>
+<div><b>Bougie ronde noire</b><br><small>Cercle noir, bougie jaune : fond jaune ou blanc</small><img id="lpQ" alt="Bougie ronde noire"><input type="file" id="flgQ" accept="image/*"><div style="margin-top:6px"><button id="lxQ" type="button">Retirer</button></div></div>
+</div>
+<small>La bougie seule ne s'affiche que sur une page d'un carrousel dont une autre page porte le logo complet (jamais bougie + logo sur la même page).</small></details>
 <details class="more"><summary>Réglages de l'antenne</summary>
 <label for="sNom">Nom de l'antenne</label><input type="text" id="sNom" maxlength="100">
 <label for="sVille">Ville du groupe local (affichée sous le logo)</label><input type="text" id="sVille" maxlength="40">
@@ -276,13 +292,11 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 <label for="sSig">Phrase de fin de légende</label><input type="text" id="sSig" maxlength="300">
 <label for="sPol">Police des publications</label><select id="sPol"><option value="officielle">Officielle : Trade Gothic si installée, sinon Arial</option><option value="condensee">Alternative condensée (Roboto, non officielle)</option></select>
 <label class="chk"><input type="checkbox" id="sId"> Ajouter l'identifiant pays « FRANCE » (usage numérique exceptionnel)</label><br></details>
-<details class="more"><summary>Mes couleurs (hors charte)</summary>
+<details class="more"><summary>Couleurs hors charte</summary>
 <p><small>La charte impose jaune, noir et blanc. À réserver aux cas particuliers.</small></p>
 <div class="g3"><div><label for="ccN">Nom</label><input type="text" id="ccN" maxlength="40"></div><div><label for="ccB">Fond</label><input type="color" id="ccB" value="#ffff00"></div><div><label for="ccF">Texte</label><input type="color" id="ccF" value="#000000"></div></div>
 <div style="margin:10px 0"><button class="pri" id="ccA" type="button">Ajouter</button></div><div id="ccl" class="list"></div></details>
-<details class="more" id="adm" hidden><summary>Membres de l'antenne (admin)</summary>
-<div class="g3"><div><label for="mE">E-mail</label><input type="text" id="mE"></div><div><label for="mR">Rôle</label><select id="mR"><option value="editeur">Éditeur</option><option value="lecteur">Lecteur</option><option value="admin">Admin</option></select></div></div>
-<div style="margin:10px 0"><button class="pri" id="mAdd" type="button">Ajouter le membre et envoyer le lien</button></div><div id="mlist" class="list"></div></details>
+<details class="more"><summary>Mes droits</summary><p id="dg"><small>Vérifie ce que Firestore autorise pour ton compte.</small></p><div style="margin-bottom:12px"><button id="dgb" type="button">Vérifier mes droits d'écriture</button></div></details>
 </section>
 </main>
 
@@ -295,7 +309,7 @@ const hx=v=>/^#[0-9a-f]{6}$/i.test(v)?v:"#000000";
 const pad2=n=>String(n).padStart(2,"0"),iso=d=>d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate());
 const fmtD=v=>new Date(v+"T12:00").toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
 const nextD=(m,d)=>{const n=new Date(),y=new Date(n.getFullYear(),m-1,d,23)<n?n.getFullYear()+1:n.getFullYear();return y+"-"+pad2(m)+"-"+pad2(d)};
-function show(t){document.querySelectorAll(".pg").forEach(e=>e.classList.toggle("on",e.id==="t-"+t));document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));window.scrollTo(0,0)}
+function show(t){if(t==="admin"&&$("tabAdmin").hidden)t="home";document.querySelectorAll(".pg").forEach(e=>e.classList.toggle("on",e.id==="t-"+t));document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));window.scrollTo(0,0)}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.t));
 document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
 const FONTS={officielle:{t:'"Trade Gothic Bold Condensed No. 20","TradeGothic LT BoldCondensed No. 20","Trade Gothic LT Std",Arial,sans-serif',b:'"Trade Gothic","Trade Gothic LT Std",Arial,sans-serif'},condensee:{t:'"Roboto Condensed",Arial,sans-serif',b:'Roboto,Arial,sans-serif'}};
@@ -309,12 +323,12 @@ let DB=null,CFG={},PL=[],LB=[],CC=[],sT;
 const rid=()=>"i"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const store={
 watch(col,cb){DB.collection(col).onSnapshot(q=>cb(q.docs.map(d=>({id:d.id,...d.data()}))),e=>note("Lecture refusée ("+e.code+")"))},
-async put(col,it){const id=it.id||rid(),o={...it};delete o.id;try{await DB.collection(col).doc(id).set(o);return true}catch(e){note("Action refusée : ton rôle ne permet pas de modifier.");return false}},
-async del(col,id){try{await DB.collection(col).doc(id).delete()}catch(e){note("Action refusée : ton rôle ne permet pas de supprimer.")}},
+async put(col,it){const id=it.id||rid(),o={...it};delete o.id;try{await DB.collection(col).doc(id).set(o);return true}catch(e){note("Action refusée ("+(e.code||"erreur")+"). Voir Charte et réglages > Mes droits.");return false}},
+async del(col,id){try{await DB.collection(col).doc(id).delete()}catch(e){note("Suppression refusée ("+(e.code||"erreur")+"). Voir Charte et réglages > Mes droits.")}},
 cfgWatch(cb){DB.doc("config/antenne").onSnapshot(q=>cb(q.exists?q.data():{}),e=>note("Lecture refusée ("+e.code+")"))},
-async cfgSet(o){try{await DB.doc("config/antenne").set(o)}catch(e){note("Réglages non enregistrés (droits insuffisants ?)")}}};
+async cfgSet(o){try{await DB.doc("config/antenne").set(o)}catch(e){note("Réglages non enregistrés ("+(e.code||"erreur")+"). Voir Charte et réglages > Mes droits.")}}};
 const ST=()=>({nom:$("sNom").value,cpt:$("sCpt").value,tags:$("sTags").value,sig:$("sSig").value,ville:$("sVille").value,police:$("sPol").value,idpays:$("sId").checked});
-const cfgObj=()=>{const t=ST();return{nom:t.nom.slice(0,100),cpt:t.cpt.slice(0,100),tags:t.tags.slice(0,300),sig:t.sig.slice(0,300),ville:t.ville.slice(0,40),police:t.police,idpays:!!t.idpays,logo:CFG.logo||"",logoN:CFG.logoN||"",logoB:CFG.logoB||""}};
+const cfgObj=()=>{const t=ST();return{nom:t.nom.slice(0,100),cpt:t.cpt.slice(0,100),tags:t.tags.slice(0,300),sig:t.sig.slice(0,300),ville:t.ville.slice(0,40),police:t.police,idpays:!!t.idpays,logo:CFG.logo||"",logoN:CFG.logoN||"",logoB:CFG.logoB||"",logoR:CFG.logoR||"",logoQ:CFG.logoQ||""}};
 const saveCfg=()=>{clearTimeout(sT);sT=setTimeout(()=>store.cfgSet(cfgObj()),700)};
 ["sNom","sCpt","sTags","sSig"].forEach(i=>$(i).addEventListener("input",()=>{caption();saveCfg()}));
 ["sVille","sPol","sId"].forEach(i=>$(i).addEventListener("input",()=>{applyFont();render();saveCfg()}));
@@ -348,21 +362,21 @@ case"blocks":c.globalAlpha=.08;c.beginPath();c.arc(W*.85,H*.3,190,0,7);c.fill();
 case"corner":c.globalAlpha=.08;c.lineWidth=40;for(let r=120;r<=560;r+=110){c.beginPath();c.arc(W,H,r,Math.PI,1.5*Math.PI);c.stroke();c.beginPath();c.arc(0,0,r*.8,0,.5*Math.PI);c.stroke()}break}
 c.restore()}
 function sticker(c,key,x,y,k,tilt,S){c.save();c.translate(x,y);c.rotate(tilt*Math.PI/180);c.scale(k,k);c.translate(-100,-100);STK[key](c,S);c.restore()}
-const IM={c:null,n:null,b:null};
+const IM={c:null,n:null,b:null,r:null,q:null};
 function cover(c,im,W,H){const r=Math.max(W/im.width,H/im.height),w=im.width*r,h=im.height*r;c.drawImage(im,(W-w)/2,(H-h)/2,w,h)}
-const SLOTS={c:{k:"logo",p:"lp",f:"flg",x:"lx",bg:"#ffff00"},n:{k:"logoN",p:"lpN",f:"flgN",x:"lxN",bg:"#000000"},b:{k:"logoB",p:"lpB",f:"flgB",x:"lxB",bg:"#ffffff"}};
+const SLOTS={c:{k:"logo",p:"lp",f:"flg",x:"lx",bg:"#ffff00"},n:{k:"logoN",p:"lpN",f:"flgN",x:"lxN",bg:"#000000"},b:{k:"logoB",p:"lpB",f:"flgB",x:"lxB",bg:"#ffffff"},r:{k:"logoR",p:"lpR",f:"flgR",x:"lxR"},q:{k:"logoQ",p:"lpQ",f:"flgQ",x:"lxQ"}};
 const LOGO_RE=/^data:image\/(jpeg|png);base64,[A-Za-z0-9+\/=]+$/;
 function setLogo(slot,u,save){const S=SLOTS[slot];$(S.p).src=u;const im=new Image();im.onload=()=>{IM[slot]=im;render()};im.src=u;if(save){CFG[S.k]=u;store.cfgSet(cfgObj())}}
-function shrink(slot,u){const im=new Image();im.onload=()=>{const h=Math.min(300,im.height),w=im.width*h/im.height,c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");x.fillStyle=SLOTS[slot].bg;x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);setLogo(slot,c.toDataURL("image/jpeg",.9),true)};im.src=u}
+function shrink(slot,u){const im=new Image();im.onload=()=>{const png=slot==="r"||slot==="q";let h=Math.min(240,im.height),out="";for(let k=0;k<6;k++){const w=Math.round(im.width*h/im.height),c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");if(!png){x.fillStyle=SLOTS[slot].bg;x.fillRect(0,0,w,h)}x.drawImage(im,0,0,w,h);out=png?c.toDataURL("image/png"):c.toDataURL("image/jpeg",.9);if(out.length<=140000)break;h=Math.round(h*.75)}if(out.length>150000){note("Image trop lourde : utilise un fichier plus léger.");return}setLogo(slot,out,true)};im.src=u}
 Object.entries(SLOTS).forEach(([slot,S])=>{$(S.f).onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>shrink(slot,r.result);r.readAsDataURL(f)};$(S.x).onclick=()=>{CFG[S.k]="";store.cfgSet(cfgObj());IM[slot]=null;$(S.p).removeAttribute("src");render()}});
 function tint(c,W,H,m){const d=c.getImageData(0,0,W,H),a=d.data;for(let i=0;i<a.length;i+=4){const l=a[i]*.299+a[i+1]*.587+a[i+2]*.114;if(m==="bw"){a[i]=a[i+1]=a[i+2]=l}else{a[i]=a[i+1]=l;a[i+2]=0}}c.putImageData(d,0,0)}
 function fit(c,text,maxW,maxH,start,min,lh){let size=start,lines;for(;size>=min;size-=4){c.font=`700 ${size}px ${TFONT}`;lines=wrap(c,text,maxW);if(lines.length*size*lh<=maxH)break}return{size,lines}}
 function bands(c,text,x,y,maxW,maxH,start,min,ac,at){if(!text.trim())return y;text=text.toUpperCase();const f=fit(c,text,maxW-28,maxH,start,min,1.12);c.font=`700 ${f.size}px ${TFONT}`;let ty=y;f.lines.forEach(l=>{const w=c.measureText(l).width;c.fillStyle=ac;c.fillRect(x-14,ty,w+28,f.size*1.08);c.fillStyle=at;c.fillText(l,x,ty+f.size*.9);ty+=f.size*1.12});return ty}
-function para(c,text,x,y,maxW,maxH,size,min,col){if(!text.trim())return y;let s=size,ls;for(;s>=min;s-=2){c.font=`500 ${s}px ${BFONT}`;ls=wrap(c,text,maxW);if(ls.length*s*1.32<=maxH)break}c.fillStyle=col;ls.forEach((l,i)=>c.fillText(l,x,y+s*1.05+i*s*1.32));return y+ls.length*s*1.32+10}
+function para(c,text,x,y,maxW,maxH,size,min,col){if(!text.trim())return y;const ox=26;let s=size,ls;for(;s>=min;s-=2){c.font=`500 ${s}px ${BFONT}`;ls=wrap(c,text,maxW-ox);if(ls.length*s*1.32<=maxH)break}const h=ls.length*s*1.32;c.fillStyle=col;c.fillRect(x,y+4,4,h-6);ls.forEach((l,i)=>c.fillText(l,x+ox,y+s*1.05+i*s*1.32));return y+h+10}
 
 /* ===== publication en plusieurs pages ===== */
 const SD={cover:{lab:"Amnesty Jeunes",ttl:"Titre accrocheur",txt:"Une phrase pour donner envie de lire la suite.",stk:["fist"]},content:{lab:"À savoir",ttl:"Une idée par page",txt:"Explique simplement un point. Phrases courtes, mots simples."},number:{lab:"Le chiffre",num:"1 sur 3",ttl:"Explique ce que ce chiffre veut dire"},cta:{lab:"Passe à l'action",ttl:"Rejoins-nous !",txt:"Signe, partage, invite tes ami·es.",stk:["mega"]}};
-const newSlide=(t,o)=>{const s={type:t,lab:"",ttl:"",txt:"",num:"",dat:"",loc:"",stk:[],sgn:"Liberté !",...SD[t],...o};s.stk=[...s.stk];return s};
+const newSlide=(t,o)=>{const s={type:t,lab:"",ttl:"",txt:"",num:"",dat:"",loc:"",stk:[],sgn:"Liberté !",mark:"logo",...SD[t],...o};s.stk=[...s.stk];return s};
 const STARTS={
 topic:["Sujet expliqué",()=>[newSlide("cover",{lab:"On t'explique",ttl:"Le sujet en quelques pages",txt:"Fais glisser pour comprendre."}),newSlide("content",{lab:"Le contexte",ttl:"Que se passe-t-il ?"}),newSlide("content",{lab:"Les droits en jeu",ttl:"Pourquoi ça nous concerne"}),newSlide("number"),newSlide("cta",{ttl:"Et toi, tu agis comment ?"})]],
 event:["Événement",()=>[newSlide("cover",{lab:"Rendez-vous",ttl:"Rejoins-nous !",txt:"Viens découvrir Amnesty Jeunes Narbonne."}),newSlide("cta",{lab:"Infos pratiques",ttl:"On t'attend !",txt:"Amène tes ami·es.",dat:"Jeudi 18h30",loc:"Narbonne",stk:["heart"]})]],
@@ -385,19 +399,24 @@ const alt=POST.pal==="alt",ph=!!S.img,bg=alt?(i%2?"#000000":"#ffff00"):POST.bg,f
 const tc=ph?(POST.pm==="duo"?"#ffff00":"#ffffff"):fg,ac=ph?"#ffff00":fg,at=ph?"#000000":bg;
 c.textBaseline="alphabetic";c.textAlign="left";c.fillStyle=ph?"#222":bg;c.fillRect(0,0,W,H);
 if(ph){cover(c,S.img,W,H);if(POST.pm!=="color")tint(c,W,H,POST.pm);c.fillStyle="rgba(0,0,0,.45)";c.fillRect(0,0,W,H)}else bgPattern(c,POST.bgs==="mix"?MIXL[i%MIXL.length]:POST.bgs,W,H,fg)
-const lh=84,idp=$("sId").checked,lx=pad+(idp?34:0);let lw=230;
+const lh=84,idp=$("sId").checked,cl=cityLabel($("sVille").value),top=56;
+const elsewhere=POST.slides.some((x,j)=>j!==i&&x.mark!=="candle");
+const CI=(ph||bg==="#000000")?(IM.r||IM.q):(IM.q||IM.r),candle=S.mark==="candle"&&elsewhere&&CI;
 const LG=ph?(POST.pm==="bw"&&IM.b?IM.b:IM.c):(bg==="#ffff00"&&IM.n?IM.n:IM.c);
-if(LG){lw=LG.width*lh/LG.height;c.drawImage(LG,lx,48,lw,lh)}
-else{c.save();c.setLineDash([10,8]);c.strokeStyle=tc;c.lineWidth=3;c.strokeRect(lx,48,lw,lh);c.setLineDash([]);c.fillStyle=tc;c.font=`700 20px ${BFONT}`;c.textAlign="center";c.fillText("LOGO OFFICIEL",lx+lw/2,84);c.fillText("À IMPORTER",lx+lw/2,110);c.restore()}
-if(idp){c.fillStyle="#000";c.fillRect(pad,48,34,lh);c.save();c.translate(pad+23,48+lh/2);c.rotate(-Math.PI/2);c.fillStyle="#fff";c.font=`700 16px ${BFONT}`;c.textAlign="center";if("letterSpacing"in c)c.letterSpacing="3px";c.fillText("FRANCE",0,0);c.restore()}
-const cl=cityLabel($("sVille").value);if(cl){c.save();c.fillStyle=tc;c.font=`300 24px ${BFONT}`;if("letterSpacing"in c)c.letterSpacing="2.4px";c.textAlign="center";c.fillText(cl,lx+lw/2,48+lh+34);c.restore()}
-if(POST.partner){const Q=POST.partner,pw=Math.min(300,Q.width*lh/Q.height);c.drawImage(Q,lx+lw+Math.round(lh*.7),48,pw,lh)}
+const capH=(!candle&&cl)?34:0,ly=H-40-capH-lh;let lw=230,lx;
+if(candle){lw=CI.width*lh/CI.height;lx=W-pad-lw;c.drawImage(CI,lx,ly,lw,lh)}
+else{if(LG)lw=LG.width*lh/LG.height;lx=W-pad-lw;
+if(LG)c.drawImage(LG,lx,ly,lw,lh);
+else{c.save();c.setLineDash([10,8]);c.strokeStyle=tc;c.lineWidth=3;c.strokeRect(lx,ly,lw,lh);c.setLineDash([]);c.fillStyle=tc;c.font=`700 20px ${BFONT}`;c.textAlign="center";c.fillText("LOGO OFFICIEL",lx+lw/2,ly+36);c.fillText("À IMPORTER",lx+lw/2,ly+62);c.restore()}
+if(idp){c.fillStyle="#000";c.fillRect(lx-34,ly,34,lh);c.save();c.translate(lx-11,ly+lh/2);c.rotate(-Math.PI/2);c.fillStyle="#fff";c.font=`700 16px ${BFONT}`;c.textAlign="center";if("letterSpacing"in c)c.letterSpacing="3px";c.fillText("FRANCE",0,0);c.restore()}
+if(cl){c.save();c.fillStyle=tc;c.font=`300 24px ${BFONT}`;if("letterSpacing"in c)c.letterSpacing="2.4px";c.textAlign="center";c.fillText(cl,lx+lw/2,ly+lh+30);c.restore()}
+if(POST.partner){const Q=POST.partner,pw=Math.min(240,Q.width*lh/Q.height),gap=Math.round(lh*.7);c.drawImage(Q,lx-(idp?34:0)-gap-pw,ly,pw,lh)}}
 c.textAlign="left";
-if(n>1){c.font=`700 30px ${BFONT}`;const t=(i+1)+"/"+n,w=c.measureText(t).width+36;c.fillStyle=ac;rr(c,W-pad-w,62,w,52,26);c.fillStyle=at;c.textAlign="center";c.fillText(t,W-pad-w/2,98);c.textAlign="left"}
-const isCta=S.type==="cta",boxH=(isCta||S.type==="cover")&&(S.dat||S.loc)?210:0,floor=H-100-boxH;
+if(n>1){c.font=`700 30px ${TFONT}`;const t=(i+1)+"/"+n,w=c.measureText(t).width+32;c.fillStyle=ac;c.fillRect(W-pad-w,top,w,52);c.fillStyle=at;c.textAlign="center";c.fillText(t,W-pad-w/2,top+37);c.textAlign="left"}
+let y=top+10;
+if(S.lab.trim()){c.font=`700 30px ${TFONT}`;const t="// "+S.lab.toUpperCase(),w=c.measureText(t).width+32;c.fillStyle=ac;c.fillRect(pad,top,w,52);c.fillStyle=at;c.fillText(t,pad+16,top+37);y=top+52+32}
+const isCta=S.type==="cta",boxH=(isCta||S.type==="cover")&&(S.dat||S.loc)?210:0,floor=H-170-boxH;
 const kk=(H<1200?1.25:1.5)*(S.type==="content"?.72:1),spx=200*kk,base=floor-(boxH?14:30),stk=S.stk||[],figTop=stk.length?base-spx-8:base;
-let y=225;
-if(S.lab.trim()){c.font=`700 32px ${BFONT}`;const w=c.measureText(S.lab).width+40;c.fillStyle=ac;rr(c,pad,y,w,52,26);c.fillStyle=at;c.fillText(S.lab,pad+20,y+37);y+=52+28}
 const avail=figTop-y-10,mw=W-2*pad;
 if(S.type==="number"){let ns=420;for(;ns>120;ns-=10){c.font=`700 ${ns}px ${TFONT}`;if(c.measureText(S.num).width<=mw)break}c.fillStyle=ac;c.fillText(S.num,pad,y+ns*.85);y+=ns*.95+14;
 y=bands(c,S.ttl,pad,y,mw,avail*.4,70,40,ac,at)+20;para(c,S.txt,pad,y,mw,figTop-y,42,28,tc)}
@@ -406,15 +425,16 @@ else{y=bands(c,S.ttl,pad,y,mw,avail*(isCta?.55:.7),isCta?120:150,48,ac,at)+22;pa
 const xs={0:[],1:[.74],2:[.3,.72],3:[.2,.5,.8]}[stk.length]||[],tl=[-7,5,-4];
 xs.forEach((f,j)=>sticker(c,stk[j],W*f,base-spx/2,kk,tl[j],S));
 if(boxH){c.fillStyle=ac;c.fillRect(0,floor,W,boxH);c.fillStyle=at;let cy=floor+82;if(S.dat){c.font=`700 76px ${TFONT}`;c.fillText(S.dat,pad,cy);cy+=52}if(S.loc){c.font=`500 38px ${BFONT}`;c.fillText(S.loc,pad,cy)}if(POST.tag){c.font=`700 30px ${BFONT}`;c.textAlign="right";c.fillText(POST.tag,W-pad,floor+boxH-28);c.textAlign="left"}}
-if(n>1&&i===0){c.font=`700 34px ${BFONT}`;c.fillStyle=ac;c.textAlign="right";c.fillText("Glisse  →",W-pad,H-42);c.textAlign="left"}
-if(n>1&&POST.dots){const tw=34+(n-1)*30;let x=(W-tw)/2;c.fillStyle=ac;for(let k=0;k<n;k++){if(k===i){rr(c,x,H-60,34,16,8);x+=48}else{c.globalAlpha=.4;c.beginPath();c.arc(x+8,H-52,8,0,7);c.fill();c.globalAlpha=1;x+=30}}}}
+const dl=!!POST.partner;
+if(n>1&&i===0&&!dl){c.font=`700 30px ${TFONT}`;c.fillStyle=ac;c.fillText("GLISSE →",pad,H-42)}
+if(n>1&&POST.dots){const tw=34+(n-1)*30;let x=dl?pad:(W-tw)/2;c.fillStyle=ac;for(let k=0;k<n;k++){if(k===i){rr(c,x,H-60,34,16,8);x+=48}else{c.globalAlpha=.4;c.beginPath();c.arc(x+8,H-52,8,0,7);c.fill();c.globalAlpha=1;x+=30}}}}
 const OFF=document.createElement("canvas");let tT;
 function render(){renderTo($("cv"),cur);dotsUI();caption();clearTimeout(tT);tT=setTimeout(thumbs,160)}
 function thumbs(){const el=$("thumbs");el.innerHTML="";POST.slides.forEach((S,i)=>{renderTo(OFF,i);const b=document.createElement("button");b.type="button";b.className="th"+(i===cur?" on":"");const t=document.createElement("canvas");t.width=108;t.height=Math.round(108*OFF.height/1080);t.getContext("2d").drawImage(OFF,0,0,t.width,t.height);b.append(t);b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});
 if(POST.slides.length<10){const a=mk("+",addSlide);a.className="th add";a.setAttribute("aria-label","Ajouter une page");el.append(a)}}
 function dotsUI(){const el=$("dots"),n=POST.slides.length;el.innerHTML="";$("multi").hidden=n<2;$("mOne").classList.toggle("on",n<2);$("mMul").classList.toggle("on",n>1);POST.slides.forEach((_,i)=>{const b=document.createElement("button");b.type="button";b.className=i===cur?"on":"";b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});$("pgn").textContent="Page "+(cur+1)+" sur "+n;$("pv").disabled=cur===0;$("nx").disabled=cur===n-1}
 function go(i){cur=Math.max(0,Math.min(POST.slides.length-1,i));fill();render()}
-function fill(){const S=POST.slides[cur];if(!S)return;$("fLab").value=S.lab;$("fNum").value=S.num;$("fTtl").value=S.ttl;$("fTxt").value=S.txt;$("fDat").value=S.dat;$("fLoc").value=S.loc;$("fSgn").value=S.sgn;$("fFmt").value=POST.fmt;$("fPm").value=POST.pm;$("fDots").checked=POST.dots;$("fTag").value=POST.tag;
+function fill(){const S=POST.slides[cur];if(!S)return;$("fLab").value=S.lab;$("fNum").value=S.num;$("fTtl").value=S.ttl;$("fTxt").value=S.txt;$("fDat").value=S.dat;$("fLoc").value=S.loc;$("fSgn").value=S.sgn;$("fFmt").value=POST.fmt;$("fPm").value=POST.pm;$("fMk").value=POST.slides[cur].mark||"logo";$("fDots").checked=POST.dots;$("fTag").value=POST.tag;
 document.querySelectorAll(".f[data-f]").forEach(e=>e.hidden=!SHOW[S.type].includes(e.dataset.f));
 document.querySelectorAll("#types button").forEach(b=>b.classList.toggle("on",b.dataset.k===S.type));
 document.querySelectorAll("#chips button,#chips2 button").forEach(b=>b.classList.toggle("on",b.dataset.k===POST.key));document.querySelectorAll("#stk button").forEach(b=>b.classList.toggle("on",S.stk.includes(b.dataset.k)));document.querySelectorAll("#bgs button").forEach(b=>b.classList.toggle("on",b.dataset.k===POST.bgs))}
@@ -422,6 +442,7 @@ const FM={fLab:"lab",fNum:"num",fTtl:"ttl",fTxt:"txt",fDat:"dat",fLoc:"loc",fSgn
 Object.keys(FM).forEach(id=>$(id).addEventListener("input",()=>{POST.slides[cur][FM[id]]=$(id).value;render()}));
 $("fFmt").onchange=()=>{POST.fmt=$("fFmt").value;render()};
 $("fPm").onchange=()=>{POST.pm=$("fPm").value;render()};
+$("fMk").onchange=()=>{const v=$("fMk").value;if(v==="candle"){if(!POST.slides.some((x,j)=>j!==cur&&x.mark!=="candle")){note("La bougie seule n'est possible que si le logo complet figure sur une autre page.");$("fMk").value="logo";return}if(!IM.r&&!IM.q){note("Importe d'abord la bougie ronde (onglet Admin > Logos).");$("fMk").value="logo";return}}POST.slides[cur].mark=v;render()};
 $("fPt").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{POST.partner=im;render()};im.src=URL.createObjectURL(f)};
 $("fPtx").onclick=()=>{delete POST.partner;render()};
 $("fDots").onchange=()=>{POST.dots=$("fDots").checked;render()};
@@ -454,7 +475,7 @@ let t=`📣 ${S0.ttl}\n\n${S0.txt}`;if(pts.length)t+="\n\nDans ce carrousel :\n"
 if(st.sig)t+=`\n${st.sig}`;if(st.cpt)t+=`\n\nSuivez ${st.nom||"nous"} : ${st.cpt}`;t+=`\n\n${st.tags} ${POST.tag.startsWith("#")?POST.tag:""}`;$("cap").value=t.trim()}
 $("cp2").onclick=async()=>{try{await navigator.clipboard.writeText($("cap").value)}catch(e){$("cap").select();try{document.execCommand("copy")}catch(_){}}$("cp2").textContent="Copié !";setTimeout(()=>$("cp2").textContent="Copier la légende",1500)};
 function clean(p){const str=(v,n)=>String(v==null?"":v).slice(0,n),ok=["cover","content","number","cta"];
-const sl=(Array.isArray(p.slides)?p.slides:[]).slice(0,10).map(s=>({type:ok.includes(s.type)?s.type:"content",lab:str(s.lab,40),ttl:str(s.ttl,150),txt:str(s.txt,600),num:str(s.num,12),dat:str(s.dat,60),loc:str(s.loc,80),stk:(Array.isArray(s.stk)?s.stk:[]).filter(k=>STK_KEYS.includes(k)).slice(0,3),sgn:str(s.sgn,40)}));
+const sl=(Array.isArray(p.slides)?p.slides:[]).slice(0,10).map(s=>({type:ok.includes(s.type)?s.type:"content",lab:str(s.lab,40),ttl:str(s.ttl,150),txt:str(s.txt,600),num:str(s.num,12),dat:str(s.dat,60),loc:str(s.loc,80),stk:(Array.isArray(s.stk)?s.stk:[]).filter(k=>STK_KEYS.includes(k)).slice(0,3),sgn:str(s.sgn,40),mark:s.mark==="candle"?"candle":"logo"}));
 return{fmt:["1350","1080","1920"].includes(p.fmt)?p.fmt:"1350",pm:["color","duo","bw"].includes(p.pm)?p.pm:"color",bgs:BG_KEYS.includes(p.bgs)?p.bgs:"circle",pal:p.pal==="alt"?"alt":"fix",key:str(p.key,30)||"alt",bg:hx(p.bg),fg:hx(p.fg),dots:p.dots!==false,tag:str(p.tag,60),slides:sl.length?sl:[newSlide("cover")]}}
 $("sv").onclick=()=>{const d=JSON.stringify(POST,(k,v)=>k==="img"||k==="partner"?undefined:v);if(d.length>29000){note("Publication trop longue pour un modèle.");return}store.put("modeles",{name:(POST.slides[0].ttl||"Sans titre").slice(0,80),data:d});note("Enregistré dans Modèles")};
 function drawLB(){const el=$("llist");el.innerHTML=LB.length?"":"<p><small>Aucun modèle enregistré.</small></p>";LB.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<b>${esc(m.name)}</b>`;d.append(mk("Ouvrir",()=>{try{POST=clean(JSON.parse(m.data));cur=0;fill();render();show("create")}catch(e){note("Modèle illisible")}}),mk("Supprimer",()=>store.del("modeles",m.id)));el.append(d)})}
@@ -727,13 +748,15 @@ const drawAll=()=>{drawPL();drawCal();drawDay();drawHome()};
 /* ===== connexion ===== */
 const say=m=>{$("lmsg").textContent=m};
 const errMsg=e=>({"auth/invalid-credential":"E-mail ou mot de passe incorrect.","auth/wrong-password":"E-mail ou mot de passe incorrect.","auth/user-not-found":"E-mail ou mot de passe incorrect.","auth/invalid-email":"Adresse e-mail invalide.","auth/missing-password":"Saisis ton mot de passe.","auth/popup-closed-by-user":"Connexion Google annulée.","auth/popup-blocked":"Fenêtre bloquée : autorise les pop-up ou utilise le lien par e-mail.","auth/operation-not-allowed":"Méthode non activée dans Firebase (Authentication > Méthode de connexion : active E-mail/Mot de passe et « Lien envoyé par e-mail »).","auth/unauthorized-domain":"Domaine non autorisé : ajoute-le dans Firebase > Authentication > Paramètres > Domaines autorisés.","auth/unauthorized-continue-uri":"Domaine non autorisé : ajoute-le dans Firebase > Authentication > Paramètres > Domaines autorisés.","auth/too-many-requests":"Trop de tentatives : réessaie dans quelques minutes.","auth/quota-exceeded":"Quota d'e-mails atteint : réessaie demain.","auth/invalid-action-code":"Lien expiré ou déjà utilisé : demande un nouveau lien.","auth/expired-action-code":"Lien expiré : demande un nouveau lien.","auth/network-request-failed":"Problème de réseau.","auth/requires-recent-login":"Reconnecte-toi puis réessaie."}[e.code]||"Erreur : "+(e.code||e.message));
-let idle,linkLogin=false;const bump=()=>{clearTimeout(idle);idle=setTimeout(()=>FB.out().finally(()=>location.reload()),3600000)};
+let idle,linkLogin=false,ME={email:"",raw:"",role:""};const bump=()=>{clearTimeout(idle);idle=setTimeout(()=>FB.out().finally(()=>location.reload()),3600000)};
 ["click","keydown","pointermove","touchstart"].forEach(e=>addEventListener(e,()=>{if(DB)bump()},{passive:true}));
 const resetLogin=()=>{["lpw","lin","lml","lgo"].forEach(i=>$(i).hidden=false);$("lfin").hidden=true};
 async function inviteMail(e){try{await FB.invite(e);note("Lien de connexion envoyé à "+e)}catch(x){note("Invitation non envoyée : "+errMsg(x))}}
-function drawMem(a){const el=$("mlist");el.innerHTML="";a.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<span>${esc(m.id)}<small>${esc(m.role)}</small></span>`;d.append(mk("Renvoyer le lien",()=>inviteMail(m.id)),mk("Retirer",()=>store.del("membres",m.id)));el.append(d)})}
+function drawMem(a){const el=$("mlist");el.innerHTML="";a.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto auto";const me=m.id===(ME.email||"").toLowerCase();d.innerHTML=`<span>${esc(m.id)}${me?" (toi)":""}<small>${esc(m.role)}</small></span>`;
+if(!me){const sel=document.createElement("select");sel.setAttribute("aria-label","Rôle de "+m.id);sel.style.width="auto";["admin","editeur","lecteur"].forEach(r=>{const o=document.createElement("option");o.value=r;o.textContent=r;if(r===m.role)o.selected=true;sel.append(o)});sel.onchange=()=>store.put("membres",{id:m.id,role:sel.value});d.append(sel,mk("Renvoyer le lien",()=>inviteMail(m.id)),mk("Retirer",()=>store.del("membres",m.id)))}
+el.append(d)})}
 $("mAdd").onclick=async()=>{const e=$("mE").value.trim().toLowerCase();if(!/^[^\s\/@]+@[^\s\/@]+\.[^\s\/@]+$/.test(e)){note("Adresse e-mail invalide.");return}if(await store.put("membres",{id:e,role:$("mR").value})){$("mE").value="";inviteMail(e)}};
-function enter(name,role){$("t-login").classList.add("hide");$("who").textContent=name+" · "+role;$("hw").textContent="Bonjour "+name.split(/[ @]/)[0];$("adm").hidden=role!=="admin";if(role==="admin")store.watch("membres",drawMem);bump();
+function enter(name,role){$("t-login").classList.add("hide");$("who").textContent=name+" · "+role;$("hw").textContent="Bonjour "+name.split(/[ @]/)[0];$("tabAdmin").hidden=role!=="admin";if(role==="admin")store.watch("membres",drawMem);bump();
 store.cfgWatch(c=>{CFG=c;const f=(i,k,d)=>{if(document.activeElement!==$(i))$(i).value=c[k]!=null?c[k]:d};f("sNom","nom","Amnesty Jeunes Narbonne");f("sCpt","cpt","");f("sTags","tags","#Amnesty #AmnestyJeunes #Narbonne #DroitsHumains");f("sSig","sig","");f("sVille","ville","Narbonne");$("sPol").value=c.police==="condensee"?"condensee":"officielle";$("sId").checked=!!c.idpays;applyFont();
 Object.entries(SLOTS).forEach(([slot,S])=>{const u=c[S.k];if(u&&LOGO_RE.test(u)){if(!IM[slot]||IM[slot].src!==u)setLogo(slot,u,false)}else{IM[slot]=null;$(S.p).removeAttribute("src")}});
 caption();render()});
@@ -745,7 +768,9 @@ if(!u){if($("lmsg").textContent==="Vérification de la session…")say("Connecte
 if(!u.emailVerified){fail("Adresse e-mail non vérifiée : utilise le lien reçu par e-mail ou Google.");return}
 let m=null;try{m=await FB.member(u)}catch(e){fail("Lecture de ton profil refusée : les règles Firestore ne sont peut-être pas publiées.");return}
 if(!m){fail("Le compte "+u.email+" n'est pas encore validé : demande à un·e admin de l'antenne de t'inviter.");return}
-DB=FB.db;enter(u.displayName||u.email,["admin","editeur","lecteur"].includes(m.role)?m.role:"lecteur")};
+const raw=m.role||m.Role||m["rôle"]||"",r0=String(raw).normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase(),role=["admin","editeur","lecteur"].includes(r0)?r0:"lecteur";
+ME={email:u.email,raw:String(raw),role};DB=FB.db;enter(u.displayName||u.email,role);
+if(r0!==role)note("Rôle « "+raw+" » non reconnu dans ta fiche membre : accès en lecture seule. Corrige le champ role (admin, editeur ou lecteur).")};
 window.onEmailLink=e=>{linkLogin=true;["lpw","lin","lml","lgo"].forEach(i=>$(i).hidden=true);$("lfin").hidden=false;if(e){$("lem").value=e;$("lfin").click()}else say("Confirme l'adresse e-mail où tu as reçu le lien, puis valide.")};
 const guard=f=>async()=>{if(!window.FB){say("Service de connexion indisponible : vérifie ta connexion internet.");return}try{await f()}catch(e){say(errMsg(e))}};
 $("lin").onclick=guard(()=>FB.login($("lem").value.trim(),$("lpw").value));
@@ -755,6 +780,10 @@ $("lgo").onclick=guard(()=>FB.google());
 $("lfin").onclick=async()=>{if(!window.FB)return;try{await FB.completeLink($("lem").value.trim())}catch(e){say(errMsg(e));resetLogin()}};
 $("pwok").onclick=async()=>{const p=$("npw").value;if(p.length<10){note("10 caractères minimum.");return}try{await FB.setPassword(p);note("Mot de passe enregistré.");$("npw").value="";$("t-pw").classList.add("hide")}catch(e){note(errMsg(e))}};
 $("pwno").onclick=()=>$("t-pw").classList.add("hide");
+$("dgb").onclick=async()=>{const el=$("dg");el.textContent="Test en cours…";const who="Connecté : "+ME.email+" · rôle lu : "+(ME.raw||"(aucun)")+" → "+ME.role+". ";
+try{await DB.doc("config/antenne").set(cfgObj());el.textContent=who+"✓ Écriture autorisée : tu peux modifier la charte et les réglages."}
+catch(e){el.textContent=who+"✗ Refusé ("+(e.code||"erreur")+"). "+(e.code==="permission-denied"?"1) Republie le fichier firestore.rules dans Firebase (onglet Règles). 2) Vérifie que le document membres/"+ME.email.toLowerCase()+" contient role = admin (minuscules).":"Vérifie ta connexion puis réessaie.")}};
+$("pdfd").addEventListener("toggle",()=>{const f=$("pdff");if($("pdfd").open&&!f.getAttribute("src"))f.src="guide-graphique-amnesty-2018.pdf#view=FitH"});
 $("out").onclick=()=>{(window.FB?FB.out():Promise.resolve()).finally(()=>location.reload())};
 setTimeout(()=>{if(!window.FB)say("Service de connexion indisponible : vérifie ta connexion internet puis recharge la page.")},7000);
 
