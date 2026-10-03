@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Q9w9SinS/QnPBteeuf/kzXZNWMN78ZyKkMtwhY1+ZHk=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-VnXzDqwA7Z1QT/cN0cwJ7kuzvMotk7Urpv+bRam4pm8=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Espace de travail d'Amnesty antenne jeune Narbonne">
@@ -371,9 +371,15 @@ const CANDLES=["k","y","w","r","q","s","t"],FROMDB=new Set();let MIG=false;
 const LOGO_RE=/^data:image\/(jpeg|png);base64,[A-Za-z0-9+\/=]+$/;
 function buildSlot(slot,host){const[lab,sub]=SLOTS[slot],d=document.createElement("div");d.innerHTML=`<b>${lab}</b><br><small>${sub}</small><img id="lp${slot}" alt="${lab}"><input type="file" id="flg${slot}" accept="image/*" aria-label="${lab}"><div style="margin-top:6px"><button type="button" id="lx${slot}">Retirer</button></div>`;$(host).append(d)}
 ["c","n","b"].forEach(k=>buildSlot(k,"logoGrid"));["k","y","w"].forEach(k=>buildSlot(k,"candleGrid"));["r","q","s","t"].forEach(k=>buildSlot(k,"roundGrid"));
-function showLogo(slot,u){$("lp"+slot).src=u;const im=new Image();im.onload=()=>{IM[slot]=im;render()};im.src=u}
-function clearLogo(slot){IM[slot]=null;$("lp"+slot).removeAttribute("src");render()}
-function shrink(slot,u){const im=new Image();im.onload=()=>{const png=CANDLES.includes(slot);let h=Math.min(240,im.height),out="";for(let k=0;k<6;k++){const w=Math.round(im.width*h/im.height),c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");if(!png){x.fillStyle=SLOTS[slot][2];x.fillRect(0,0,w,h)}x.drawImage(im,0,0,w,h);out=png?c.toDataURL("image/png"):c.toDataURL("image/jpeg",.9);if(out.length<=140000)break;h=Math.round(h*.75)}if(out.length>150000){note("Image trop lourde : utilise un fichier plus léger.");return}store.put("marques",{id:slot,data:out})};im.src=u}
+const IMSRC={};
+function normImg(im,slot){const W=im.width,H=im.height,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");x.drawImage(im,0,0);let d;try{d=x.getImageData(0,0,W,H).data}catch(e){return im}
+const cs=[0,(W-1)*4,(H-1)*W*4,((H-1)*W+W-1)*4],tr=cs.every(i=>d[i+3]<12),wh=!tr&&["c","n","k","r","q"].includes(slot)&&cs.every(i=>d[i]>240&&d[i+1]>240&&d[i+2]>240);
+if(!tr&&!wh)return im;const isBg=i=>tr?d[i+3]<12:(d[i]>240&&d[i+1]>240&&d[i+2]>240);let x0=W,y0=H,x1=-1,y1=-1;
+for(let y=0;y<H;y++)for(let xx=0;xx<W;xx++)if(!isBg((y*W+xx)*4)){if(xx<x0)x0=xx;if(xx>x1)x1=xx;if(y<y0)y0=y;if(y>y1)y1=y}
+if(x1<0)return im;const w=x1-x0+1,h=y1-y0+1;if(w>=W-2&&h>=H-2)return im;const o=document.createElement("canvas");o.width=w;o.height=h;o.getContext("2d").drawImage(im,x0,y0,w,h,0,0,w,h);return o}
+function showLogo(slot,u){$("lp"+slot).src=u;const im=new Image();im.onload=()=>{IM[slot]=normImg(im,slot);IMSRC[slot]=u;render()};im.src=u}
+function clearLogo(slot){IM[slot]=null;delete IMSRC[slot];$("lp"+slot).removeAttribute("src");render()}
+function shrink(slot,u){const im=new Image();im.onload=()=>{const png=CANDLES.includes(slot),src=normImg(im,slot);let h=240,out="";for(let k=0;k<6;k++){const w=Math.max(1,Math.round(src.width*h/src.height)),c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");if(!png){x.fillStyle=SLOTS[slot][2];x.fillRect(0,0,w,h)}x.drawImage(src,0,0,w,h);out=png?c.toDataURL("image/png"):c.toDataURL("image/jpeg",.9);if(out.length<=140000)break;h=Math.round(h*.75)}if(out.length>150000){note("Image trop lourde : utilise un fichier plus léger.");return}store.put("marques",{id:slot,data:out})};im.src=u}
 Object.keys(SLOTS).forEach(slot=>{$("flg"+slot).onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>shrink(slot,r.result);r.readAsDataURL(f)};$("lx"+slot).onclick=()=>store.del("marques",slot)});
 function pickCandle(bg,ph,pm){const o=ph?(pm==="bw"?["t","s","w","k","r","y","q"]:["r","y","q","s","t","k","w"]):bg==="#ffff00"?["q","k","s","r","t","y","w"]:bg==="#000000"?["r","y","t","w","q","s","k"]:bg==="#ffffff"?["s","k","q","t","r","y","w"]:["r","y","q","s","t","k","w"];for(const k of o)if(IM[k])return IM[k];return null}
 /* ===== typographie officielle importée ===== */
@@ -462,7 +468,7 @@ Object.keys(FM).forEach(id=>$(id).addEventListener("input",()=>{POST.slides[cur]
 $("fFmt").onchange=()=>{POST.fmt=$("fFmt").value;render()};
 $("fPm").onchange=()=>{POST.pm=$("fPm").value;render()};
 $("fMk").onchange=()=>{const v=$("fMk").value;if(v==="candle"){if(!POST.slides.some((x,j)=>j!==cur&&x.mark!=="candle")){note("La bougie seule n'est possible que si le logo complet figure sur une autre page.");$("fMk").value="logo";return}if(!CANDLES.some(k=>IM[k])){note("Importe d'abord une bougie (onglet Admin > Logos et bougies).");$("fMk").value="logo";return}}POST.slides[cur].mark=v;render()};
-$("fPt").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{POST.partner=im;render()};im.src=URL.createObjectURL(f)};
+$("fPt").onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{POST.partner=normImg(im,"c");render()};im.src=URL.createObjectURL(f)};
 $("fPtx").onclick=()=>{delete POST.partner;render()};
 $("fDots").onchange=()=>{POST.dots=$("fDots").checked;render()};
 $("fTag").addEventListener("input",()=>{POST.tag=$("fTag").value;render()});
@@ -782,7 +788,7 @@ Object.entries(OLD).forEach(([k,slot])=>{const u=c[k];if(u&&LOGO_RE.test(u)&&!IM
 if(ME.role==="admin"&&!MIG){const ks=Object.keys(OLD).filter(k=>c[k]&&LOGO_RE.test(c[k]));if(ks.length){MIG=true;Promise.all(ks.map(k=>store.put("marques",{id:OLD[k],data:c[k]}))).then(()=>store.cfgSet(cfgObj())).then(()=>note("Logos déplacés dans la nouvelle base."))}}
 caption();render()});
 store.watch("plan",a=>{PL=a;drawAll()});store.watch("modeles",a=>{LB=a;drawLB()});store.watch("couleurs",a=>{CC=a;drawChips()});
-store.watch("marques",a=>{const have={};a.forEach(m=>{if(SLOTS[m.id]&&LOGO_RE.test(m.data||"")){have[m.id]=1;FROMDB.add(m.id);if(!IM[m.id]||IM[m.id].src!==m.data)showLogo(m.id,m.data)}});Object.keys(SLOTS).forEach(k=>{if(!have[k]&&FROMDB.has(k)){FROMDB.delete(k);clearLogo(k)}})});
+store.watch("marques",a=>{const have={};a.forEach(m=>{if(SLOTS[m.id]&&LOGO_RE.test(m.data||"")){have[m.id]=1;FROMDB.add(m.id);if(IMSRC[m.id]!==m.data)showLogo(m.id,m.data)}});Object.keys(SLOTS).forEach(k=>{if(!have[k]&&FROMDB.has(k)){FROMDB.delete(k);clearLogo(k)}})});
 store.watch("polices",watchFonts);show("home");
 if(linkLogin){linkLogin=false;$("t-pw").classList.remove("hide")}}
 window.onFbUser=async u=>{
