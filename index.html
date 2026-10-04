@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ixEtUE52Zn7odbxiVrdZEJk2gKBtOz3Llcg+uKs3Wi8=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-BxVPyhUpNl1H+bkKGcVh2SsbngARkSqy6/sUQrDUUqE=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Espace de travail d'Amnesty antenne jeune Narbonne">
@@ -96,6 +96,24 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 #t-login input{max-width:340px;border-color:var(--k)}
 #t-login .cartb{border:4px solid var(--k);padding:12px 20px;text-align:left}
 .hide{display:none!important}
+#t-landing{position:fixed;inset:0;background:#ffff00;color:#111;z-index:52;overflow:auto}
+.ld{max-width:1000px;margin:0 auto;padding:28px 22px 56px;padding-top:calc(28px + env(safe-area-inset-top,0px))}
+.ld .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:38px}
+.lt{display:inline-block;background:#111;color:#ffff00;font:700 22px/1 "Roboto Condensed",Arial,sans-serif;padding:8px 14px 6px;text-transform:uppercase}
+.ld h1.big{font-size:clamp(46px,11vw,118px);line-height:1.12;text-transform:uppercase;margin:0 0 22px}
+.ld h1.big span{background:#111;color:#ffff00;padding:0 14px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ld .lead{font-size:clamp(18px,3vw,26px);font-weight:500;max-width:620px;margin:0 0 26px;border-left:4px solid #111;padding-left:18px}
+.ld .acts{display:flex;gap:10px;flex-wrap:wrap}
+.lsec{padding:56px 0}
+.lsec h2{font-size:clamp(30px,5vw,48px);text-transform:uppercase;margin-bottom:16px}
+.lblack{background:#111;color:#ffff00}.lwhite{background:#fff;color:#111}.lyel{background:#ffff00;color:#111}
+.lblack p{font-size:clamp(18px,2.4vw,24px);max-width:760px;font-weight:500;border-left:4px solid #ffff00;padding-left:18px;margin:0 0 18px}
+.lcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.lcard{border:3px solid #111;padding:22px;background:#fff}
+.lcard h3{font-size:30px;text-transform:uppercase;margin:0 0 8px;background:#111;color:#ffff00;display:inline-block;padding:4px 12px 2px}
+.lcard p{margin:10px 0 0;font-size:17px}
+#t-landing .ld button:not(.pri),#t-landing .ld a.btn:not(.pri){background:transparent}
+.lblack .ld a.btn{background:transparent;color:#ffff00;border-color:#ffff00}
 h2.band{display:inline-block;background:var(--k);color:#fff;padding:6px 14px 4px;font-size:26px;margin-bottom:10px}
 a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;border-radius:999px;border:2px solid var(--k);background:#fff;color:var(--k);text-decoration:none}a.btn.pri{background:var(--k);color:var(--y)}
 .mode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
@@ -109,9 +127,35 @@ a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;bor
 <body>
 <div id="toast" role="status"></div>
 
+<div id="t-landing">
+<section class="lyel"><div class="ld">
+<div class="bar"><span class="lt">// Antenne jeunes</span><button class="pri" type="button" data-login>Espace militant·es</button></div>
+<h1 class="big"><span>Amnesty</span><br><span>antenne jeune</span><br><span>Narbonne</span></h1>
+<p class="lead">Des jeunes de Narbonne qui se mobilisent pour défendre les droits humains.</p>
+<div class="acts"><button class="pri" type="button" data-login>Espace militant·es</button><a class="btn" href="https://www.amnesty.fr" target="_blank" rel="noopener">Découvrir Amnesty France</a></div>
+</div></section>
+<section class="lblack lsec"><div class="ld" style="padding-top:0;padding-bottom:0">
+<h2><span class="lt">// Qui sommes-nous ?</span></h2>
+<p>Nous sommes un mouvement mondial de plus de 7 millions de personnes qui se battent pour faire respecter l'ensemble des droits inscrits dans la Déclaration universelle des droits de l'homme de 1948.</p>
+<p>Nous sommes impartiaux et indépendants de toute tendance politique, de tout intérêt économique et de toute croyance religieuse.</p>
+</div></section>
+<section class="lwhite lsec"><div class="ld" style="padding-top:0;padding-bottom:0">
+<h2><span class="lt">// Ce que nous faisons</span></h2>
+<div class="lcards">
+<div class="lcard"><h3>Informer</h3><p>Expliquer les droits humains et l'actualité en mots simples, en ligne et sur le terrain.</p></div>
+<div class="lcard"><h3>Agir</h3><p>Signer, partager et participer aux actions et aux campagnes d'Amnesty.</p></div>
+<div class="lcard"><h3>Se retrouver</h3><p>Se rencontrer, s'organiser et faire vivre l'antenne ensemble.</p></div>
+</div></div></section>
+<section class="lyel lsec"><div class="ld" style="padding-top:0;padding-bottom:0">
+<h2>Tu fais partie de l'antenne ?</h2>
+<p style="font-size:20px;margin:0 0 20px">L'espace militant·es réunit le calendrier, la création de publications et la charte graphique.</p>
+<div class="acts"><button class="pri" type="button" data-login>Accéder à l'espace militant·es</button></div>
+</div></section>
+</div>
+
 <div id="t-login">
-<div class="cartb"><div class="cond" style="font-size:48px">AMNESTY</div><div class="cond" style="font-size:28px">INTERNATIONAL</div><div style="font-weight:500">Jeunes Narbonne</div></div>
-<h1 style="font-size:44px;margin:8px 0 0">Espace militant·es</h1>
+<h1 style="font-size:44px;margin:0"><span style="background:#111;color:#ffff00;padding:2px 14px;display:inline-block">// ESPACE MILITANT·ES</span></h1>
+<small>Amnesty antenne jeune Narbonne</small>
 <p id="lmsg" style="max-width:440px;margin:0">Vérification de la session…</p>
 <input id="lem" type="email" placeholder="Adresse e-mail" autocomplete="username" aria-label="Adresse e-mail">
 <input id="lpw" type="password" placeholder="Mot de passe" autocomplete="current-password" aria-label="Mot de passe">
@@ -119,6 +163,7 @@ a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;bor
 <button id="lml" type="button">Recevoir un lien de connexion par e-mail</button>
 <button id="lgo" type="button">Continuer avec Google</button>
 <button class="pri" id="lfin" type="button" hidden>Valider mon adresse</button>
+<button id="lback" class="ghost" type="button">← Retour à l'accueil</button>
 <small style="max-width:380px">Première visite ? Un·e admin de l'antenne doit d'abord t'inviter : tu recevras un lien par e-mail.</small>
 </div>
 
@@ -126,7 +171,7 @@ a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;bor
 <label for="npw">Mot de passe (10 caractères minimum)</label><input type="password" id="npw" autocomplete="new-password">
 <div class="chips" style="margin-top:14px"><button class="pri" id="pwok" type="button">Enregistrer</button><button id="pwno" type="button">Plus tard</button></div></div></div>
 
-<header class="top"><div class="brand"><span class="cart">AMNESTY</span><b>Amnesty antenne jeune Narbonne</b></div><div class="usr"><span id="who"></span><button id="out" type="button">Se déconnecter</button></div></header>
+<header class="top"><div class="brand"><b>Amnesty antenne jeune Narbonne</b></div><div class="usr"><span id="who"></span><button id="out" type="button">Se déconnecter</button></div></header>
 <nav id="nav" aria-label="Navigation"><button data-t="home" class="on">Accueil</button><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="lib">Modèles</button><button data-t="charte">Charte graphique</button><button data-t="admin" id="tabAdmin" hidden>Admin</button></nav>
 
 <main>
@@ -316,6 +361,9 @@ let TFONT,BFONT,BBOLD,BLIGHT;
 function applyFont(){if($("sPol").value==="condensee"){TFONT='"Roboto Condensed",Arial,sans-serif';BFONT=BBOLD=BLIGHT='Roboto,Arial,sans-serif'}else{TFONT='"ATG Condensed",'+FALL.t;BFONT='"ATG Medium",'+FALL.b;BBOLD='"ATG Bold",'+FALL.b;BLIGHT='"ATG Light",'+FALL.b}}
 applyFont();
 const cityLabel=v=>{v=(v||"").trim();if(!v)return"";return v.replace(/[^A-Za-zÀ-ÿ]/g,"").length>10?v:"Ville de "+v};
+const showLogin=()=>$("t-landing").classList.add("hide");
+document.querySelectorAll("[data-login]").forEach(b=>b.onclick=showLogin);
+$("lback").onclick=()=>$("t-landing").classList.remove("hide");
 const note=m=>{const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(note.t);note.t=setTimeout(()=>t.style.display="none",3800)};
 
 /* ===== base de données (Firestore, via l'adaptateur FB.db) ===== */
@@ -792,7 +840,7 @@ function drawMem(a){const el=$("mlist");el.innerHTML="";a.forEach(m=>{const d=do
 if(!me){const sel=document.createElement("select");sel.setAttribute("aria-label","Rôle de "+m.id);sel.style.width="auto";["admin","editeur","lecteur"].forEach(r=>{const o=document.createElement("option");o.value=r;o.textContent=r;if(r===m.role)o.selected=true;sel.append(o)});sel.onchange=()=>store.put("membres",{id:m.id,role:sel.value});d.append(sel,mk("Renvoyer le lien",()=>inviteMail(m.id)),mk("Retirer",()=>store.del("membres",m.id)))}
 el.append(d)})}
 $("mAdd").onclick=async()=>{const e=$("mE").value.trim().toLowerCase();if(!/^[^\s\/@]+@[^\s\/@]+\.[^\s\/@]+$/.test(e)){note("Adresse e-mail invalide.");return}if(await store.put("membres",{id:e,role:$("mR").value})){$("mE").value="";inviteMail(e)}};
-function enter(name,role){$("t-login").classList.add("hide");$("who").textContent=name+" · "+role;$("hw").textContent="Bonjour "+name.split(/[ @]/)[0];$("tabAdmin").hidden=role!=="admin";if(role==="admin")store.watch("membres",drawMem);bump();
+function enter(name,role){$("t-landing").classList.add("hide");$("t-login").classList.add("hide");$("who").textContent=name+" · "+role;$("hw").textContent="Bonjour "+name.split(/[ @]/)[0];$("tabAdmin").hidden=role!=="admin";if(role==="admin")store.watch("membres",drawMem);bump();
 store.cfgWatch(c=>{CFG=c;const f=(i,k,d)=>{if(document.activeElement!==$(i))$(i).value=c[k]!=null?c[k]:d};f("sNom","nom","Amnesty Jeunes Narbonne");f("sCpt","cpt","");f("sTags","tags","#Amnesty #AmnestyJeunes #Narbonne #DroitsHumains");f("sSig","sig","");f("sVille","ville","Narbonne");$("sPol").value=c.police==="condensee"?"condensee":"officielle";$("sId").checked=!!c.idpays;applyFont();
 const OLD={logo:"c",logoN:"n",logoB:"b",logoR:"r",logoQ:"q"};
 Object.entries(OLD).forEach(([k,slot])=>{const u=c[k];if(u&&LOGO_RE.test(u)&&!IM[slot])showLogo(slot,u)});
@@ -803,7 +851,7 @@ store.watch("marques",a=>{const have={};a.forEach(m=>{if(SLOTS[m.id]&&LOGO_RE.te
 store.watch("polices",watchFonts);show("home");
 if(linkLogin){linkLogin=false;$("t-pw").classList.remove("hide")}}
 window.onFbUser=async u=>{
-const fail=m=>{say(m);FB.out();resetLogin()};
+const fail=m=>{showLogin();say(m);FB.out();resetLogin()};
 if(!u){if($("lmsg").textContent==="Vérification de la session…")say("Connecte-toi avec ton compte de l'antenne.");return}
 if(!u.emailVerified){fail("Adresse e-mail non vérifiée : utilise le lien reçu par e-mail ou Google.");return}
 let m=null;try{m=await FB.member(u)}catch(e){fail("Lecture de ton profil refusée : les règles Firestore ne sont peut-être pas publiées.");return}
@@ -811,7 +859,7 @@ if(!m){fail("Le compte "+u.email+" n'est pas encore validé : demande à un·e a
 const raw=m.role||m.Role||m["rôle"]||"",r0=String(raw).normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase(),role=["admin","editeur","lecteur"].includes(r0)?r0:"lecteur";
 ME={email:u.email,raw:String(raw),role};DB=FB.db;enter(u.displayName||u.email,role);
 if(r0!==role)note("Rôle « "+raw+" » non reconnu dans ta fiche membre : accès en lecture seule. Corrige le champ role (admin, editeur ou lecteur).")};
-window.onEmailLink=e=>{linkLogin=true;["lpw","lin","lml","lgo"].forEach(i=>$(i).hidden=true);$("lfin").hidden=false;if(e){$("lem").value=e;$("lfin").click()}else say("Confirme l'adresse e-mail où tu as reçu le lien, puis valide.")};
+window.onEmailLink=e=>{showLogin();linkLogin=true;["lpw","lin","lml","lgo"].forEach(i=>$(i).hidden=true);$("lfin").hidden=false;if(e){$("lem").value=e;$("lfin").click()}else say("Confirme l'adresse e-mail où tu as reçu le lien, puis valide.")};
 const guard=f=>async()=>{if(!window.FB){say("Service de connexion indisponible : vérifie ta connexion internet.");return}try{await f()}catch(e){say(errMsg(e))}};
 $("lin").onclick=guard(()=>FB.login($("lem").value.trim(),$("lpw").value));
 $("lpw").addEventListener("keydown",e=>{if(e.key==="Enter")$("lin").click()});
