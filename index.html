@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-XQK7plqa/EnX2uk/AwgAEeovVaPO3B4q4+OYh1BjH2M=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-QSQySkwcSVmgjcMh/TKgplM55COzYqqtB3m6Pm8BLFM=' 'sha256-p9NlXYDlHapPHVf/zxFhHigqwWhFOsPvCz3J/EZpCvE=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Espace de travail d'Amnesty antenne jeune Narbonne">
@@ -96,6 +96,8 @@ details.more>summary{cursor:pointer;font:700 20px "Roboto Condensed",sans-serif;
 #t-login input{max-width:340px;border-color:var(--k)}
 #t-login .cartb{border:4px solid var(--k);padding:12px 20px;text-align:left}
 .hide{display:none!important}
+.ce{color:#b3261e;font-weight:700}.cw{color:#8a5a00}.co{color:#1b6e2d;font-weight:700}
+table.rt{width:100%;border-collapse:collapse;margin:8px 0}table.rt th,table.rt td{border:1px solid var(--line);padding:8px;text-align:left;font-size:14px;vertical-align:top}table.rt th{background:var(--k);color:var(--y)}
 #t-landing{position:fixed;inset:0;background:#ffff00;color:#111;z-index:52;overflow:auto}
 .ld{max-width:1000px;margin:0 auto;padding:28px 22px 56px;padding-top:calc(28px + env(safe-area-inset-top,0px))}
 .ld .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:38px}
@@ -221,11 +223,12 @@ a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;bor
 <div class="grp" id="g-per">
 <p class="hint">Stickers sur cette page (3 maximum)</p><div class="chips" id="stk"></div>
 <p class="hint">Bougie seule sur cette page</p><div class="chips" id="cdl"></div>
-<small>La charte interdit la bougie et le logo sur la même page : la bougie remplace le logo, et seulement si une autre page porte le logo complet.</small>
+<small id="cdn"></small><br><small>La charte interdit la bougie et le logo sur la même page : la bougie remplace le logo, et seulement si une autre page porte le logo complet.</small>
 <label for="fSgn">Texte de la pancarte ou de la bulle</label><input type="text" id="fSgn" maxlength="40">
 </div>
 
 <div class="grp" id="g-out">
+<p class="hint">Contrôle de la charte</p><div id="chk" class="list"></div>
 <p class="hint">Légende à copier</p><textarea id="cap"></textarea>
 <div class="chips" style="margin-top:10px"><button id="cp2" type="button">Copier la légende</button><button id="sv" type="button">Enregistrer comme modèle</button></div>
 <p class="hint">Images</p><div class="chips"><button class="pri" id="dlx" type="button">Préparer les images</button><button id="dlall" type="button" hidden>Tout télécharger</button></div>
@@ -302,6 +305,16 @@ a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;bor
 
 <details class="more"><summary>Papier et impression</summary><p>Amnesty International s'engage à utiliser des papiers labellisés (type PEFC ou FSC) ou recyclés, pour des impressions « responsables ».</p></details>
 
+<details class="more"><summary>Quel logo, quelle bougie, sur quel fond ?</summary>
+<p><small>Le site applique ces règles automatiquement : une version non autorisée est refusée ou remplacée, et l'export est bloqué en cas de non-conformité.</small></p>
+<table class="rt"><tr><th>Fond</th><th>Logo autorisé</th><th>Bougie seule autorisée</th></tr>
+<tr><td>Jaune</td><td>Négatif jaune (cartouche noir)</td><td>Bougie noire, bougie ronde noire</td></tr>
+<tr><td>Noir</td><td>Couleur (cartouche jaune) ou noir et blanc (cartouche blanc)</td><td>Bougie jaune, ronde jaune, blanche, ronde blanche</td></tr>
+<tr><td>Blanc</td><td>Couleur ou négatif blanc (cartouche noir)</td><td>Bougie noire, ronde noire (bougie blanche)</td></tr>
+<tr><td>Photo en couleurs</td><td>Couleur (jaune)</td><td>Bougie jaune, ronde jaune</td></tr>
+<tr><td>Photo en bichromie</td><td>Couleur ou négatif jaune</td><td>Jaune, ronde jaune, noire, ronde noire</td></tr>
+<tr><td>Photo noir et blanc</td><td>Noir et blanc ou négatif blanc</td><td>Blanche, noire, rondes blanche et noire</td></tr></table>
+<ul><li>Le logo complet doit figurer au moins une fois ; la bougie seule remplace le logo sur une autre page, jamais les deux ensemble.</li><li>Fonds et textes : jaune, noir, blanc uniquement ; jamais jaune et blanc ensemble.</li></ul></details>
 <details class="more"><summary>Avant de publier</summary>
 <label class="chk"><input type="checkbox"> Logo officiel avec son cartouche, bonne version selon le fond</label>
 <label class="chk"><input type="checkbox"> « Ville de Narbonne » sous le logo</label>
@@ -411,15 +424,15 @@ case"blocks":c.globalAlpha=.08;c.beginPath();c.arc(W*.85,H*.3,190,0,7);c.fill();
 case"corner":c.globalAlpha=.08;c.lineWidth=40;for(let r=120;r<=560;r+=110){c.beginPath();c.arc(W,H,r,Math.PI,1.5*Math.PI);c.stroke();c.beginPath();c.arc(0,0,r*.8,0,.5*Math.PI);c.stroke()}break}
 c.restore()}
 function sticker(c,key,x,y,k,tilt,S,P){c.save();c.translate(x,y);c.rotate(tilt*Math.PI/180);c.scale(k,k);c.translate(-100,-100);STK[key](c,S,P);c.restore()}
-const IM={c:null,n:null,b:null,k:null,y:null,w:null,r:null,q:null,s:null,t:null};
+const IM={c:null,n:null,b:null,v:null,k:null,y:null,w:null,r:null,q:null,s:null,t:null};
 function cover(c,im,W,H){const r=Math.max(W/im.width,H/im.height),w=im.width*r,h=im.height*r;c.drawImage(im,(W-w)/2,(H-h)/2,w,h)}
-const SLOTS={c:["Logo couleur","Cartouche jaune, texte noir (par défaut)","#ffff00"],n:["Logo négatif","Cartouche noir : sur fond jaune","#000000"],b:["Logo noir et blanc","Cartouche blanc : sur photo N&B","#ffffff"],
+const SLOTS={c:["Logo couleur","Texte noir, cartouche jaune : fond noir ou blanc, photo en couleurs","#ffff00"],n:["Logo négatif jaune","Texte jaune, cartouche noir : uniquement sur fond jaune","#000000"],b:["Logo noir et blanc","Texte noir, cartouche blanc : fond noir ou photo N&B","#ffffff"],v:["Logo négatif blanc","Texte blanc, cartouche noir : fond blanc ou photo N&B","#000000"],
 k:["Bougie noire","Sans cercle : fond jaune ou blanc"],y:["Bougie jaune","Sans cercle : fond noir"],w:["Bougie blanche","Sans cercle : fond noir ou photo N&B"],
 r:["Bougie ronde jaune","Cercle jaune, bougie noire : fond noir ou photo"],q:["Bougie ronde noire","Cercle noir, bougie jaune : fond jaune"],s:["Bougie ronde noire (bougie blanche)","Cercle noir, bougie blanche : fond blanc"],t:["Bougie ronde blanche","Cercle blanc, bougie noire : photo N&B"]};
 const CANDLES=["k","y","w","r","q","s","t"],FROMDB=new Set();let MIG=false;
 const LOGO_RE=/^data:image\/(jpeg|png);base64,[A-Za-z0-9+\/=]+$/;
 function buildSlot(slot,host){const[lab,sub]=SLOTS[slot],d=document.createElement("div");d.innerHTML=`<b>${lab}</b><br><small>${sub}</small><img id="lp${slot}" alt="${lab}"><input type="file" id="flg${slot}" accept="image/png,image/svg+xml,image/jpeg,image/webp" aria-label="${lab}"><div style="margin-top:6px"><button type="button" id="lx${slot}">Retirer</button></div>`;$(host).append(d)}
-["c","n","b"].forEach(k=>buildSlot(k,"logoGrid"));["k","y","w"].forEach(k=>buildSlot(k,"candleGrid"));["r","q","s","t"].forEach(k=>buildSlot(k,"roundGrid"));
+["c","n","b","v"].forEach(k=>buildSlot(k,"logoGrid"));["k","y","w"].forEach(k=>buildSlot(k,"candleGrid"));["r","q","s","t"].forEach(k=>buildSlot(k,"roundGrid"));
 const IMSRC={};
 function normImg(im,slot){const W=im.width,H=im.height;if(!W||!H)return im;const c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");x.drawImage(im,0,0);let id;try{id=x.getImageData(0,0,W,H)}catch(e){return im}const d=id.data;
 const cs=[0,(W-1)*4,(H-1)*W*4,((H-1)*W+W-1)*4],op=cs.every(i=>d[i+3]>200),c0=[d[cs[0]],d[cs[0]+1],d[cs[0]+2]];
@@ -436,9 +449,11 @@ function cornerKind(im){const W=im.width,H=im.height;if(!W||!H)return"other";con
 const cs=[0,(W-1)*4,(H-1)*W*4,((H-1)*W+W-1)*4];if(cs.every(i=>d[i+3]<12))return"alpha";if(!cs.every(i=>d[i+3]>200))return"other";const c0=[d[cs[0]],d[cs[0]+1],d[cs[0]+2]];if(!cs.every(i=>Math.abs(d[i]-c0[0])<40&&Math.abs(d[i+1]-c0[1])<40&&Math.abs(d[i+2]-c0[2])<40))return"other";return c0.every(v=>v>235)?"white":"solid"}
 function svgToUrl(t){const doc=new DOMParser().parseFromString(t,"image/svg+xml"),sv=doc.documentElement;if(!sv||sv.nodeName.toLowerCase()!=="svg")return null;let w=parseFloat(sv.getAttribute("width")),h=parseFloat(sv.getAttribute("height"));const vb=(sv.getAttribute("viewBox")||"").split(/[\s,]+/).map(Number);if((!w||!h)&&vb.length===4&&vb[2]&&vb[3]){w=vb[2];h=vb[3]}if(!w||!h){w=400;h=400}const k=1000/Math.max(w,h);sv.setAttribute("width",Math.round(w*k));sv.setAttribute("height",Math.round(h*k));return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(new XMLSerializer().serializeToString(sv))}
 function drawCandlePick(){const el=$("cdl");if(!el)return;el.innerHTML="";const S=POST.slides[cur];if(!S)return;
-const add=(label,mark,cv,img)=>{const b=document.createElement("button");b.type="button";b.className=(S.mark===mark&&(S.cv||"")===cv)?"on":"";if(img){const im=document.createElement("img");im.src=img;im.alt="";b.append(im);b.setAttribute("aria-label",label);b.title=label}else b.textContent=label;b.onclick=()=>setCandle(mark,cv);el.append(b)};
-add("Logo complet","logo","");add("Bougie (choix auto)","candle","");CANDLES.forEach(k=>{if(IM[k])add(SLOTS[k][0],"candle",k,$("lp"+k).src)})}
-function setCandle(mark,cv){if(mark==="candle"){if(!CANDLES.some(k=>IM[k])){note("Importe d'abord une bougie (Admin > Logos et bougies).");return}
+const fx=ctxOf(slideBg(cur),!!S.img,POST.pm),al=CANDLE_ALLOW[fx];
+const add=(label,mark,cv,img)=>{const b=document.createElement("button");b.type="button";b.className=(S.mark===mark&&(S.cv||"")===cv)?"on":"";if(cv&&!al.includes(cv)){b.disabled=true;b.style.opacity=".35"}if(img){const im=document.createElement("img");im.src=img;im.alt="";b.append(im);b.setAttribute("aria-label",label);b.title=cv&&!al.includes(cv)?label+" : non autorisée sur "+CTXN[fx]:label}else b.textContent=label;b.onclick=()=>setCandle(mark,cv);el.append(b)};
+add("Logo complet","logo","");add("Bougie (choix auto)","candle","");CANDLES.forEach(k=>{if(IM[k])add(SLOTS[k][0],"candle",k,$("lp"+k).src)});
+$("cdn").textContent="Sur "+CTXN[fx]+", bougies autorisées : "+al.map(k=>SLOTS[k][0].replace("Bougie ","")).join(", ")+"."}
+function setCandle(mark,cv){if(mark==="candle"){const fx=ctxOf(slideBg(cur),!!POST.slides[cur].img,POST.pm);if(cv&&!CANDLE_ALLOW[fx].includes(cv)){note("Cette bougie n'est pas autorisée sur "+CTXN[fx]+" (charte graphique).");return}if(!CANDLES.some(k=>IM[k])){note("Importe d'abord une bougie (Admin > Logos et bougies).");return}
 if(POST.slides.length<2){setMode(true);note("La bougie seule demande que le logo complet soit sur une autre page : j'ai ajouté des pages au carrousel.")}
 else if(!POST.slides.some((x,j)=>j!==cur&&x.mark!=="candle")){note("Le logo complet doit rester sur une autre page : remets-le sur une autre page avant de choisir une bougie ici.");return}}
 const S=POST.slides[cur];S.mark=mark;S.cv=cv||"";fill();render()}
@@ -450,7 +465,30 @@ const png=CANDLES.includes(slot),src=normImg(im,slot);let h=240,out="";for(let k
 if(!LOGO_RE.test(out)||out.length>150000){note("Image trop lourde ou illisible : utilise un fichier plus léger.");return}
 store.put("marques",{id:slot,data:out}).then(ok=>{if(ok)note("✓ "+SLOTS[slot][0]+" importé")})};im.src=u}
 Object.keys(SLOTS).forEach(slot=>{$("flg"+slot).onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();if(f.type==="image/svg+xml"||/\.svg$/i.test(f.name)){r.onload=()=>{const u=svgToUrl(r.result);if(u)shrink(slot,u);else note("SVG illisible.")};r.readAsText(f)}else{r.onload=()=>shrink(slot,r.result);r.readAsDataURL(f)}e.target.value=""};$("lx"+slot).onclick=()=>store.del("marques",slot)});
-function pickCandle(bg,ph,pm){const o=ph?(pm==="bw"?["t","s","w","k","r","y","q"]:["r","y","q","s","t","k","w"]):bg==="#ffff00"?["q","k","s","r","t","y","w"]:bg==="#000000"?["r","y","t","w","q","s","k"]:bg==="#ffffff"?["s","k","q","t","r","y","w"]:["r","y","q","s","t","k","w"];for(const k of o)if(IM[k])return IM[k];return null}
+const LOGO_ALLOW={yellow:["n"],black:["c","b"],white:["c","v"],photo:["c"],duo:["c","n"],bw:["b","v"],other:["c"]};
+const CANDLE_ALLOW={yellow:["q","k"],black:["r","y","t","w"],white:["s","k"],photo:["r","y"],duo:["r","y","q","k"],bw:["t","s","w","k"],other:["r","y"]};
+const CTXN={yellow:"fond jaune",black:"fond noir",white:"fond blanc",photo:"photo en couleurs",duo:"photo en bichromie",bw:"photo en noir et blanc",other:"ce fond"};
+const LNAME={c:"COULEUR",n:"NÉGATIF JAUNE",b:"NOIR ET BLANC",v:"NÉGATIF BLANC"};
+const ctxOf=(bg,ph,pm)=>ph?(pm==="bw"?"bw":pm==="duo"?"duo":"photo"):bg==="#ffff00"?"yellow":bg==="#000000"?"black":bg==="#ffffff"?"white":"other";
+const slideBg=i=>POST.pal==="alt"?(i%2?"#000000":"#ffff00"):POST.bg;
+const pickLogo=fx=>{for(const k of LOGO_ALLOW[fx])if(IM[k])return{k,im:IM[k]};return null};
+const pickCandle2=(fx,cv)=>{const a=CANDLE_ALLOW[fx];if(cv&&a.includes(cv)&&IM[cv])return{k:cv,im:IM[cv]};for(const k of a)if(IM[k])return{k,im:IM[k]};return null};
+function charteCheck(){const E=[],W=[],ok=["#ffff00","#000000","#ffffff"];
+if(POST.pal==="fix"){const b=POST.bg.toLowerCase(),f=POST.fg.toLowerCase();if(!ok.includes(b))E.push("Fond hors charte : seuls le jaune, le noir et le blanc sont autorisés.");if(!ok.includes(f))E.push("Couleur de texte hors charte : jaune, noir ou blanc uniquement.");if((b==="#ffff00"&&f==="#ffffff")||(b==="#ffffff"&&f==="#ffff00"))E.push("Jaune et blanc ensemble : interdit (lisibilité).")}
+let anyLogo=false;
+POST.slides.forEach((S,i)=>{const fx=ctxOf(slideBg(i),!!S.img,POST.pm),els=POST.slides.some((x,j)=>j!==i&&x.mark!=="candle");
+if(S.mark==="candle"){if(!els)E.push("Page "+(i+1)+" : la bougie seule exige le logo complet sur une autre page.");
+else if(!pickCandle2(fx,S.cv))E.push("Page "+(i+1)+" : aucune bougie autorisée sur "+CTXN[fx]+" n'est importée ("+CANDLE_ALLOW[fx].map(k=>SLOTS[k][0]).join(", ")+").");
+else if(S.cv&&!CANDLE_ALLOW[fx].includes(S.cv))W.push("Page "+(i+1)+" : la bougie choisie n'est pas autorisée sur "+CTXN[fx]+", une version conforme est utilisée.")}
+else{anyLogo=true;if(!pickLogo(fx))E.push("Page "+(i+1)+" : logo manquant pour "+CTXN[fx]+" ("+LOGO_ALLOW[fx].map(k=>SLOTS[k][0]).join(" ou ")+").")}});
+if(!anyLogo)E.push("Le logo complet doit figurer au moins une fois sur la publication.");
+if(!cityLabel($("sVille").value))W.push("Aucune ville renseignée : la mention du groupe local n'apparaît pas sous le logo.");
+if(!FFACE.cond)W.push("Police officielle non importée : Arial est utilisée à défaut (accepté par la charte).");
+if(POST.partner&&slideBg(0)!=="#ffff00")W.push("Logo partenaire : le nôtre doit si possible être sur fond jaune.");
+return{E,W}}
+function drawCheck(){const el=$("chk");if(!el)return;const{E,W}=charteCheck();el.innerHTML="";
+const add=(t,cls,m)=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="26px 1fr";d.innerHTML=`<b>${m}</b><span class="${cls}">${esc(t)}</span>`;el.append(d)};
+E.forEach(t=>add(t,"ce","✗"));W.forEach(t=>add(t,"cw","!"));if(!E.length&&!W.length)add("Tout est conforme à la charte graphique.","co","✓");else if(!E.length)add("Aucune erreur bloquante : l'export est autorisé.","co","✓")}
 /* ===== typographie officielle importée ===== */
 const FSLOTS={cond:["ATG Condensed","Condensed n°20","Gros titres, exergues, citations"],bold:["ATG Bold","Bold n°2","Chapeaux, mots mis en valeur"],med:["ATG Medium","Médium","Texte courant"],light:["ATG Light","Light","Nom de ville sous le logo"]};
 const FFACE={},FSIG={};
@@ -495,13 +533,13 @@ c.textBaseline="alphabetic";c.textAlign="left";c.fillStyle=ph?"#222":bg;c.fillRe
 if(ph){cover(c,S.img,W,H);if(POST.pm!=="color")tint(c,W,H,POST.pm);c.fillStyle="rgba(0,0,0,.45)";c.fillRect(0,0,W,H)}else bgPattern(c,POST.bgs==="mix"?MIXL[i%MIXL.length]:POST.bgs,W,H,fg)
 const lh=84,idp=$("sId").checked,cl=cityLabel($("sVille").value),top=56;
 const elsewhere=POST.slides.some((x,j)=>j!==i&&x.mark!=="candle");
-const CI=(S.cv&&IM[S.cv])?IM[S.cv]:pickCandle(bg,ph,POST.pm),candle=S.mark==="candle"&&elsewhere&&CI;
-const LG=ph?(POST.pm==="bw"&&IM.b?IM.b:IM.c):(bg==="#ffff00"&&IM.n?IM.n:IM.c);
+const fx=ctxOf(bg,ph,POST.pm),cd=pickCandle2(fx,S.cv),CI=cd&&cd.im,candle=S.mark==="candle"&&elsewhere&&CI;
+const lgp=pickLogo(fx),LG=lgp&&lgp.im;
 const capH=(!candle&&cl)?34:0,ly=H-48-capH-lh;let lw=230,lx;
 if(candle){const ch=120,cy2=H-48-ch;lw=CI.width*ch/CI.height;lx=W-pad-lw;c.drawImage(CI,lx,cy2,lw,ch)}
 else{if(LG)lw=LG.width*lh/LG.height;lx=W-pad-lw;
 if(LG)c.drawImage(LG,lx,ly,lw,lh);
-else{c.save();c.setLineDash([10,8]);c.strokeStyle=tc;c.lineWidth=3;c.strokeRect(lx,ly,lw,lh);c.setLineDash([]);c.fillStyle=tc;c.font=`700 20px ${BBOLD}`;c.textAlign="center";c.fillText("LOGO OFFICIEL",lx+lw/2,ly+36);c.fillText("À IMPORTER",lx+lw/2,ly+62);c.restore()}
+else{c.save();c.setLineDash([10,8]);c.strokeStyle=tc;c.lineWidth=3;c.strokeRect(lx,ly,lw,lh);c.setLineDash([]);c.fillStyle=tc;c.font=`700 20px ${BBOLD}`;c.textAlign="center";c.fillText("LOGO "+LNAME[LOGO_ALLOW[fx][0]],lx+lw/2,ly+36);c.fillText("À IMPORTER",lx+lw/2,ly+62);c.restore()}
 if(idp){c.fillStyle="#000";c.fillRect(lx-34,ly,34,lh);c.save();c.translate(lx-11,ly+lh/2);c.rotate(-Math.PI/2);c.fillStyle="#fff";c.font=`700 16px ${BBOLD}`;c.textAlign="center";if("letterSpacing"in c)c.letterSpacing="3px";c.fillText("FRANCE",0,0);c.restore()}
 if(cl){c.save();c.fillStyle=tc;c.font=`300 24px ${BLIGHT}`;if("letterSpacing"in c)c.letterSpacing="2.4px";c.textAlign="center";c.fillText(cl,lx+lw/2,ly+lh+30);c.restore()}
 if(POST.partner){const Q=POST.partner,pw=Math.min(240,Q.width*lh/Q.height),gap=Math.round(lh*.7);c.drawImage(Q,lx-(idp?34:0)-gap-pw,ly,pw,lh)}}
@@ -524,7 +562,7 @@ const dl=!!POST.partner;
 if(n>1&&i===0&&!dl){c.font=`700 30px ${TFONT}`;c.fillStyle=ac;c.fillText("GLISSE →",pad,H-42)}
 if(n>1&&POST.dots){const tw=34+(n-1)*30;let x=dl?pad:(W-tw)/2;c.fillStyle=ac;for(let k=0;k<n;k++){if(k===i){rr(c,x,H-60,34,16,8);x+=48}else{c.globalAlpha=.4;c.beginPath();c.arc(x+8,H-52,8,0,7);c.fill();c.globalAlpha=1;x+=30}}}}
 const OFF=document.createElement("canvas");let tT;
-function render(){renderTo($("cv"),cur);dotsUI();caption();clearTimeout(tT);tT=setTimeout(thumbs,160)}
+function render(){renderTo($("cv"),cur);dotsUI();drawCheck();caption();clearTimeout(tT);tT=setTimeout(thumbs,160)}
 function thumbs(){const el=$("thumbs");el.innerHTML="";POST.slides.forEach((S,i)=>{renderTo(OFF,i);const b=document.createElement("button");b.type="button";b.className="th"+(i===cur?" on":"");const t=document.createElement("canvas");t.width=108;t.height=Math.round(108*OFF.height/1080);t.getContext("2d").drawImage(OFF,0,0,t.width,t.height);b.append(t);b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});
 if(POST.slides.length<10){const a=mk("+",addSlide);a.className="th add";a.setAttribute("aria-label","Ajouter une page");el.append(a)}}
 function dotsUI(){const el=$("dots"),n=POST.slides.length;el.innerHTML="";$("multi").hidden=n<2;$("mOne").classList.toggle("on",n<2);$("mMul").classList.toggle("on",n>1);POST.slides.forEach((_,i)=>{const b=document.createElement("button");b.type="button";b.className=i===cur?"on":"";b.setAttribute("aria-label","Page "+(i+1));b.onclick=()=>go(i);el.append(b)});$("pgn").textContent="Page "+(cur+1)+" sur "+n;$("pv").disabled=cur===0;$("nx").disabled=cur===n-1}
@@ -574,7 +612,7 @@ const sl=(Array.isArray(p.slides)?p.slides:[]).slice(0,10).map(s=>({type:ok.incl
 return{fmt:["1350","1080","1920"].includes(p.fmt)?p.fmt:"1350",acc:SEC.some(x=>x[2]===String(p.acc).toLowerCase())?String(p.acc).toLowerCase():"",pm:["color","duo","bw"].includes(p.pm)?p.pm:"color",bgs:BG_KEYS.includes(p.bgs)?p.bgs:"circle",pal:p.pal==="alt"?"alt":"fix",key:str(p.key,30)||"alt",bg:hx(p.bg),fg:hx(p.fg),dots:p.dots!==false,tag:str(p.tag,60),slides:sl.length?sl:[newSlide("cover")]}}
 $("sv").onclick=()=>{const d=JSON.stringify(POST,(k,v)=>k==="img"||k==="partner"?undefined:v);if(d.length>29000){note("Publication trop longue pour un modèle.");return}store.put("modeles",{name:(POST.slides[0].ttl||"Sans titre").slice(0,80),data:d});note("Enregistré dans Modèles")};
 function drawLB(){const el=$("llist");el.innerHTML=LB.length?"":"<p><small>Aucun modèle enregistré.</small></p>";LB.forEach(m=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns="1fr auto auto";d.innerHTML=`<b>${esc(m.name)}</b>`;d.append(mk("Ouvrir",()=>{try{POST=clean(JSON.parse(m.data));cur=0;fill();render();show("create")}catch(e){note("Modèle illisible")}}),mk("Supprimer",()=>store.del("modeles",m.id)));el.append(d)})}
-$("dlx").onclick=async()=>{if(!IM.c){note("Importe d'abord le logo officiel (Charte et réglages) : la charte interdit de publier sans.");return}const el=$("exp");el.innerHTML="";const links=[];for(let i=0;i<POST.slides.length;i++){const cv=document.createElement("canvas");renderTo(cv,i);const b=await new Promise(r=>cv.toBlob(r,"image/png")),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="amnesty-narbonne-page-"+(i+1)+".png";a.innerHTML=`<img src="${u}" alt="Page ${i+1}"><span>Page ${i+1}</span>`;el.append(a);links.push(a)}
+$("dlx").onclick=async()=>{{const ck=charteCheck();if(ck.E.length){drawCheck();note("Export bloqué par la charte : "+ck.E[0]);return}}const el=$("exp");el.innerHTML="";const links=[];for(let i=0;i<POST.slides.length;i++){const cv=document.createElement("canvas");renderTo(cv,i);const b=await new Promise(r=>cv.toBlob(r,"image/png")),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="amnesty-narbonne-page-"+(i+1)+".png";a.innerHTML=`<img src="${u}" alt="Page ${i+1}"><span>Page ${i+1}</span>`;el.append(a);links.push(a)}
 $("dlall").hidden=false;$("dlall").onclick=()=>links.forEach((a,k)=>setTimeout(()=>a.click(),k*400))};
 
 /* ===== calendrier et journées mondiales (liste ONU, dates fixes) ===== */
