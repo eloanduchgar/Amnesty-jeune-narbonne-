@@ -1,6 +1,6 @@
 /* Service worker : coquille de l'application disponible hors ligne.
    Les données (planning, modèles, logos) viennent du cache local de Firestore. */
-const V = "aj-v3";
+const V = "aj-v4";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-180.png"];
 const CDN = ["www.gstatic.com", "fonts.googleapis.com", "fonts.gstatic.com"];
 
