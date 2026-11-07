@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-B92haiflbmlUPKi0xlNMrG9gXDT1bnWO7zNaRvEQlto=' 'sha256-uz2WTv5v1MJDyGmBIfHcIYWdpZzmz3jsMScWNjloWPA=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-1qMTdSeJeeBpJk3mm1/wNgEx1AhEzNcAQFmw73CdNA8=' 'sha256-8FQl+VeJpxw6QwYKbHPQhUJm/ZCkVpitTMJW2uOqUwc=' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com; frame-src 'self' https://*.firebaseapp.com https://accounts.google.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Espace de travail d'Amnesty antenne jeune Narbonne">
@@ -83,14 +83,6 @@ canvas#cv{max-width:100%;max-height:70vh;width:auto;height:auto;border-radius:10
 .grp .f[hidden]{display:none}
 .exp{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:12px}.exp a{color:var(--k);font-weight:700;font-size:13px;text-decoration:none;text-align:center}.exp img{width:100%;border-radius:8px;display:block}
 textarea#cap{min-height:190px}
-.mur-form{background:var(--g);border-radius:20px;padding:18px;margin:16px 0}
-.mur-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
-.mur-card{background:#fff;border:2px solid var(--line);border-top:8px solid var(--y);border-radius:16px;padding:16px;overflow-wrap:anywhere}
-.mur-card h3{margin:0 0 8px;font-size:22px}.mur-card p{white-space:pre-wrap}
-.mur-meta{font-size:12px;color:var(--mut);margin-top:12px}.mur-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.mur-actions button{font-size:13px;padding:7px 12px}.mur-empty{padding:24px;background:var(--g);border:2px dashed var(--line);border-radius:16px;text-align:center}
-.mur-tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:600px){.mur-tools{grid-template-columns:1fr}}
 /* calendrier */
 .ch{display:flex;align-items:center;gap:10px;margin-bottom:12px}.ch h2{flex:1;margin:0;text-transform:capitalize;font-size:34px}
 .cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
@@ -248,7 +240,7 @@ a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;bor
 <div class="chips" style="margin-top:14px"><button class="pri" id="pwok" type="button">Enregistrer</button><button id="pwno" type="button">Plus tard</button></div></div></div>
 
 <header class="top"><div class="brand"><b>Amnesty antenne jeune Narbonne</b></div><div class="usr"><span id="who"></span><button id="out" type="button">Se déconnecter</button></div></header>
-<nav id="nav" aria-label="Navigation"><button data-t="home" class="on">Accueil</button><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="mur">Mur collaboratif</button><button data-t="bank">Banque d'images</button><button data-t="lib">Modèles</button><button data-t="charte">Charte graphique</button><button data-t="admin" id="tabAdmin" hidden>Admin</button></nav>
+<nav id="nav" aria-label="Navigation"><button data-t="home" class="on">Accueil</button><button data-t="create">Créer</button><button data-t="plan">Calendrier</button><button data-t="bank">Banque d'images</button><button data-t="lib">Modèles</button><button data-t="charte">Charte graphique</button><button data-t="admin" id="tabAdmin" hidden>Admin</button></nav>
 
 <main id="main" tabindex="-1">
 <section id="t-home" class="pg on">
@@ -358,23 +350,6 @@ a.btn{display:inline-block;font:700 15px Roboto,sans-serif;padding:10px 18px;bor
 <div class="chips" style="margin-top:14px"><button class="pri" id="dPrint" type="button">Imprimer / enregistrer en PDF</button><button id="dCopy" type="button">Copier le texte</button><button id="dTxt" type="button">Télécharger .txt</button><button id="dSave" type="button">Enregistrer comme modèle</button></div>
 <p class="hint">Contrôle de la charte</p><div id="dChk" class="list"></div></div>
 <div class="docr"><div class="docp" id="docv" aria-label="Aperçu du document"></div></div></div>
-</section>
-
-<section id="t-mur" class="pg">
-<h2 class="band">// MUR COLLABORATIF</h2>
-<p>Un espace commun pour partager des idées, des ressources, des propositions d’actions et des informations avec toute l’antenne.</p>
-<div class="mur-form">
-<h3 id="murFormTitle" style="margin-top:0">Ajouter une publication</h3>
-<label for="murTitle">Titre</label><input type="text" id="murTitle" maxlength="100" placeholder="Ex. Idée pour la prochaine action">
-<label for="murText">Message</label><textarea id="murText" rows="5" maxlength="3000" placeholder="Partage ton idée, une information ou une ressource…"></textarea>
-<label for="murLink">Lien (facultatif)</label><input type="text" id="murLink" maxlength="500" placeholder="https://…">
-<div class="mur-tools"><div><label for="murColor">Couleur</label><select id="murColor"><option value="#ffff00">Jaune</option><option value="#ffffff">Blanc</option><option value="#f4f4ef">Gris clair</option></select></div>
-<div><label for="murCategory">Catégorie</label><select id="murCategory"><option>Idée</option><option>Action</option><option>Ressource</option><option>Information</option><option>Question</option></select></div></div>
-<div class="chips"><button class="pri" id="murSave" type="button">Publier sur le mur</button><button id="murCancel" type="button" hidden>Annuler la modification</button></div>
-<small>Chaque membre peut publier et modifier ses propres messages. Les admins et éditeur·rices peuvent aussi modérer le mur.</small></div>
-<div class="g3" style="align-items:end;margin:18px 0"><div><label for="murSearch">Rechercher</label><input type="text" id="murSearch" placeholder="Mot-clé…"></div>
-<div><label for="murFilter">Catégorie</label><select id="murFilter"><option value="">Toutes</option><option>Idée</option><option>Action</option><option>Ressource</option><option>Information</option><option>Question</option></select></div></div>
-<p id="murStatus" class="hint" role="status" aria-live="polite">Chargement du mur…</p><div id="murGrid" class="mur-grid"></div>
 </section>
 
 <section id="t-plan" class="pg">
@@ -517,7 +492,7 @@ const hx=v=>/^#[0-9a-f]{6}$/i.test(v)?v:"#000000";
 const pad2=n=>String(n).padStart(2,"0"),iso=d=>d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate());
 const fmtD=v=>new Date(v+"T12:00").toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
 const nextD=(m,d)=>{const n=new Date(),y=new Date(n.getFullYear(),m-1,d,23)<n?n.getFullYear()+1:n.getFullYear();return y+"-"+pad2(m)+"-"+pad2(d)};
-const PGT={home:"Accueil",create:"Créer",plan:"Calendrier",mur:"Mur collaboratif",lib:"Modèles",bank:"Banque d'images",charte:"Charte graphique",admin:"Administration"};
+const PGT={home:"Accueil",create:"Créer",plan:"Calendrier",lib:"Modèles",bank:"Banque d'images",charte:"Charte graphique",admin:"Administration"};
 function show(t,quiet){if(t==="admin"&&$("tabAdmin").hidden)t="home";document.querySelectorAll(".pg").forEach(e=>e.classList.toggle("on",e.id==="t-"+t));document.querySelectorAll("#nav button").forEach(b=>{const on=b.dataset.t===t;b.classList.toggle("on",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
 document.title=(PGT[t]||"")+" – Amnesty antenne jeune Narbonne";window.scrollTo(0,0);const pg=$("t-"+t);if(pg&&!quiet){pg.setAttribute("tabindex","-1");try{pg.focus({preventScroll:true})}catch(e){}}}
 /* fenêtres superposées : le reste de la page n'est plus atteignable au clavier (inert) */
@@ -548,41 +523,6 @@ async put(col,it){const id=it.id||rid(),o={...it};delete o.id;try{await wr(DB.co
 async del(col,id){try{await wr(DB.collection(col).doc(id).delete())}catch(e){note("Suppression refusée ("+(e.code||"erreur")+"). Voir Charte et réglages > Mes droits.")}},
 cfgWatch(cb){DB.doc("config/antenne").onSnapshot(q=>cb(q.exists?q.data():{}),e=>note("Lecture refusée ("+e.code+")"))},
 async cfgSet(o){try{await wr(DB.doc("config/antenne").set(o))}catch(e){note("Réglages non enregistrés ("+(e.code||"erreur")+"). Voir Charte et réglages > Mes droits.")}}};
-/* ===== Mur collaboratif façon Padlet ===== */
-let MUR=[],murEdit=null;
-const MUR_COLORS=["#ffff00","#ffffff","#f4f4ef"];
-function safeMurUrl(v){try{const u=new URL(v);return ["http:","https:"].includes(u.protocol)?u.href:""}catch(_){return ""}}
-function drawMur(){
- const grid=$("murGrid");if(!grid)return;
- const term=$("murSearch").value.trim().toLocaleLowerCase("fr"),cat=$("murFilter").value;
- const rows=MUR.filter(x=>(!cat||x.category===cat)&&[x.title,x.text,x.category,x.by].join(" ").toLocaleLowerCase("fr").includes(term)).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
- grid.replaceChildren();$("murStatus").textContent=rows.length+" publication(s)";
- if(!rows.length){const e=document.createElement("div");e.className="mur-empty";e.textContent="Aucune publication pour le moment.";grid.append(e);return}
- rows.forEach(x=>{
-  const c=document.createElement("article");c.className="mur-card";c.style.borderTopColor=MUR_COLORS.includes(x.color)?x.color:"#ffff00";
-  const h=document.createElement("h3");h.textContent=x.title||"Sans titre";
-  const k=document.createElement("small");k.textContent=x.category||"Idée";
-  const p=document.createElement("p");p.textContent=x.text||"";c.append(h,k,p);
-  const url=safeMurUrl(x.link||"");if(url){const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Ouvrir la ressource ↗";c.append(a)}
-  const m=document.createElement("div");m.className="mur-meta";m.textContent=(x.by||"Membre")+" · "+(x.createdAt?.toDate?x.createdAt.toDate().toLocaleString("fr-FR"):"Date non disponible");c.append(m);
-  const own=(x.by||"").toLowerCase()===ME.email.toLowerCase();
-  if(own||["admin","editeur"].includes(ME.role)){const ops=document.createElement("div");ops.className="mur-actions";
-   ops.append(mk("Modifier",()=>editMur(x)),mk("Supprimer",async()=>{if(confirm("Supprimer cette publication ?"))await store.del("mur",x.id)}));c.append(ops)}
-  grid.append(c);
- });
-}
-function editMur(x){murEdit=x.id;$("murTitle").value=x.title||"";$("murText").value=x.text||"";$("murLink").value=x.link||"";$("murColor").value=MUR_COLORS.includes(x.color)?x.color:"#ffff00";$("murCategory").value=x.category||"Idée";$("murFormTitle").textContent="Modifier une publication";$("murSave").textContent="Enregistrer";$("murCancel").hidden=false;show("mur");$("murTitle").focus()}
-function resetMur(){murEdit=null;$("murTitle").value="";$("murText").value="";$("murLink").value="";$("murColor").value="#ffff00";$("murCategory").value="Idée";$("murFormTitle").textContent="Ajouter une publication";$("murSave").textContent="Publier sur le mur";$("murCancel").hidden=true}
-$("murSave").onclick=async()=>{
- const title=$("murTitle").value.trim(),textv=$("murText").value.trim(),link=$("murLink").value.trim();
- if(!title||!textv){note("Ajoute un titre et un message.");return}
- if(link&&!safeMurUrl(link)){note("Le lien doit commencer par http:// ou https://.");return}
- const item={title,text:textv,link:safeMurUrl(link),color:$("murColor").value,category:$("murCategory").value};
- if(murEdit){const old=MUR.find(x=>x.id===murEdit);if(!old){note("Publication introuvable.");resetMur();return}item.by=old.by;item.createdAt=old.createdAt;if(await store.put("mur",{id:murEdit,...item})){note("Publication modifiée.");resetMur()}}
- else{item.by=ME.email.toLowerCase();item.createdAt=FB.timestamp();if(await store.put("mur",item)){note("Publication ajoutée.");resetMur()}}
-};
-$("murCancel").onclick=resetMur;$("murSearch").addEventListener("input",drawMur);$("murFilter").addEventListener("change",drawMur);
-
 const ST=()=>({nom:$("sNom").value,cpt:$("sCpt").value,tags:$("sTags").value,sig:$("sSig").value,ville:$("sVille").value,police:$("sPol").value,idpays:$("sId").checked});
 const cfgObj=()=>{const t=ST();return{nom:t.nom.slice(0,100),cpt:t.cpt.slice(0,100),tags:t.tags.slice(0,300),sig:t.sig.slice(0,300),ville:t.ville.slice(0,40),police:t.police,idpays:!!t.idpays}};
 const saveCfg=()=>{clearTimeout(sT);sT=setTimeout(()=>store.cfgSet(cfgObj()),700)};
@@ -1202,7 +1142,7 @@ const OLD={logo:"c",logoN:"n",logoB:"b",logoR:"r",logoQ:"q"};
 Object.entries(OLD).forEach(([k,slot])=>{const u=c[k];if(u&&LOGO_RE.test(u)&&!IM[slot])showLogo(slot,u)});
 if(ME.role==="admin"&&!MIG){const ks=Object.keys(OLD).filter(k=>c[k]&&LOGO_RE.test(c[k]));if(ks.length){MIG=true;Promise.all(ks.map(k=>store.put("marques",{id:OLD[k],data:c[k]}))).then(()=>store.cfgSet(cfgObj())).then(()=>note("Logos déplacés dans la nouvelle base."))}}
 caption();render()});
-store.watch("plan",a=>{PL=a;drawAll()});store.watch("mur",a=>{MUR=a;drawMur()});store.watch("modeles",a=>{LB=a;drawLB()});store.watch("couleurs",a=>{CC=a;drawChips()});
+store.watch("plan",a=>{PL=a;drawAll()});store.watch("modeles",a=>{LB=a;drawLB()});store.watch("couleurs",a=>{CC=a;drawChips()});
 store.watch("marques",a=>{setTimeout(()=>{Object.keys(SLOTS).forEach(k=>{const m=a.find(x=>x.id===k);MARQ[k]=m&&LOGO_RE.test(m.data||"")?m.data:null});drawBank()},0);const have={};a.forEach(m=>{if(SLOTS[m.id]&&LOGO_RE.test(m.data||"")){have[m.id]=1;FROMDB.add(m.id);if(IMSRC[m.id]!==m.data)showLogo(m.id,m.data)}});Object.keys(SLOTS).forEach(k=>{if(!have[k]&&FROMDB.has(k)){FROMDB.delete(k);clearLogo(k)}})});
 store.watch("polices",watchFonts);store.watch("banque",a=>{BK=a;drawBank()});show("home");
 if(linkLogin){linkLogin=false;$("t-pw").classList.remove("hide");setTimeout(()=>$("npw").focus(),60)}}
@@ -1378,7 +1318,7 @@ render();drawJD();
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, updatePassword, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, terminate, clearIndexedDbPersistence, collection, doc, onSnapshot, setDoc, deleteDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, terminate, clearIndexedDbPersistence, collection, doc, onSnapshot, setDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyAKp_oELkaMTaA4o84eD6_OLeUTLm5QnOY",
   authDomain: "amnesty-antenne-jeune-nrb.firebaseapp.com",
@@ -1393,7 +1333,7 @@ try { fs = initializeFirestore(app, { localCache: persistentLocalCache({ tabMana
 catch (e) { fs = getFirestore(app); }
 const P = p => doc(fs, ...p.split("/"));
 const linkSettings = () => ({ url: location.origin + location.pathname, handleCodeInApp: true });
-window.FB = {\n  timestamp: () => serverTimestamp(),
+window.FB = {
   login: (e, p) => signInWithEmailAndPassword(auth, e, p),
   google: () => signInWithPopup(auth, new GoogleAuthProvider()),
   // lien de connexion pour soi-même (mémorise l'adresse sur cet appareil)
